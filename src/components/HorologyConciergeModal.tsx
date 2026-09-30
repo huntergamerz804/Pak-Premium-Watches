@@ -72,12 +72,29 @@ export const HorologyConciergeModal: React.FC = () => {
 
       setMessages(prev => [...prev, botMsg]);
     } catch (err: any) {
-      console.error('Concierge Chat Error:', err);
+      console.warn('Backend API unavailable (running on static host like GitHub Pages). Utilizing client-side horological engine.', err);
+      
+      const queryLower = text.toLowerCase();
+      let expertReply = '';
+
+      if (queryLower.includes('tourbillon') || queryLower.includes('gravity') || queryLower.includes('cage')) {
+        expertReply = 'In high-horology, the tourbillon is an architectural triumph designed to negate the isochronal errors caused by Earth’s gravitational pull on the balance spring. In our flagship AUREN Sovereign and Nocturne calibres, the balance assembly and escapement are cradled within an ultralight Grade 5 titanium cage weighing just 0.28 grams, rotating a full 360 degrees once every sixty seconds to distribute gravitational forces symmetrically.';
+      } else if (queryLower.includes('904l') || queryLower.includes('steel') || queryLower.includes('metal')) {
+        expertReply = 'We forge our cases strictly from austenitic 904L stainless steel rather than standard 316L alloy. 904L contains elevated percentages of chromium, nickel, and molybdenum with copper infusion, providing peerless corrosion resistance against harsh oceanic salts and acidic perspiration. When finished with our signature hand-brushed satin flanks and mirror-beveled facets, it emits an exceptionally crisp, luminous luster.';
+      } else if (queryLower.includes('black-tie') || queryLower.includes('suit') || queryLower.includes('formal') || queryLower.includes('event')) {
+        expertReply = 'For black-tie galas and formal evening attire, we recommend the AUREN Meridian Chronometre (40mm) or the Regent Imperial in 18k Sedna Rose Gold (41mm). With their slender 9.6mm profile, solid sterling silver guilloché dials, and hand-stitched Louisiana alligator straps, they slip effortlessly beneath a tailored French cuff while maintaining quiet, undeniable distinction.';
+      } else if (queryLower.includes('care') || queryLower.includes('service') || queryLower.includes('maintain') || queryLower.includes('wind')) {
+        expertReply = 'To preserve your mechanical calibre over decades: 1) Wind manual calibres once daily at a consistent morning hour until gentle mechanical resistance is felt. 2) Avoid setting the date between 9:00 PM and 3:00 AM to safeguard the calendar gear train. 3) Keep your timepiece separated from strong magnetic fields (laptop speakers, inductive chargers). Every AUREN watch includes a complimentary inspection and gasket resealing at year three under our 5-Year Atelier Guarantee.';
+      } else if (queryLower.includes('nocturne') || queryLower.includes('skeleton') || queryLower.includes('ar-08')) {
+        expertReply = 'The AUREN Nocturne is our tribute to architectural transparency. Driven by the manual-wind Calibre AR-08, its bridges are skeletonized by hand to minimize mass while maximizing structural rigidity. Operating at 21,600 vph with 27 ruby bearings, it provides an unyielding 68-hour power reserve housed in a 42mm matte black DLC-hardened 904L steel case.';
+      } else {
+        expertReply = `Regarding "${text}": At AUREN Atelier Horloger, our philosophy balances classic Swiss chronometric precision with contemporary architectural silhouettes. Our in-house calibres (AR-01 through AR-12) are hand-regulated to five spatial positions and finished with traditional Anglage Main. If you are considering a piece for your collection, both our Nocturne Tourbillon and Meridian Chronometre represent the pinnacle of our Geneva atelier.`;
+      }
+
       const fallbackMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content:
-          'Our ateliers in Geneva are currently experiencing high volume. In high-horology traditions, precision takes precedence. For our flagship Nocturne, it utilizes the manual-wind Calibre AR-08 skeleton with 68 hours of reserve, while the Meridian Chronometre is COSC-certified. Please inquire again in a moment or visit our collection overview.',
+        content: expertReply,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages(prev => [...prev, fallbackMsg]);
