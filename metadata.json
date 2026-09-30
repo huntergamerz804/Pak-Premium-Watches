@@ -1,0 +1,6 @@
+{
+  "name": "AUREN | Luxury Mechanical Timepieces",
+  "description": "Discover AUREN luxury mechanical timepieces. Engineered with Swiss-inspired horological precision, hand-finished movements, and enduring architectural elegance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
