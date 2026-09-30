@@ -12,6 +12,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        background-color: #050505 !important;
+        color: #F4F0E8 !important;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      #root {
+        min-height: 100vh;
+        background-color: #050505;
+      }
+    </style>
+    <script>
+      (function() {
+        // If uncompiled root index.html is loaded directly on a static host like GitHub Pages
+        var isGithub = window.location.hostname.includes('github.io');
+        var isRawSource = !!document.querySelector('script[src*="/src/main.tsx"]');
+        if (isGithub && isRawSource && !window.location.pathname.includes('/docs/')) {
+          var cleanPath = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
+          window.location.replace(cleanPath + '/docs/' + window.location.search + window.location.hash);
+        }
+      })();
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -23,8 +48,13 @@
     }
     </script>
   </head>
-  <body class="bg-[#050505] text-[#F4F0E8] antialiased selection:bg-[#C7A86B]/30 selection:text-[#F4F0E8] overflow-x-hidden min-h-screen">
-    <div id="root"></div>
+  <body class="bg-[#050505] text-[#F4F0E8] antialiased selection:bg-[#C7A86B]/30 selection:text-[#F4F0E8] overflow-x-hidden min-h-screen" style="background-color: #050505; color: #F4F0E8;">
+    <div id="root" style="background-color: #050505; min-height: 100vh;">
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #050505; color: #C7A86B; font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.25em;">
+        <span style="font-size: 32px; font-weight: 400; text-transform: uppercase;">AUREN</span>
+        <span style="font-size: 11px; color: #6F6D68; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: 0.3em; margin-top: 8px; text-transform: uppercase;">Atelier Horloger · Geneva</span>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
