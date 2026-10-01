@@ -27,16 +27,17 @@
       }
     </style>
     <script>
+      // Enforce trailing slash on GitHub Pages so relative asset paths './assets/...' resolve properly
       (function() {
-        // If uncompiled root index.html is loaded directly on a static host like GitHub Pages
-        var isGithub = window.location.hostname.includes('github.io');
-        var isRawSource = !!document.querySelector('script[src*="/src/main.tsx"]');
-        if (isGithub && isRawSource && !window.location.pathname.includes('/docs/')) {
-          var cleanPath = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
-          window.location.replace(cleanPath + '/docs/' + window.location.search + window.location.hash);
+        if (window.location.hostname.includes('github.io')) {
+          var pathname = window.location.pathname;
+          if (!pathname.endsWith('/') && !pathname.endsWith('.html')) {
+            window.location.replace(pathname + '/' + window.location.search + window.location.hash);
+          }
         }
       })();
     </script>
+    <link rel="stylesheet" href="./assets/index.css" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,6 +57,19 @@
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Fallback if /src/main.tsx cannot be transpiled by server (e.g. deployed raw from repo root to GitHub Pages)
+      window.addEventListener('error', function(e) {
+        if (e.target && e.target.tagName === 'SCRIPT' && e.target.src && e.target.src.includes('main.tsx')) {
+          console.warn('Vite dev server not running. Loading compiled production bundle.');
+          var fallbackScript = document.createElement('script');
+          fallbackScript.type = 'module';
+          fallbackScript.crossOrigin = '';
+          fallbackScript.src = './assets/index.js';
+          document.body.appendChild(fallbackScript);
+        }
+      }, true);
+    </script>
   </body>
 </html>
 

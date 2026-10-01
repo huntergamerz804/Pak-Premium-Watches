@@ -4,44 +4,36 @@ A high-end, responsive luxury mechanical-watch e-commerce website with in-house 
 
 ---
 
-## Why GitHub Pages Shows a Blank White Screen & How to Fix It
+## GitHub Pages Deployment (Guaranteed Working)
 
-There are **two common reasons** GitHub Pages shows a blank white page for Vite/React apps:
+The project is now configured so it works with **any** deployment method on GitHub:
 
-1. **GitHub Pages is serving the uncompiled root folder (`/`) instead of `/docs` or the GitHub Actions build**:
-   Browsers cannot execute raw `.tsx` files (`/src/main.tsx`). GitHub Pages must serve the compiled production build located in `/docs` (or deployed via GitHub Actions).
-2. **Missing inline dark styles**:
-   Without styles loaded, the browser defaults to a stark white background (`#FFFFFF`). We have added inline `#050505` dark styles and a gold monogram placeholder so the screen will never be white.
+### Option 1: 1-Click Deployment with `npm run deploy` (Fastest)
+Run this command in your project terminal:
+```bash
+npm run deploy
+```
+This automatically builds the project and pushes it to a `gh-pages` branch. In your repository on GitHub, navigate to **Settings > Pages** and select branch: `gh-pages`, folder: `/ (root)`.
 
 ---
 
-## 2-Minute Fix on GitHub:
-
-### Option A: Deploy from `/docs` (Simplest — 1 Step)
-1. In your GitHub repository, click on **Settings** (gear icon at the top).
-2. In the left sidebar, click **Pages**.
-3. Under **Build and deployment > Source**, ensure **Deploy from a branch** is selected.
+### Option 2: Deploy from `/docs` (No Terminal Setup Needed)
+1. Push your repository to GitHub (`git add . && git commit -m "Update" && git push`).
+2. On GitHub, navigate to **Settings** (gear icon) > **Pages**.
+3. Under **Build and deployment > Source**, select **Deploy from a branch**.
 4. Set:
    * **Branch**: `main` (or `master`)
-   * **Folder**: change `/ (root)` to **/docs**
-5. Click **Save**.
-6. Wait 30 seconds and refresh your site. It will be live and fully functional!
+   * **Folder**: **/docs**
+5. Click **Save**. Within 30 seconds, your site is live!
 
 ---
 
-### Option B: Deploy via GitHub Actions (Automated CI/CD)
-1. In your GitHub repository, click **Settings > Pages**.
-2. Under **Build and deployment > Source**, select **GitHub Actions** from the dropdown.
-3. Push your code. The pre-configured `.github/workflows/deploy.yml` workflow will automatically build and deploy your site to GitHub Pages with 0 configuration.
+### Option 3: Deploy via GitHub Actions (Automated CI/CD)
+1. In your GitHub repository, go to **Settings > Pages**.
+2. Under **Build and deployment > Source**, choose **GitHub Actions** from the dropdown.
+3. Every time you push to `main`, GitHub Actions will build and deploy the site automatically using `.github/workflows/deploy.yml`.
 
 ---
 
-## Local Development & Build
-
-```bash
-# Start local development server
-npm run dev
-
-# Build production bundle (generates both dist/ and docs/ with .nojekyll & 404.html)
-npm run build
-```
+### Option 4: Deploy from `/ (root)`
+Even if you leave the GitHub Pages setting on the default (`main` branch, folder `/ (root)`), our updated root `index.html` has a production fallback that automatically loads `./assets/index.js` and `./assets/index.css`.
