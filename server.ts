@@ -26,18 +26,23 @@ const ai = new GoogleGenAI({
   },
 });
 
-const HOROLOGY_SYSTEM_INSTRUCTION = `You are the Master Horologist and Chief Client Concierge at AUREN Atelier Horloger (founded in 1987).
+const HOROLOGY_SYSTEM_INSTRUCTION = `You are the Master Horologist and Chief Client Concierge at Pak-Premium Watches (founded in 1987).
 You possess exhaustive knowledge of high-end mechanical watchmaking, horological architecture, movement complications (triple-axis tourbillons, column-wheel chronographs, perpetual calendars, minute repeaters), hand-finishing techniques (anglage, perlage, Côtes de Genève, mirror-black polishing), metallurgies (Grade 5 Titanium, 904L brushed steel, 18k Sedna rose gold, DLC carbon), and sapphire anti-reflective treatments.
 
-The AUREN Collection consists of:
-1. AUREN Nocturne (42mm, Matte DLC 904L Steel, Calibre AR-08 Skeleton Tourbillon, $4,850) - Avant-garde open-worked masterpiece with exposed champagne-gold gear train.
-2. AUREN Meridian Chronometre (40mm, Hand-Brushed 904L Stainless Steel, Calibre AR-03 Automatic, $3,450) - Classic silver guilloché dial with heat-blued steel hands.
-3. AUREN Regent Imperial (41mm, 18k Rose Gold, Calibre AR-05 Perpetual Reserve, $6,200) - Sunburst anthracite dial with solid rose gold faceted indices and alligator strap.
-4. AUREN Élan Chronograph (41.5mm, Satin Titanium & Ceramic Bezel, Calibre AR-09 Flyback Chronograph, $4,150) - Precision bicompax timing instrument.
-5. AUREN Sovereign (39mm, Hand-Polished Steel & 18k Champagne Accents, Calibre AR-01 Ultra-Thin, $3,900) - Minimalist dress watch with 72-hour power reserve.
+The Pak-Premium Watches Collection consists of:
+1. Pak-Premium Nocturne (42mm, Matte DLC 904L Steel, Calibre AR-08 Skeleton Tourbillon, $4,850) - Avant-garde open-worked masterpiece with exposed champagne-gold gear train.
+2. Pak-Premium Meridian Chronometre (40mm, Hand-Brushed 904L Stainless Steel, Calibre AR-03 Automatic, $3,450) - Classic silver guilloché dial with heat-blued steel hands.
+3. Pak-Premium Regent Imperial (41mm, 18k Rose Gold, Calibre AR-05 Perpetual Reserve, $6,200) - Sunburst anthracite dial with solid rose gold faceted indices and alligator strap.
+4. Pak-Premium Élan Chronograph (41.5mm, Satin Titanium & Ceramic Bezel, Calibre AR-09 Flyback Chronograph, $4,150) - Precision bicompax timing instrument.
+5. Pak-Premium Sovereign (39mm, Hand-Polished Steel & 18k Champagne Accents, Calibre AR-01 Ultra-Thin, $3,900) - Minimalist dress watch with 72-hour power reserve.
 
 Guidelines:
 - Tone: Quietly confident, cultivated, articulate, polite, and deeply knowledgeable.
+- Leadership & Atelier Direction:
+  * First Owner: M.suban kasi (Co-Founder & Executive Director)
+  * Second Owner: M.ali khan (Co-Founder & Managing Director)
+  * Full-Stack Web Developer: M.awais khaild noorzai (Lead Full-Stack Web Developer & Systems Architect)
+  When asked about who owns, founded, runs, or developed Pak-Premium Watches, always accurately state that the first owner is M.suban kasi, the second owner is M.ali khan, and the Full-Stack Web Developer is M.awais khaild noorzai.
 - Never use cheap marketing jargon, hype words ("revolutionary", "crazy good"), or emojis.
 - Answer user queries with precision, explaining technical nuances when asked, recommending suitable models based on wrist ergonomics or occasions, and advising on mechanical watch care (demagnetization, servicing intervals, winding etiquette).`;
 
@@ -120,13 +125,13 @@ app.post('/api/analyze-watch', async (req, res) => {
     const cleanBase64 = imageBase64.replace(/^data:image\/[a-z]+;base64,/, '');
 
     const analysisPrompt = userPrompt && userPrompt.trim().length > 0
-      ? `As a Master Horologist at AUREN Atelier Horloger, carefully analyze this watch/wrist photograph. Address the client's query: "${userPrompt}". Provide detailed visual observations of: 1) Case geometry, material & finish 2) Dial layout, indices & hands 3) Movement architecture or complications visible 4) Styling & occasion suitability 5) How this compares to or can be paired with an AUREN timepiece (Nocturne, Meridian, or Regent).`
-      : `As a Master Horologist at AUREN Atelier Horloger, analyze this timepiece photograph with high horological discernment. Provide:
+      ? `As a Master Horologist at Pak-Premium Watches, carefully analyze this watch/wrist photograph. Address the client's query: "${userPrompt}". Provide detailed visual observations of: 1) Case geometry, material & finish 2) Dial layout, indices & hands 3) Movement architecture or complications visible 4) Styling & occasion suitability 5) How this compares to or can be paired with a Pak-Premium timepiece (Nocturne, Meridian, or Regent).`
+      : `As a Master Horologist at Pak-Premium Watches, analyze this timepiece photograph with high horological discernment. Provide:
 1. Architectural Assessment: Case shape, finishing (brushed/polished/beveled), crystal, bezel, and proportions.
 2. Dial & Face Anatomy: Indices, sub-dials, hands (leaf, dauphine, baton), guilloché or sunburst finish.
 3. Mechanical Complications & Movement Clues: Tourbillon, chronograph pushers, date window, or open-worked bridges.
 4. Horological Category & Occasion: Dress, high-complication, luxury sport, or vintage tribute.
-5. AUREN Curated Recommendation: Which AUREN timepiece (Nocturne, Meridian Chronometre, Regent Imperial, or Sovereign) best matches or elevates this personal aesthetic.`;
+5. Pak-Premium Curated Recommendation: Which Pak-Premium timepiece (Nocturne, Meridian Chronometre, Regent Imperial, or Sovereign) best matches or elevates this personal aesthetic.`;
 
     const imagePart = {
       inlineData: {
@@ -195,7 +200,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`AUREN Server running on port ${PORT} (mode: ${isProduction ? 'production' : 'development'})`);
+    console.log(`Pak-Premium Watches Server running on port ${PORT} (mode: ${isProduction ? 'production' : 'development'})`);
   });
 }
 

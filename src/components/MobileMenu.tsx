@@ -26,9 +26,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         <div>
           {/* Top Bar */}
           <div className="flex items-center justify-between pb-6 border-b border-[#1B1B1B]">
-            <span className="font-serif tracking-[0.2em] text-xl text-[#F4F0E8] uppercase">
-              AUREN
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-serif tracking-[0.18em] text-base text-[#F4F0E8] font-semibold uppercase">
+                PAK-PREMIUM
+              </span>
+              <span className="font-serif tracking-[0.2em] text-xs text-[#C7A86B] font-light uppercase">
+                WATCHES
+              </span>
+            </div>
             <button
               onClick={onClose}
               className="p-2 text-[#9C9A94] hover:text-[#F4F0E8] transition-colors"
@@ -66,10 +71,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           <nav className="flex flex-col space-y-4 pt-2">
             {[
               { label: 'The Collection', href: '#collection' },
-              { label: 'Craftsmanship & Metiers', href: '#craftsmanship' },
-              { label: 'The Movement Architecture', href: '#movement' },
-              { label: 'Geneva Heritage', href: '#heritage' },
-              { label: 'Horology Journal', href: '#journal' },
               { label: 'Client Testimonials', href: '#testimonials' },
             ].map(item => (
               <a
@@ -134,12 +135,15 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer info */}
-        <div className="pt-6 border-t border-[#1B1B1B] text-center">
+        <div className="pt-6 border-t border-[#1B1B1B] text-center space-y-1.5">
           <div className="text-[11px] tracking-[0.18em] uppercase text-[#6F6D68]">
-            AUREN Atelier Horloger · Geneva
+            Pak-Premium Watches · Atelier Horloger
           </div>
-          <div className="text-[10px] text-[#4A4844] mt-1">
-            Engineered for Eternity · Est. 1987
+          <div className="text-[10px] text-[#555555]">
+            First Owner: <span className="text-[#888888]">M.suban kasi</span> · Second Owner: <span className="text-[#888888]">M.ali khan</span>
+          </div>
+          <div className="text-[10px] text-[#C7A86B]/90 font-mono">
+            Full-Stack Web Developer: M.awais khaild noorzai
           </div>
         </div>
       </div>

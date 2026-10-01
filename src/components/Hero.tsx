@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
       ref={heroRef}
       onMouseMove={handleMouseMove}
       className="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#050505]"
-      aria-label="AUREN Atelier Showcase"
+      aria-label="Pak-Premium Watches Showcase"
     >
       {/* Background Radial Spotlight */}
       <div
@@ -76,17 +76,10 @@ export const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
             <a
               href="#collection"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-medium text-xs tracking-[0.18em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-[#C7A86B]/15 hover:shadow-[#C7A86B]/25 active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86B]"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-medium text-xs tracking-[0.18em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-[#C7A86B]/15 hover:shadow-[#C7A86B]/25 active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86B]"
             >
               <span>Explore Collection</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-
-            <a
-              href="#craftsmanship"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-[#F4F0E8]/30 hover:border-[#C7A86B] text-[#F4F0E8] hover:text-[#C7A86B] font-medium text-xs tracking-[0.18em] uppercase transition-all duration-300 rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B]"
-            >
-              <span>Discover Our Craft</span>
             </a>
           </div>
 
@@ -125,7 +118,7 @@ export const Hero: React.FC = () => {
             <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-sm overflow-hidden border border-[#222222]/80 bg-gradient-to-b from-[#111111] to-[#080808] shadow-2xl shadow-black/80">
               <img
                 src={heroWatchImg}
-                alt="AUREN Sovereign Flying Tourbillon mechanical watch with visible open-worked escapement"
+                alt="Pak-Premium Sovereign Flying Tourbillon mechanical watch with visible open-worked escapement"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="eager"
@@ -144,7 +137,7 @@ export const Hero: React.FC = () => {
                     Flagship Piece
                   </span>
                   <span className="font-serif text-lg text-[#F4F0E8] font-normal">
-                    AUREN Sovereign Tourbillon
+                    Pak-Premium Sovereign Tourbillon
                   </span>
                 </div>
                 <div className="text-right">

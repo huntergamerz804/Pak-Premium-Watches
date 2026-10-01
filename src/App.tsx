@@ -8,15 +8,8 @@ import { CartProvider } from './context/CartContext';
 import { Header } from './components/Header';
 import { MobileMenu } from './components/MobileMenu';
 import { Hero } from './components/Hero';
-import { TrustStrip } from './components/TrustStrip';
 import { FeaturedCollection } from './components/FeaturedCollection';
-import { EditorialSplit } from './components/EditorialSplit';
-import { CraftsmanshipSection } from './components/CraftsmanshipSection';
-import { CinematicBanner } from './components/CinematicBanner';
-import { HeritageSection } from './components/HeritageSection';
-import { JournalSection } from './components/JournalSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
-import { NewsletterSection } from './components/NewsletterSection';
 import { Footer } from './components/Footer';
 
 // Modals & Drawers
@@ -24,7 +17,6 @@ import { CartDrawer } from './components/CartDrawer';
 import { SearchModal } from './components/SearchModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CheckoutModal } from './components/CheckoutModal';
-import { ArticleModal } from './components/ArticleModal';
 import { HorologyConciergeModal } from './components/HorologyConciergeModal';
 import { WatchAnalysisModal } from './components/WatchAnalysisModal';
 
@@ -45,15 +37,8 @@ function AppContent() {
       {/* Main Content Flow */}
       <main className="flex-1">
         <Hero />
-        <TrustStrip />
         <FeaturedCollection />
-        <EditorialSplit />
-        <CraftsmanshipSection />
-        <CinematicBanner />
-        <HeritageSection />
-        <JournalSection />
         <TestimonialsSection />
-        <NewsletterSection />
       </main>
 
       {/* Luxury Footer */}
@@ -64,7 +49,6 @@ function AppContent() {
       <SearchModal />
       <ProductDetailModal />
       <CheckoutModal />
-      <ArticleModal />
       <HorologyConciergeModal />
       <WatchAnalysisModal />
     </div>

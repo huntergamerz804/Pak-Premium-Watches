@@ -8,14 +8,10 @@ export const TestimonialsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-[#C7A86B] font-medium mb-3">
-            <span className="w-4 h-[1px] bg-[#C7A86B]" aria-hidden="true" />
-            <span>Patronage & Dialogue</span>
-            <span className="w-4 h-[1px] bg-[#C7A86B]" aria-hidden="true" />
-          </div>
           <h2 className="text-3xl sm:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
-            VOICES OF COLLECTORS.
+            Customer Experiences
           </h2>
+          <div className="w-12 h-[1px] bg-[#C7A86B] mx-auto mt-4" aria-hidden="true" />
         </div>
 
         {/* Testimonials 3 Columns */}

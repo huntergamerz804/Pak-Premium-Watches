@@ -53,7 +53,7 @@ export const CartDrawer: React.FC = () => {
                 The bag is empty.
               </span>
               <p className="text-xs text-[#9C9A94] max-w-xs mb-6 font-light leading-relaxed">
-                Discover the AUREN mechanical watch collection and select a timepiece of enduring distinction.
+                Discover the Pak-Premium mechanical watch collection and select a timepiece of enduring distinction.
               </p>
               <button
                 onClick={closeCart}
@@ -169,6 +169,11 @@ export const CartDrawer: React.FC = () => {
               <span>Proceed to Bespoke Checkout</span>
               <ArrowRight className="w-4 h-4" />
             </button>
+
+            <div className="flex items-center justify-center gap-2 text-[11px] text-[#A898A0]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D31044]" />
+              <span>JazzCash Supported: <strong>03083536703</strong> (Rafiq Ahmed)</span>
+            </div>
 
             <p className="text-[10px] text-center text-[#555555] font-light">
               Taxes calculated at dispatch. 30-day inspection privilege included.

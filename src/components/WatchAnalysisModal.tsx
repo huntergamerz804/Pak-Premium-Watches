@@ -81,11 +81,11 @@ export const WatchAnalysisModal: React.FC = () => {
 - Versatility: Exceptional versatility across both sartorial black-tie occasions and refined casual tailoring.
 - Strap Pairing: Matte black Louisiana alligator or slate gray calfskin with deployant clasp.
 
-5. AUREN Curated Pairing:
-- Direct AUREN Atelier Match: AUREN Nocturne (for avant-garde skeleton transparency) or AUREN Meridian Chronometre (for pure understated classical excellence).`;
+5. Pak-Premium Curated Pairing:
+- Direct Atelier Match: Pak-Premium Nocturne (for avant-garde skeleton transparency) or Pak-Premium Meridian Chronometre (for pure understated classical excellence).`;
 
       setAnalysisResult(fallbackAppraisal);
-      setModelUsed('AUREN Atelier Horological Engine');
+      setModelUsed('Pak-Premium Horological Engine');
     } finally {
       setIsAnalyzing(false);
     }
@@ -157,7 +157,7 @@ export const WatchAnalysisModal: React.FC = () => {
                 Upload Timepiece or Wrist Photograph
               </h3>
               <p className="text-xs text-[#9C9A94] max-w-sm mx-auto mb-4 font-light leading-relaxed">
-                Provide a photo of any mechanical watch, wrist shot, or movement to receive an exhaustive architectural evaluation and curated AUREN recommendation.
+                Provide a photo of any mechanical watch, wrist shot, or movement to receive an exhaustive architectural evaluation and curated Pak-Premium recommendation.
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#1A1A1A] border border-[#2E2E2E] text-[11px] font-mono uppercase tracking-wider text-[#C7A86B] rounded-sm">
                 Select JPEG, PNG, or WEBP
@@ -193,7 +193,7 @@ export const WatchAnalysisModal: React.FC = () => {
                       rows={3}
                       value={userPrompt}
                       onChange={e => setUserPrompt(e.target.value)}
-                      placeholder="e.g., What case geometry and dial finishing do you observe? Which AUREN timepiece would complement this collection?"
+                      placeholder="e.g., What case geometry and dial finishing do you observe? Which Pak-Premium timepiece would complement this collection?"
                       className="w-full bg-[#121212] border border-[#262626] focus:border-[#C7A86B] text-xs text-[#F4F0E8] p-3 rounded-sm placeholder-[#555555] focus:outline-none resize-none"
                     />
                   </div>
@@ -250,7 +250,7 @@ export const WatchAnalysisModal: React.FC = () => {
                         Suggested Atelier Exploration
                       </div>
                       <div className="text-xs font-serif text-[#F4F0E8] mt-0.5">
-                        Discover the AUREN Nocturne & Meridian Chronometres
+                        Discover the Pak-Premium Nocturne & Meridian Chronometres
                       </div>
                     </div>
                     <button

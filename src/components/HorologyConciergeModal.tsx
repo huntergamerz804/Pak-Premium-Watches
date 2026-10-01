@@ -10,7 +10,7 @@ export const HorologyConciergeModal: React.FC = () => {
       id: 'welcome',
       role: 'assistant',
       content:
-        'Greetings. I am the Master Horologist and Client Concierge at AUREN Atelier Horloger. How may I assist you today? Whether you seek technical insights into our Calibre AR-08 tourbillon, guidance on wrist ergonomics, or bespoke recommendations, I am at your service.',
+        'Greetings. I am the Master Horologist and Client Concierge at Pak-Premium Watches. How may I assist you today? Whether you seek technical insights into our Calibre AR-08 tourbillon, guidance on wrist ergonomics, or bespoke recommendations, I am at your service.',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -77,18 +77,20 @@ export const HorologyConciergeModal: React.FC = () => {
       const queryLower = text.toLowerCase();
       let expertReply = '';
 
-      if (queryLower.includes('tourbillon') || queryLower.includes('gravity') || queryLower.includes('cage')) {
-        expertReply = 'In high-horology, the tourbillon is an architectural triumph designed to negate the isochronal errors caused by Earth’s gravitational pull on the balance spring. In our flagship AUREN Sovereign and Nocturne calibres, the balance assembly and escapement are cradled within an ultralight Grade 5 titanium cage weighing just 0.28 grams, rotating a full 360 degrees once every sixty seconds to distribute gravitational forces symmetrically.';
+      if (queryLower.includes('owner') || queryLower.includes('founder') || queryLower.includes('developer') || queryLower.includes('suban') || queryLower.includes('ali khan') || queryLower.includes('awais') || queryLower.includes('who made') || queryLower.includes('creator')) {
+        expertReply = 'Pak-Premium Watches is led by First Owner M.suban kasi and Second Owner M.ali khan, steering the atelier\'s vision and mechanical curation. The digital platform and full-stack architecture were designed and engineered by Full-Stack Web Developer M.awais khaild noorzai.';
+      } else if (queryLower.includes('tourbillon') || queryLower.includes('gravity') || queryLower.includes('cage')) {
+        expertReply = 'In high-horology, the tourbillon is an architectural triumph designed to negate the isochronal errors caused by Earth’s gravitational pull on the balance spring. In our flagship Pak-Premium Sovereign and Nocturne calibres, the balance assembly and escapement are cradled within an ultralight Grade 5 titanium cage weighing just 0.28 grams, rotating a full 360 degrees once every sixty seconds to distribute gravitational forces symmetrically.';
       } else if (queryLower.includes('904l') || queryLower.includes('steel') || queryLower.includes('metal')) {
         expertReply = 'We forge our cases strictly from austenitic 904L stainless steel rather than standard 316L alloy. 904L contains elevated percentages of chromium, nickel, and molybdenum with copper infusion, providing peerless corrosion resistance against harsh oceanic salts and acidic perspiration. When finished with our signature hand-brushed satin flanks and mirror-beveled facets, it emits an exceptionally crisp, luminous luster.';
       } else if (queryLower.includes('black-tie') || queryLower.includes('suit') || queryLower.includes('formal') || queryLower.includes('event')) {
-        expertReply = 'For black-tie galas and formal evening attire, we recommend the AUREN Meridian Chronometre (40mm) or the Regent Imperial in 18k Sedna Rose Gold (41mm). With their slender 9.6mm profile, solid sterling silver guilloché dials, and hand-stitched Louisiana alligator straps, they slip effortlessly beneath a tailored French cuff while maintaining quiet, undeniable distinction.';
+        expertReply = 'For black-tie galas and formal evening attire, we recommend the Pak-Premium Meridian Chronometre (40mm) or the Regent Imperial in 18k Sedna Rose Gold (41mm). With their slender 9.6mm profile, solid sterling silver guilloché dials, and hand-stitched Louisiana alligator straps, they slip effortlessly beneath a tailored French cuff while maintaining quiet, undeniable distinction.';
       } else if (queryLower.includes('care') || queryLower.includes('service') || queryLower.includes('maintain') || queryLower.includes('wind')) {
-        expertReply = 'To preserve your mechanical calibre over decades: 1) Wind manual calibres once daily at a consistent morning hour until gentle mechanical resistance is felt. 2) Avoid setting the date between 9:00 PM and 3:00 AM to safeguard the calendar gear train. 3) Keep your timepiece separated from strong magnetic fields (laptop speakers, inductive chargers). Every AUREN watch includes a complimentary inspection and gasket resealing at year three under our 5-Year Atelier Guarantee.';
+        expertReply = 'To preserve your mechanical calibre over decades: 1) Wind manual calibres once daily at a consistent morning hour until gentle mechanical resistance is felt. 2) Avoid setting the date between 9:00 PM and 3:00 AM to safeguard the calendar gear train. 3) Keep your timepiece separated from strong magnetic fields (laptop speakers, inductive chargers). Every Pak-Premium watch includes a complimentary inspection and gasket resealing at year three under our 5-Year Atelier Guarantee.';
       } else if (queryLower.includes('nocturne') || queryLower.includes('skeleton') || queryLower.includes('ar-08')) {
-        expertReply = 'The AUREN Nocturne is our tribute to architectural transparency. Driven by the manual-wind Calibre AR-08, its bridges are skeletonized by hand to minimize mass while maximizing structural rigidity. Operating at 21,600 vph with 27 ruby bearings, it provides an unyielding 68-hour power reserve housed in a 42mm matte black DLC-hardened 904L steel case.';
+        expertReply = 'The Pak-Premium Nocturne is our tribute to architectural transparency. Driven by the manual-wind Calibre AR-08, its bridges are skeletonized by hand to minimize mass while maximizing structural rigidity. Operating at 21,600 vph with 27 ruby bearings, it provides an unyielding 68-hour power reserve housed in a 42mm matte black DLC-hardened 904L steel case.';
       } else {
-        expertReply = `Regarding "${text}": At AUREN Atelier Horloger, our philosophy balances classic Swiss chronometric precision with contemporary architectural silhouettes. Our in-house calibres (AR-01 through AR-12) are hand-regulated to five spatial positions and finished with traditional Anglage Main. If you are considering a piece for your collection, both our Nocturne Tourbillon and Meridian Chronometre represent the pinnacle of our Geneva atelier.`;
+        expertReply = `Regarding "${text}": At Pak-Premium Watches, our philosophy balances classic Swiss chronometric precision with contemporary architectural silhouettes. Our in-house calibres (AR-01 through AR-12) are hand-regulated to five spatial positions and finished with traditional Anglage Main. If you are considering a piece for your collection, both our Nocturne Tourbillon and Meridian Chronometre represent the pinnacle of our horological atelier.`;
       }
 
       const fallbackMsg: ChatMessage = {
@@ -112,7 +114,7 @@ export const HorologyConciergeModal: React.FC = () => {
 
   const SUGGESTED_QUERIES = [
     'Explain the Calibre AR-08 skeleton tourbillon architecture',
-    'Which AUREN timepiece is ideal for black-tie galas?',
+    'Which Pak-Premium timepiece is ideal for black-tie galas?',
     'What are the advantages of 904L steel over standard steel?',
     'How should I care for a mechanical manual-wind watch?',
   ];
@@ -137,12 +139,12 @@ export const HorologyConciergeModal: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="font-serif text-base tracking-wider uppercase text-[#F4F0E8]">
-                  AUREN Horological Concierge
+                  Pak-Premium Horological Concierge
                 </h2>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
               <span className="text-[11px] text-[#6F6D68] font-mono">
-                Geneva Master Horologist & Curatorial Advisory
+                Master Horologist & Curatorial Advisory
               </span>
             </div>
           </div>
@@ -291,7 +293,7 @@ export const HorologyConciergeModal: React.FC = () => {
           </div>
           <div className="flex items-center justify-between text-[10px] text-[#555555] mt-2 font-mono">
             <span>Powered by Gemini Horological Architecture</span>
-            <span>AUREN Atelier Protocol</span>
+            <span>Pak-Premium Atelier Protocol</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,11 @@
-# AUREN | Luxury Mechanical Timepieces
+# Pak-Premium Watches | Luxury Mechanical Timepieces
 
 A high-end, responsive luxury mechanical-watch e-commerce website with in-house horological curation, bespoke cart, and Gemini-powered horological advisory.
+
+### Leadership & Development
+* **First Owner**: M.suban kasi
+* **Second Owner**: M.ali khan
+* **Full-Stack Web Developer**: M.awais khaild noorzai
 
 ---
 

@@ -284,7 +284,7 @@ export const ProductDetailModal: React.FC = () => {
               {openAccordion === 'shipping' && (
                 <div className="p-6 bg-[#080808] text-xs text-[#9C9A94] space-y-3 leading-relaxed">
                   <p>
-                    Every AUREN timepiece is dispatched in an armored, tamper-evident presentation casket via specialized high-value courier (Ferrari Group / Malca-Amit / Brinks) with signature-required delivery.
+                    Every Pak-Premium timepiece is dispatched in an armored, tamper-evident presentation casket via specialized high-value courier (Ferrari Group / Malca-Amit / Brinks) with signature-required delivery.
                   </p>
                   <p>
                     The 5-Year Atelier Warranty covers all mechanical malfunctions arising from materials or assembly. A complimentary complete movement check-up and water resistance reseal is provided at year three.

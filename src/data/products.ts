@@ -11,7 +11,7 @@ export { heroWatchImg, nocturneBlackImg, meridianSteelImg, regentRoseGoldImg, ma
 export const PRODUCTS: Product[] = [
   {
     id: 'auren-nocturne',
-    name: 'AUREN Nocturne',
+    name: 'Pak-Premium Nocturne',
     subtitle: 'Open-Worked Skeleton Calibre',
     category: 'Tourbillon & Skeleton',
     price: 4850,
@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'auren-meridian',
-    name: 'AUREN Meridian',
+    name: 'Pak-Premium Meridian',
     subtitle: 'High-Beat Precision Chronometre',
     category: 'Classic Chronometre',
     price: 3450,
@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
     strap: 'French Slate Calfskin with Quick-Release',
     warranty: '5-Year International Atelier Warranty',
     badge: 'Chronometer',
-    description: 'The quintessential modern dress chronometer. Crafted with a solid sterling silver hand-guilloché dial, flame-blued hands, and a chronometer-grade oscillating weight engraved with the AUREN coat of arms.',
+    description: 'The quintessential modern dress chronometer. Crafted with a solid sterling silver hand-guilloché dial, flame-blued hands, and a chronometer-grade oscillating weight engraved with the Pak-Premium coat of arms.',
     features: [
       'Solid 925 sterling silver dial with hand-turned guilloché pattern',
       'Heat-blued leaf hands tempered to 290°C for permanent deep cobalt tone',
@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'auren-regent',
-    name: 'AUREN Regent',
+    name: 'Pak-Premium Regent',
     subtitle: 'Imperial Perpetual Reserve',
     category: 'Precious Metals',
     price: 6200,
@@ -120,7 +120,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'auren-sovereign',
-    name: 'AUREN Sovereign Tourbillon',
+    name: 'Pak-Premium Sovereign Tourbillon',
     subtitle: 'Celestial Escapement Masterpiece',
     category: 'Tourbillon & Skeleton',
     price: 5600,
@@ -135,7 +135,7 @@ export const PRODUCTS: Product[] = [
     warranty: '5-Year International Atelier Warranty',
     limitedEdition: 'Atelier Edition of 100',
     badge: 'Tourbillon',
-    description: 'The crowning achievement of AUREN watchmaking. A visible 60-second flying tourbillon carriage hovers serenely at 6 o’clock against an obsidian dial, hand-regulated to five positions across variable temperatures.',
+    description: 'The crowning achievement of Pak-Premium watchmaking. A visible 60-second flying tourbillon carriage hovers serenely at 6 o’clock against an obsidian dial, hand-regulated to five positions across variable temperatures.',
     features: [
       '60-second flying tourbillon titanium carriage weighing just 0.28 grams',
       'Obsidian black lacquered dial with polished gold chapter ring',
@@ -157,7 +157,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'auren-elan',
-    name: 'AUREN Élan Chronograph',
+    name: 'Pak-Premium Élan Chronograph',
     subtitle: 'Flyback Column-Wheel Instrument',
     category: 'Sport & Chronograph',
     price: 4150,
@@ -193,7 +193,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'auren-atlas',
-    name: 'AUREN Atlas Steel',
+    name: 'Pak-Premium Atlas Steel',
     subtitle: 'Integrated Architecture Sports Watch',
     category: 'Integrated Sports',
     price: 3800,

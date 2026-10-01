@@ -30,13 +30,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
         {/* Zone 1: Single text element wordmark */}
         <a
           href="#home"
-          className="text-2xl sm:text-3xl font-serif tracking-[0.25em] text-[#F4F0E8] hover:text-[#C7A86B] transition-colors uppercase select-none flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B]"
-          aria-label="AUREN Atelier Horloger Homepage"
+          className="text-lg sm:text-2xl font-serif tracking-[0.2em] text-[#F4F0E8] hover:text-[#C7A86B] transition-colors uppercase select-none flex items-center gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B]"
+          aria-label="Pak-Premium Watches Homepage"
         >
-          AUREN
+          <span className="font-semibold">PAK-PREMIUM</span>
+          <span className="text-[#C7A86B] font-light text-xs sm:text-sm tracking-[0.25em]">WATCHES</span>
         </a>
 
-        {/* Zone 2: 5 clean text navigation links */}
+        {/* Zone 2: Clean text navigation links */}
         <nav
           className="hidden lg:flex items-center gap-8 text-[13px] tracking-[0.16em] uppercase text-[#9C9A94] font-medium"
           aria-label="Primary Navigation"
@@ -48,28 +49,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
             Collection
           </a>
           <a
-            href="#craftsmanship"
+            href="#testimonials"
             className="hover:text-[#F4F0E8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C7A86B] hover:after:w-full after:transition-all after:duration-300"
           >
-            Craftsmanship
-          </a>
-          <a
-            href="#movement"
-            className="hover:text-[#F4F0E8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C7A86B] hover:after:w-full after:transition-all after:duration-300"
-          >
-            The Movement
-          </a>
-          <a
-            href="#heritage"
-            className="hover:text-[#F4F0E8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C7A86B] hover:after:w-full after:transition-all after:duration-300"
-          >
-            Heritage
-          </a>
-          <a
-            href="#journal"
-            className="hover:text-[#F4F0E8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C7A86B] hover:after:w-full after:transition-all after:duration-300"
-          >
-            Journal
+            Reviews
           </a>
         </nav>
 
@@ -90,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
           <button
             onClick={openConcierge}
             className="flex items-center gap-2 px-3 py-1.5 text-xs tracking-wider uppercase text-[#F4F0E8] hover:text-[#C7A86B] border border-[#222222] hover:border-[#C7A86B]/50 transition-all rounded-sm whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B]"
-            title="Ask AUREN Horological Concierge"
+            title="Ask Pak-Premium Horological Concierge"
             aria-label="Open Concierge"
           >
             <MessageSquare className="w-3.5 h-3.5 text-[#C7A86B]" />
