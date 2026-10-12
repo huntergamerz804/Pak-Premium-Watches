@@ -1,6 +1,7 @@
 import React from 'react';
 import { Crown, Shield, Code2 } from 'lucide-react';
 import { JazzCashLogo } from './JazzCashLogo';
+import { EasyPaisaLogo } from './EasyPaisaLogo';
 
 export const Footer: React.FC = () => {
   return (
@@ -128,30 +129,33 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Official Payment Methods & JazzCash Gateway */}
-        <div className="mb-12 p-6 sm:p-7 bg-gradient-to-r from-[#170910] via-[#10060B] to-[#0A0A0A] border border-[#B31745]/40 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+        {/* Official Payment Methods & JazzCash / EasyPaisa Gateway */}
+        <div className="mb-12 p-6 sm:p-7 bg-gradient-to-r from-[#170F14] via-[#101411] to-[#0A0A0A] border border-[#C7A86B]/30 rounded-sm flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-            <JazzCashLogo size="md" />
+            <div className="flex items-center gap-2.5">
+              <JazzCashLogo size="md" />
+              <EasyPaisaLogo size="md" />
+            </div>
             <div>
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-0.5">
                 <span className="text-xs font-mono uppercase tracking-widest text-[#FFDE00] font-semibold">
-                  Official JazzCash Payment Method
+                  JazzCash & EasyPaisa Accepted
                 </span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse" />
               </div>
               <p className="text-xs text-[#9C9A94]">
-                Direct mobile account transfers accepted for timepieces acquisition across Pakistan.
+                Direct mobile wallet transfers accepted for timepieces acquisition across Pakistan.
               </p>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
-            <div className="px-4 py-2 bg-[#090306] border border-[#3D1422] rounded-sm text-center">
-              <span className="text-[10px] uppercase text-[#8A7982] block mb-0.5">JazzCash Number</span>
-              <span className="text-sm font-bold text-white tracking-wider">03083536703</span>
+            <div className="px-4 py-2 bg-[#090A09] border border-[#2A332B] rounded-sm text-center">
+              <span className="text-[10px] uppercase text-[#8A8E89] block mb-0.5">Account Number (Both Wallets)</span>
+              <span className="text-sm font-bold text-white tracking-wider">03188849935</span>
             </div>
-            <div className="px-4 py-2 bg-[#090306] border border-[#3D1422] rounded-sm text-center">
-              <span className="text-[10px] uppercase text-[#8A7982] block mb-0.5">Account Title</span>
+            <div className="px-4 py-2 bg-[#090A09] border border-[#2A332B] rounded-sm text-center">
+              <span className="text-[10px] uppercase text-[#8A8E89] block mb-0.5">Account Title</span>
               <span className="text-sm font-serif font-medium text-[#FFDE00]">Rafiq Ahmed</span>
             </div>
           </div>

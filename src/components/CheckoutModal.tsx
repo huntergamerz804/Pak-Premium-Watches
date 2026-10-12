@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, CheckCircle2, ShieldCheck, Lock, ArrowRight, Truck, Copy, Check, Smartphone } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { JazzCashLogo } from './JazzCashLogo';
+import { EasyPaisaLogo } from './EasyPaisaLogo';
 
 export const CheckoutModal: React.FC = () => {
   const { isCheckoutOpen, closeCheckout, cartItems, subtotal, clearCart } = useCart();
@@ -14,12 +15,13 @@ export const CheckoutModal: React.FC = () => {
     city: '',
     postalCode: '',
     country: 'Pakistan',
-    paymentMethod: 'jazzcash',
-    jazzCashTid: '',
+    paymentMethod: 'mobile_account', // JazzCash & EasyPaisa
+    walletProvider: 'both', // 'jazzcash' | 'easypaisa' | 'both'
+    transactionTid: '',
     specialNotes: '',
   });
 
-  const [copiedJazzCash, setCopiedJazzCash] = useState(false);
+  const [copiedNumber, setCopiedNumber] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [commissionId, setCommissionId] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -28,9 +30,9 @@ export const CheckoutModal: React.FC = () => {
   if (!isCheckoutOpen) return null;
 
   const copyNumber = () => {
-    navigator.clipboard.writeText('03083536703');
-    setCopiedJazzCash(true);
-    setTimeout(() => setCopiedJazzCash(false), 2000);
+    navigator.clipboard.writeText('03188849935');
+    setCopiedNumber(true);
+    setTimeout(() => setCopiedNumber(false), 2000);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -124,34 +126,34 @@ export const CheckoutModal: React.FC = () => {
                 </div>
               </div>
 
-              {/* JazzCash Settlement Details on Confirmation */}
-              {formData.paymentMethod === 'jazzcash' && (
-                <div className="p-4 bg-[#14080D] border border-[#D31044]/60 rounded-sm text-left max-w-md mx-auto text-xs space-y-2.5">
-                  <div className="flex items-center justify-between border-b border-[#3D1422] pb-2">
+              {/* JazzCash / EasyPaisa Settlement Details on Confirmation */}
+              {formData.paymentMethod === 'mobile_account' && (
+                <div className="p-5 bg-gradient-to-br from-[#190D14] via-[#101410] to-[#0A0D0B] border border-[#C7A86B]/40 rounded-sm text-left max-w-md mx-auto text-xs space-y-3">
+                  <div className="flex items-center justify-between border-b border-[#2A2A2A] pb-2.5">
                     <div className="flex items-center gap-2">
                       <JazzCashLogo size="sm" />
-                      <span className="font-semibold text-white">JazzCash Payment Details</span>
+                      <EasyPaisaLogo size="sm" />
                     </div>
-                    <span className="text-[10px] text-[#FFDE00] font-mono uppercase bg-[#D31044]/20 px-2 py-0.5 rounded-sm">
-                      Verified Account
+                    <span className="text-[10px] text-[#00E676] font-mono uppercase bg-[#00A859]/20 border border-[#00A859]/40 px-2 py-0.5 rounded-sm">
+                      Verified Receiver
                     </span>
                   </div>
-                  <div className="flex justify-between border-b border-[#2B0E19] pb-1.5">
-                    <span className="text-[#8A7982]">Account Number:</span>
-                    <span className="text-white font-mono font-bold text-sm">03083536703</span>
+                  <div className="flex justify-between border-b border-[#222222] pb-1.5">
+                    <span className="text-[#9C9A94]">JazzCash & EasyPaisa Number:</span>
+                    <span className="text-white font-mono font-bold text-sm tracking-wider">03188849935</span>
                   </div>
-                  <div className="flex justify-between border-b border-[#2B0E19] pb-1.5">
-                    <span className="text-[#8A7982]">Account Name:</span>
+                  <div className="flex justify-between border-b border-[#222222] pb-1.5">
+                    <span className="text-[#9C9A94]">Account Title (Name):</span>
                     <span className="text-[#FFDE00] font-serif font-medium text-sm">Rafiq Ahmed</span>
                   </div>
-                  {formData.jazzCashTid && (
-                    <div className="flex justify-between border-b border-[#2B0E19] pb-1.5">
-                      <span className="text-[#8A7982]">Recorded TID:</span>
-                      <span className="text-[#E8E5DE] font-mono">{formData.jazzCashTid}</span>
+                  {formData.transactionTid && (
+                    <div className="flex justify-between border-b border-[#222222] pb-1.5">
+                      <span className="text-[#9C9A94]">Recorded Transaction ID (TID):</span>
+                      <span className="text-[#E8E5DE] font-mono font-semibold">{formData.transactionTid}</span>
                     </div>
                   )}
                   <p className="text-[11px] text-[#A898A0] pt-1">
-                    Please ensure the transaction is completed from your JazzCash app to <strong>03083536703 (Rafiq Ahmed)</strong>. Your order will be confirmed immediately.
+                    Please transfer the total amount via <strong>JazzCash</strong> or <strong>EasyPaisa</strong> to <strong className="text-white font-mono">03188849935</strong> (<strong className="text-[#FFDE00]">Rafiq Ahmed</strong>). Your order will be confirmed immediately.
                   </p>
                 </div>
               )}
@@ -219,7 +221,7 @@ export const CheckoutModal: React.FC = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="0300 0000000 or +92 / +41..."
+                      placeholder="0318 0000000 or +92 / +41..."
                       className="w-full bg-[#121212] border border-[#242424] focus:border-[#C7A86B] px-3.5 py-2.5 rounded-sm text-[#F4F0E8] focus:outline-none"
                     />
                   </div>
@@ -287,79 +289,76 @@ export const CheckoutModal: React.FC = () => {
                   Settlement Method
                 </h3>
                 <div className="space-y-3 text-xs">
-                  {/* JAZZCASH Option */}
+                  {/* JAZZCASH & EASYPAISA Combined Option */}
                   <label
                     className={`flex items-start gap-3 p-4 border-2 rounded-sm cursor-pointer transition-all ${
-                      formData.paymentMethod === 'jazzcash'
-                        ? 'border-[#D31044] bg-[#16080E] shadow-lg shadow-[#D31044]/10'
+                      formData.paymentMethod === 'mobile_account'
+                        ? 'border-[#C7A86B] bg-[#141210] shadow-lg shadow-[#C7A86B]/10'
                         : 'border-[#222222] bg-[#0E0E0E] hover:border-[#333333]'
                     }`}
                   >
                     <input
                       type="radio"
                       name="paymentMethod"
-                      value="jazzcash"
-                      checked={formData.paymentMethod === 'jazzcash'}
-                      onChange={() => setFormData({ ...formData, paymentMethod: 'jazzcash' })}
-                      className="mt-1 text-[#D31044] accent-[#D31044]"
+                      value="mobile_account"
+                      checked={formData.paymentMethod === 'mobile_account'}
+                      onChange={() => setFormData({ ...formData, paymentMethod: 'mobile_account' })}
+                      className="mt-1 text-[#C7A86B] accent-[#C7A86B]"
                     />
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2.5">
                         <JazzCashLogo size="sm" />
+                        <EasyPaisaLogo size="sm" />
                         <span className="font-semibold text-[#F4F0E8] text-sm">
-                          JazzCash Mobile Account
+                          JazzCash & EasyPaisa Account
                         </span>
-                        <span className="px-2 py-0.5 rounded-full bg-[#D31044]/20 border border-[#D31044]/40 text-[#FFDE00] text-[10px] font-mono tracking-wider uppercase">
+                        <span className="px-2 py-0.5 rounded-full bg-[#C7A86B]/20 border border-[#C7A86B]/40 text-[#FFDE00] text-[10px] font-mono tracking-wider uppercase">
                           Recommended
                         </span>
                       </div>
                       <div className="text-[11px] text-[#A898A0] mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1">
                         <span>
-                          Account Number: <strong className="text-[#FFFFFF] font-mono">03083536703</strong>
+                          Account Number: <strong className="text-[#FFFFFF] font-mono tracking-wider">03188849935</strong>
                         </span>
                         <span>
-                          Account Name: <strong className="text-[#FFDE00] font-serif">Rafiq Ahmed</strong>
+                          Account Title: <strong className="text-[#FFDE00] font-serif">Rafiq Ahmed</strong>
                         </span>
                       </div>
                     </div>
                   </label>
 
-                  {/* JAZZCASH Interactive Card Details (expanded when selected) */}
-                  {formData.paymentMethod === 'jazzcash' && (
-                    <div className="p-4 sm:p-5 bg-gradient-to-br from-[#1C0B14] via-[#14080E] to-[#0D0408] border-2 border-[#D31044]/60 rounded-sm space-y-4">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#3D1422]">
-                        <div className="flex items-center gap-3">
+                  {/* Interactive Details (expanded when selected) */}
+                  {formData.paymentMethod === 'mobile_account' && (
+                    <div className="p-4 sm:p-5 bg-gradient-to-br from-[#1C1217] via-[#121614] to-[#0A0D0C] border-2 border-[#C7A86B]/60 rounded-sm space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#2C2925]">
+                        <div className="flex flex-wrap items-center gap-3">
                           <JazzCashLogo size="md" />
-                          <div>
-                            <span className="text-xs font-mono uppercase tracking-wider text-[#FFDE00] font-semibold block">
-                              Official JazzCash Account Details
-                            </span>
-                            <span className="text-[11px] text-[#A898A0]">
-                              Direct transfer via JazzCash mobile app or USSD
-                            </span>
-                          </div>
+                          <EasyPaisaLogo size="md" />
                         </div>
+                        <span className="inline-flex items-center px-2 py-1 rounded-sm bg-[#00A859]/20 border border-[#00A859]/50 text-[#00E676] text-[10px] font-mono tracking-widest uppercase self-start sm:self-auto">
+                          Active & Verified
+                        </span>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {/* Account Number */}
-                        <div className="p-3.5 bg-[#0A0306] border border-[#3D1422] rounded-sm">
-                          <span className="text-[10px] uppercase font-mono tracking-wider text-[#9C8A93] block mb-1">
-                            JazzCash Mobile Number
+                        <div className="p-3.5 bg-[#090A09] border border-[#2D332F] rounded-sm">
+                          <span className="text-[10px] uppercase font-mono tracking-wider text-[#9C9A94] block mb-1">
+                            Mobile Account Number (JazzCash & EasyPaisa)
                           </span>
                           <div className="flex items-center justify-between gap-2">
                             <span className="text-lg sm:text-xl font-mono font-bold text-[#FFFFFF] tracking-wider">
-                              03083536703
+                              03188849935
                             </span>
                             <button
                               type="button"
                               onClick={copyNumber}
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-sm bg-[#D31044] hover:bg-[#E41B52] text-white transition-colors shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-sm bg-[#C7A86B] hover:bg-[#D8BC82] text-[#0A0A0A] font-semibold transition-colors shadow-sm"
                             >
-                              {copiedJazzCash ? (
+                              {copiedNumber ? (
                                 <>
-                                  <Check className="w-3.5 h-3.5 text-[#FFDE00]" />
-                                  <span className="text-[#FFDE00] font-bold">Copied</span>
+                                  <Check className="w-3.5 h-3.5 text-[#008000]" />
+                                  <span>Copied</span>
                                 </>
                               ) : (
                                 <>
@@ -372,9 +371,9 @@ export const CheckoutModal: React.FC = () => {
                         </div>
 
                         {/* Account Title */}
-                        <div className="p-3.5 bg-[#0A0306] border border-[#3D1422] rounded-sm">
-                          <span className="text-[10px] uppercase font-mono tracking-wider text-[#9C8A93] block mb-1">
-                            JazzCash Account Title (Receiver)
+                        <div className="p-3.5 bg-[#090A09] border border-[#2D332F] rounded-sm">
+                          <span className="text-[10px] uppercase font-mono tracking-wider text-[#9C9A94] block mb-1">
+                            Account Title (Receiver Name)
                           </span>
                           <span className="text-lg sm:text-xl font-serif font-medium text-[#FFDE00] tracking-wide block">
                             Rafiq Ahmed
@@ -383,29 +382,54 @@ export const CheckoutModal: React.FC = () => {
                       </div>
 
                       {/* Step-by-Step Instructions */}
-                      <div className="p-3.5 bg-[#0A0306]/90 rounded-sm border border-[#2F0F1B] text-[11px] text-[#C4B7BD] space-y-1.5">
-                        <div className="font-semibold text-[#FFFFFF] flex items-center gap-2 mb-1 text-xs">
-                          <Smartphone className="w-4 h-4 text-[#FFDE00]" />
-                          <span>Simple steps to complete payment:</span>
+                      <div className="p-3.5 bg-[#080808]/90 rounded-sm border border-[#222222] text-[11px] text-[#C4B7BD] space-y-2">
+                        <div className="font-semibold text-[#FFFFFF] flex items-center gap-2 text-xs">
+                          <Smartphone className="w-4 h-4 text-[#C7A86B]" />
+                          <span>Simple Payment Instructions:</span>
                         </div>
-                        <p>1. Open your <strong>JazzCash App</strong> or dial <strong>*786#</strong> on your phone.</p>
-                        <p>2. Select <strong>Send Money</strong> &gt; <strong>To JazzCash Mobile Account</strong>.</p>
-                        <p>3. Enter Mobile Number: <strong className="text-white font-mono bg-[#1A0B12] px-1.5 py-0.5 rounded">03083536703</strong></p>
-                        <p>4. Verify the recipient name shows: <strong className="text-[#FFDE00] font-medium">Rafiq Ahmed</strong></p>
-                        <p>5. Enter amount and enter your MPIN to finalize payment.</p>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                          {/* JazzCash steps */}
+                          <div className="p-2.5 bg-[#14080E] border border-[#3D1422] rounded-sm">
+                            <span className="font-bold text-[#FF3366] block mb-1 font-mono uppercase text-[10px]">
+                              Via JazzCash:
+                            </span>
+                            <ol className="list-decimal list-inside space-y-1 text-[11px] text-[#D8D0D5]">
+                              <li>Open <strong>JazzCash App</strong> or dial <strong>*786#</strong></li>
+                              <li>Select <strong>Send Money</strong> &gt; <strong>Mobile Account</strong></li>
+                              <li>Enter Number: <strong className="text-white font-mono bg-[#2B0E19] px-1 py-0.5 rounded">03188849935</strong></li>
+                              <li>Confirm Title: <strong className="text-[#FFDE00]">Rafiq Ahmed</strong></li>
+                              <li>Enter amount and confirm with MPIN</li>
+                            </ol>
+                          </div>
+
+                          {/* EasyPaisa steps */}
+                          <div className="p-2.5 bg-[#032414] border border-[#006633] rounded-sm">
+                            <span className="font-bold text-[#00E676] block mb-1 font-mono uppercase text-[10px]">
+                              Via EasyPaisa:
+                            </span>
+                            <ol className="list-decimal list-inside space-y-1 text-[11px] text-[#D0E0D8]">
+                              <li>Open <strong>EasyPaisa App</strong> or dial <strong>*786#</strong></li>
+                              <li>Select <strong>Send Money</strong> &gt; <strong>EasyPaisa Transfer</strong></li>
+                              <li>Enter Number: <strong className="text-white font-mono bg-[#05381F] px-1 py-0.5 rounded">03188849935</strong></li>
+                              <li>Confirm Title: <strong className="text-[#FFDE00]">Rafiq Ahmed</strong></li>
+                              <li>Enter amount and tap Send Now</li>
+                            </ol>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Transaction ID input */}
                       <div>
                         <label className="block text-[11px] text-[#A898A0] mb-1 font-mono">
-                          JazzCash Transaction ID (TID) / Reference (Optional):
+                          JazzCash / EasyPaisa Transaction ID (TID) / Reference (Optional):
                         </label>
                         <input
                           type="text"
-                          value={formData.jazzCashTid}
-                          onChange={e => setFormData({ ...formData, jazzCashTid: e.target.value })}
-                          placeholder="e.g. 0829104819 (received in SMS from 8558)"
-                          className="w-full bg-[#0A0306] border border-[#3D1422] focus:border-[#FFDE00] px-3.5 py-2.5 rounded-sm text-[#F4F0E8] font-mono text-xs focus:outline-none"
+                          value={formData.transactionTid}
+                          onChange={e => setFormData({ ...formData, transactionTid: e.target.value })}
+                          placeholder="e.g. 0829104819 (received in confirmation SMS)"
+                          className="w-full bg-[#0A0A0A] border border-[#333333] focus:border-[#C7A86B] px-3.5 py-2.5 rounded-sm text-[#F4F0E8] font-mono text-xs focus:outline-none"
                         />
                       </div>
                     </div>
