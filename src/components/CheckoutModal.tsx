@@ -144,7 +144,7 @@ export const CheckoutModal: React.FC = () => {
                   </div>
                   <div className="flex justify-between border-b border-[#222222] pb-1.5">
                     <span className="text-[#9C9A94]">Account Title (Name):</span>
-                    <span className="text-[#FFDE00] font-serif font-medium text-sm">Rafiq Ahmed</span>
+                    <span className="text-[#FFDE00] font-serif font-medium text-sm">Saad Tanveer</span>
                   </div>
                   {formData.transactionTid && (
                     <div className="flex justify-between border-b border-[#222222] pb-1.5">
@@ -153,7 +153,7 @@ export const CheckoutModal: React.FC = () => {
                     </div>
                   )}
                   <p className="text-[11px] text-[#A898A0] pt-1">
-                    Please transfer the total amount via <strong>JazzCash</strong> or <strong>EasyPaisa</strong> to <strong className="text-white font-mono">03188849935</strong> (<strong className="text-[#FFDE00]">Rafiq Ahmed</strong>). Your order will be confirmed immediately.
+                    Please transfer the total amount via <strong>JazzCash</strong> or <strong>EasyPaisa</strong> to <strong className="text-white font-mono">03188849935</strong> (<strong className="text-[#FFDE00]">Saad Tanveer</strong>). Your order will be confirmed immediately.
                   </p>
                 </div>
               )}
@@ -321,7 +321,7 @@ export const CheckoutModal: React.FC = () => {
                           Account Number: <strong className="text-[#FFFFFF] font-mono tracking-wider">03188849935</strong>
                         </span>
                         <span>
-                          Account Title: <strong className="text-[#FFDE00] font-serif">Rafiq Ahmed</strong>
+                          Account Title: <strong className="text-[#FFDE00] font-serif">Saad Tanveer</strong>
                         </span>
                       </div>
                     </div>
@@ -376,7 +376,7 @@ export const CheckoutModal: React.FC = () => {
                             Account Title (Receiver Name)
                           </span>
                           <span className="text-lg sm:text-xl font-serif font-medium text-[#FFDE00] tracking-wide block">
-                            Rafiq Ahmed
+                            Saad Tanveer
                           </span>
                         </div>
                       </div>
@@ -398,7 +398,7 @@ export const CheckoutModal: React.FC = () => {
                               <li>Open <strong>JazzCash App</strong> or dial <strong>*786#</strong></li>
                               <li>Select <strong>Send Money</strong> &gt; <strong>Mobile Account</strong></li>
                               <li>Enter Number: <strong className="text-white font-mono bg-[#2B0E19] px-1 py-0.5 rounded">03188849935</strong></li>
-                              <li>Confirm Title: <strong className="text-[#FFDE00]">Rafiq Ahmed</strong></li>
+                              <li>Confirm Title: <strong className="text-[#FFDE00]">Saad Tanveer</strong></li>
                               <li>Enter amount and confirm with MPIN</li>
                             </ol>
                           </div>
@@ -412,7 +412,7 @@ export const CheckoutModal: React.FC = () => {
                               <li>Open <strong>EasyPaisa App</strong> or dial <strong>*786#</strong></li>
                               <li>Select <strong>Send Money</strong> &gt; <strong>EasyPaisa Transfer</strong></li>
                               <li>Enter Number: <strong className="text-white font-mono bg-[#05381F] px-1 py-0.5 rounded">03188849935</strong></li>
-                              <li>Confirm Title: <strong className="text-[#FFDE00]">Rafiq Ahmed</strong></li>
+                              <li>Confirm Title: <strong className="text-[#FFDE00]">Saad Tanveer</strong></li>
                               <li>Enter amount and tap Send Now</li>
                             </ol>
                           </div>

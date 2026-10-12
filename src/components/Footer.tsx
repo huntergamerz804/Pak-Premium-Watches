@@ -156,7 +156,7 @@ export const Footer: React.FC = () => {
             </div>
             <div className="px-4 py-2 bg-[#090A09] border border-[#2A332B] rounded-sm text-center">
               <span className="text-[10px] uppercase text-[#8A8E89] block mb-0.5">Account Title</span>
-              <span className="text-sm font-serif font-medium text-[#FFDE00]">Rafiq Ahmed</span>
+              <span className="text-sm font-serif font-medium text-[#FFDE00]">Saad Tanveer</span>
             </div>
           </div>
         </div>

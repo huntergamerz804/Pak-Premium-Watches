@@ -173,7 +173,7 @@ export const CartDrawer: React.FC = () => {
             <div className="flex items-center justify-center gap-2 text-[11px] text-[#A898A0]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D31044]" />
               <span className="w-1.5 h-1.5 rounded-full bg-[#00A859]" />
-              <span>JazzCash & EasyPaisa: <strong>03188849935</strong> (Rafiq Ahmed)</span>
+              <span>JazzCash & EasyPaisa: <strong>03188849935</strong> (Saad Tanveer)</span>
             </div>
 
             <p className="text-[10px] text-center text-[#555555] font-light">
