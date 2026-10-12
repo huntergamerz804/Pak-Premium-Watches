@@ -133,10 +133,7 @@ export const SearchModal: React.FC = () => {
 
                   <div className="text-right shrink-0">
                     <span className="text-sm font-sans font-semibold text-[#F4F0E8] tabular-nums block">
-                      ${p.price.toLocaleString('en-US')}
-                    </span>
-                    <span className="text-[10px] text-[#6F6D68] uppercase font-mono">
-                      USD
+                      Rs {p.price.toLocaleString('en-US')}
                     </span>
                   </div>
 

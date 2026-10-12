@@ -11,18 +11,16 @@ export const FeaturedCollection: React.FC = () => {
 
   const categories = [
     'All',
-    'Tourbillon & Skeleton',
-    'Classic Chronometre',
-    'Precious Metals',
-    'Sport & Chronograph',
-    'Integrated Sports',
+    'Deal',
+    'Men',
+    'Women',
   ];
 
   const filteredProducts = useMemo(() => {
     let result = [...PRODUCTS];
 
     if (activeCategory !== 'All') {
-      result = result.filter(p => p.category === activeCategory);
+      result = result.filter(p => p.category.toLowerCase() === activeCategory.toLowerCase());
     }
 
     if (sortBy === 'price-asc') {
@@ -93,19 +91,19 @@ export const FeaturedCollection: React.FC = () => {
           })}
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Product Grid - Refined Medium Proportions */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
           {filteredProducts.map(product => {
             const isWishlisted = isInWishlist(product.id);
 
             return (
               <article
                 key={product.id}
-                className="group relative bg-[#0D0D0D] border border-[#1E1E1E] hover:border-[#C7A86B]/40 rounded-sm overflow-hidden flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-black/70 hover:-translate-y-1"
+                className="group relative bg-[#0D0D0D] border border-[#1E1E1E] hover:border-[#C7A86B]/40 rounded-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/70 hover:-translate-y-1 max-w-[320px] sm:max-w-none w-full mx-auto"
               >
-                {/* Image Section */}
+                {/* Image Section - Medium Proportioned Frame */}
                 <div
-                  className="relative aspect-[4/3] bg-gradient-to-b from-[#141414] to-[#0D0D0D] overflow-hidden cursor-pointer"
+                  className="relative aspect-[4/3] max-h-48 sm:max-h-52 bg-gradient-to-b from-[#141414] to-[#0D0D0D] overflow-hidden cursor-pointer"
                   onClick={() => openProductDetail(product)}
                 >
                   <img
@@ -122,10 +120,10 @@ export const FeaturedCollection: React.FC = () => {
                     aria-hidden="true"
                   />
 
-                  {/* Subtle Badge (Zero-Pill discipline: unboxed clean text) */}
+                  {/* Subtle Badge */}
                   {product.badge && (
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="text-[11px] font-mono tracking-widest text-[#C7A86B] uppercase font-medium bg-[#080808]/85 px-2.5 py-1 border border-[#C7A86B]/30 rounded-sm backdrop-blur-sm">
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="text-[10px] font-mono tracking-widest text-[#C7A86B] uppercase font-medium bg-[#080808]/85 px-2 py-0.5 border border-[#C7A86B]/30 rounded-sm backdrop-blur-sm">
                         {product.badge}
                       </span>
                     </div>
@@ -137,7 +135,7 @@ export const FeaturedCollection: React.FC = () => {
                       e.stopPropagation();
                       toggleWishlist(product.id);
                     }}
-                    className={`absolute top-4 right-4 z-10 p-2.5 rounded-sm backdrop-blur-sm border transition-all ${
+                    className={`absolute top-3 right-3 z-10 p-2 rounded-sm backdrop-blur-sm border transition-all ${
                       isWishlisted
                         ? 'bg-[#C7A86B] text-[#080808] border-[#C7A86B]'
                         : 'bg-[#080808]/70 hover:bg-[#080808] text-[#9C9A94] hover:text-[#C7A86B] border-[#222222]'
@@ -148,15 +146,15 @@ export const FeaturedCollection: React.FC = () => {
                   </button>
 
                   {/* Hover Overlay Quick Actions */}
-                  <div className="absolute inset-x-4 bottom-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                  <div className="absolute inset-x-3 bottom-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                     <button
                       onClick={e => {
                         e.stopPropagation();
                         openProductDetail(product);
                       }}
-                      className="px-3.5 py-2 bg-[#171717]/90 hover:bg-[#222222] text-[#F4F0E8] text-[11px] tracking-wider uppercase font-medium flex items-center gap-1.5 border border-[#333333] rounded-sm transition-colors"
+                      className="px-3 py-1.5 bg-[#171717]/90 hover:bg-[#222222] text-[#F4F0E8] text-[10px] tracking-wider uppercase font-medium flex items-center gap-1.5 border border-[#333333] rounded-sm transition-colors"
                     >
-                      <Eye className="w-3.5 h-3.5 text-[#C7A86B]" />
+                      <Eye className="w-3 h-3 text-[#C7A86B]" />
                       <span>Inspect</span>
                     </button>
 
@@ -165,20 +163,22 @@ export const FeaturedCollection: React.FC = () => {
                         e.stopPropagation();
                         addToCart(product);
                       }}
-                      className="px-3.5 py-2 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-[11px] tracking-wider uppercase font-semibold flex items-center gap-1.5 rounded-sm transition-colors shadow-md"
+                      className="px-3 py-1.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-[10px] tracking-wider uppercase font-semibold flex items-center gap-1.5 rounded-sm transition-colors shadow-md"
                     >
-                      <Plus className="w-3.5 h-3.5" />
+                      <Plus className="w-3 h-3" />
                       <span>Add to Bag</span>
                     </button>
                   </div>
                 </div>
 
-                {/* Card Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between">
+                {/* Card Content - Medium Balanced Padding */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
                   <div>
-                    {/* Unboxed Metadata */}
-                    <div className="flex items-center gap-2 text-xs text-[#6F6D68] uppercase tracking-wider mb-2 font-mono">
-                      <span>{product.caseSize}</span>
+                    {/* Unboxed Metadata with Size: Medium */}
+                    <div className="flex items-center gap-2 text-[11px] text-[#6F6D68] uppercase tracking-wider mb-2 font-mono">
+                      <span className="text-[#C7A86B] font-semibold bg-[#C7A86B]/15 px-1.5 py-0.5 rounded-sm border border-[#C7A86B]/30">
+                        {product.caseSize}
+                      </span>
                       <span aria-hidden="true">·</span>
                       <span>{product.movement.split(' ')[0]}</span>
                       <span aria-hidden="true">·</span>
@@ -188,32 +188,31 @@ export const FeaturedCollection: React.FC = () => {
                     {/* Title */}
                     <h3
                       onClick={() => openProductDetail(product)}
-                      className="text-xl font-serif text-[#F4F0E8] hover:text-[#C7A86B] transition-colors cursor-pointer mb-1.5 font-normal tracking-wide"
+                      className="text-lg font-serif text-[#F4F0E8] hover:text-[#C7A86B] transition-colors cursor-pointer mb-1 font-normal tracking-wide"
                     >
                       {product.name}
                     </h3>
 
                     {/* Subtitle */}
-                    <p className="text-xs text-[#9C9A94] line-clamp-1 mb-4 font-light">
+                    <p className="text-xs text-[#9C9A94] line-clamp-1 mb-3 font-light">
                       {product.subtitle}
                     </p>
                   </div>
 
                   {/* Card Bottom Row: Price & Trigger */}
-                  <div className="pt-4 border-t border-[#1C1C1C] flex items-center justify-between">
+                  <div className="pt-3 border-t border-[#1C1C1C] flex items-center justify-between">
                     <div>
                       <span className="text-[10px] uppercase tracking-widest text-[#6F6D68] block">
                         Acquisition Price
                       </span>
                       <span className="text-base font-sans font-semibold text-[#F4F0E8] tabular-nums tracking-tight">
-                        ${product.price.toLocaleString('en-US')}
-                        <span className="text-xs text-[#6F6D68] font-normal ml-1 font-mono">USD</span>
+                        Rs {product.price.toLocaleString('en-US')}
                       </span>
                     </div>
 
                     <button
                       onClick={() => openProductDetail(product)}
-                      className="p-2 text-[#9C9A94] hover:text-[#C7A86B] transition-colors flex items-center gap-1 text-xs tracking-wider uppercase font-medium"
+                      className="p-1.5 text-[#9C9A94] hover:text-[#C7A86B] transition-colors flex items-center gap-1 text-xs tracking-wider uppercase font-medium"
                       aria-label={`View details for ${product.name}`}
                     >
                       <span>Details</span>

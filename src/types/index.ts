@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   name: string;
   subtitle: string;
-  category: 'Tourbillon & Skeleton' | 'Classic Chronometre' | 'Precious Metals' | 'Integrated Sports' | 'Sport & Chronograph';
+  category: 'Men' | 'Women' | 'Deal';
   price: number;
   caseSize: string;
   caseMaterial: string;

@@ -122,7 +122,7 @@ export const CheckoutModal: React.FC = () => {
                 </div>
                 <div className="flex justify-between pt-1">
                   <span className="text-[#6F6D68]">Total Allocation:</span>
-                  <span className="text-[#C7A86B] font-mono font-semibold">${subtotal.toLocaleString('en-US')} USD</span>
+                  <span className="text-[#C7A86B] font-mono font-semibold">Rs {subtotal.toLocaleString('en-US')}</span>
                 </div>
               </div>
 
@@ -176,7 +176,7 @@ export const CheckoutModal: React.FC = () => {
                     Total Timepiece Commission:
                   </span>
                   <span className="text-sm font-semibold text-[#F4F0E8] font-mono">
-                    ${subtotal.toLocaleString('en-US')} USD
+                    Rs {subtotal.toLocaleString('en-US')}
                   </span>
                 </div>
                 <div className="text-[11px] text-[#C7A86B] flex items-center gap-1.5 font-light">

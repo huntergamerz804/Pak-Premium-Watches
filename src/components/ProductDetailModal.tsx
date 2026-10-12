@@ -64,8 +64,8 @@ export const ProductDetailModal: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Left Image Gallery (7 cols) */}
             <div className="lg:col-span-7 space-y-4">
-              {/* Main Image Frame */}
-              <div className="relative aspect-[4/3] bg-gradient-to-b from-[#141414] to-[#0A0A0A] border border-[#222222] rounded-sm overflow-hidden shadow-xl">
+              {/* Main Image Frame - Refined Medium Frame */}
+              <div className="relative aspect-[16/11] max-h-[380px] bg-gradient-to-b from-[#141414] to-[#0A0A0A] border border-[#222222] rounded-sm overflow-hidden shadow-xl">
                 <img
                   src={gallery[activeImageIndex] || selectedProduct.primaryImage}
                   alt={selectedProduct.name}
@@ -121,10 +121,10 @@ export const ProductDetailModal: React.FC = () => {
                 {/* Price */}
                 <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-[#1A1A1A]">
                   <span className="text-2xl sm:text-3xl font-sans font-semibold text-[#F4F0E8] tabular-nums">
-                    ${selectedProduct.price.toLocaleString('en-US')}
+                    Rs {selectedProduct.price.toLocaleString('en-US')}
                   </span>
                   <span className="text-xs text-[#6F6D68] uppercase font-mono">
-                    USD · Free Insured Delivery
+                    · Free Insured Delivery
                   </span>
                 </div>
 

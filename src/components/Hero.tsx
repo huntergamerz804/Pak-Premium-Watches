@@ -104,9 +104,9 @@ export const Hero: React.FC = () => {
             aria-hidden="true"
           />
 
-          {/* Interactive Parallax Frame */}
+          {/* Interactive Parallax Frame - Refined Medium Proportions */}
           <div
-            className="relative w-full max-w-[480px] sm:max-w-[540px] transition-transform duration-300 ease-out cursor-pointer group"
+            className="relative w-full max-w-[390px] sm:max-w-[450px] transition-transform duration-300 ease-out cursor-pointer group"
             style={{
               transform: reducedMotion
                 ? 'none'
@@ -142,7 +142,7 @@ export const Hero: React.FC = () => {
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-[#E8E5DE] font-mono tracking-tight block">
-                    $5,600 USD
+                    Rs 5,600
                   </span>
                   <span className="text-[10px] text-[#9C9A94] uppercase tracking-wider">
                     Click to Inspect

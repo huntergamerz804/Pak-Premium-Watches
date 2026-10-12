@@ -125,10 +125,7 @@ export const CartDrawer: React.FC = () => {
                       {/* Price */}
                       <div className="text-right">
                         <span className="text-xs font-sans font-semibold text-[#F4F0E8] tabular-nums">
-                          ${(item.product.price * item.quantity).toLocaleString('en-US')}
-                        </span>
-                        <span className="text-[10px] text-[#6F6D68] ml-1 font-mono">
-                          USD
+                          Rs {(item.product.price * item.quantity).toLocaleString('en-US')}
                         </span>
                       </div>
                     </div>
@@ -154,10 +151,7 @@ export const CartDrawer: React.FC = () => {
                 Subtotal (Excl. VAT / Duties)
               </span>
               <span className="text-xl font-sans font-bold text-[#F4F0E8] tabular-nums">
-                ${subtotal.toLocaleString('en-US')}
-                <span className="text-xs text-[#6F6D68] font-mono ml-1 font-normal">
-                  USD
-                </span>
+                Rs {subtotal.toLocaleString('en-US')}
               </span>
             </div>
 
