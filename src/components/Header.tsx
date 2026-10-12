@@ -26,15 +26,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
           : 'bg-gradient-to-b from-[#050505]/90 via-[#050505]/40 to-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
         {/* Zone 1: Single text element wordmark */}
         <a
           href="#home"
-          className="text-lg sm:text-2xl font-serif tracking-[0.2em] text-[#F4F0E8] hover:text-[#C7A86B] transition-colors uppercase select-none flex items-center gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B]"
+          className="text-base sm:text-2xl font-serif tracking-[0.16em] sm:tracking-[0.2em] text-[#F4F0E8] hover:text-[#C7A86B] transition-colors uppercase select-none flex items-center gap-1.5 sm:gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B] shrink-0"
           aria-label="Pak-Premium Watches Homepage"
         >
           <span className="font-semibold">PAK-PREMIUM</span>
-          <span className="text-[#C7A86B] font-light text-xs sm:text-sm tracking-[0.25em]">WATCHES</span>
+          <span className="text-[#C7A86B] font-light text-[11px] sm:text-sm tracking-[0.2em] sm:tracking-[0.25em]">WATCHES</span>
         </a>
 
         {/* Zone 2: Clean text navigation links */}

@@ -53,30 +53,30 @@ export const Hero: React.FC = () => {
       />
 
       {/* Main Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
         {/* Left Editorial Copy (7 cols on desktop) */}
-        <div className="lg:col-span-6 flex flex-col justify-center text-left order-2 lg:order-1 pt-4 lg:pt-0">
+        <div className="lg:col-span-6 flex flex-col justify-center text-left order-2 lg:order-1 pt-2 lg:pt-0">
           {/* Eyebrow metadata */}
-          <div className="flex items-center gap-3 text-xs tracking-[0.25em] text-[#C7A86B] uppercase mb-5 font-medium">
-            <span className="w-6 h-[1px] bg-[#C7A86B]/60" aria-hidden="true" />
+          <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs tracking-[0.18em] sm:tracking-[0.25em] text-[#C7A86B] uppercase mb-4 sm:mb-5 font-medium">
+            <span className="w-5 sm:w-6 h-[1px] bg-[#C7A86B]/60" aria-hidden="true" />
             <span>Geneva Horology · Limited Atelier Series</span>
           </div>
 
           {/* Major Heading */}
-          <h1 className="text-4xl sm:text-6xl xl:text-7xl font-serif font-normal text-[#F4F0E8] leading-[1.06] tracking-tight mb-6 text-balance">
+          <h1 className="text-3xl sm:text-5xl xl:text-7xl font-serif font-normal text-[#F4F0E8] leading-[1.08] tracking-tight mb-5 sm:mb-6 text-balance">
             ENGINEERED FOR ETERNITY.
           </h1>
 
           {/* Supporting Text */}
-          <p className="text-base sm:text-lg text-[#9C9A94] max-w-xl font-light leading-relaxed mb-8 sm:mb-10">
+          <p className="text-sm sm:text-lg text-[#9C9A94] max-w-xl font-light leading-relaxed mb-6 sm:mb-10">
             Precision mechanical timepieces shaped by uncompromising craftsmanship. Hand-regulated escapements, proprietary calibres, and sculpted geometries designed to outlive ephemeral trends.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
             <a
               href="#collection"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-medium text-xs tracking-[0.18em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-[#C7A86B]/15 hover:shadow-[#C7A86B]/25 active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86B]"
+              className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-medium text-xs tracking-[0.18em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-[#C7A86B]/15 hover:shadow-[#C7A86B]/25 active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86B]"
             >
               <span>Explore Collection</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -84,7 +84,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Micro Trust Metadata */}
-          <div className="pt-6 border-t border-[#1B1B1B] flex flex-wrap items-center gap-6 text-xs text-[#6F6D68]">
+          <div className="pt-6 border-t border-[#1B1B1B] flex flex-wrap items-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-[#6F6D68]">
             <div className="flex items-center gap-2">
               <Clock className="w-3.5 h-3.5 text-[#C7A86B]" />
               <span className="tracking-wide">72-Hour Power Reserve</span>

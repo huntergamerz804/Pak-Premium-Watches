@@ -120,7 +120,7 @@ export const HorologyConciergeModal: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-hidden">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
@@ -129,7 +129,7 @@ export const HorologyConciergeModal: React.FC = () => {
       />
 
       {/* Main Dialog */}
-      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-2xl w-full h-[85vh] shadow-2xl shadow-black z-10 text-[#F4F0E8] flex flex-col overflow-hidden">
+      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-2xl w-full h-[90vh] sm:h-[85vh] shadow-2xl shadow-black z-10 text-[#F4F0E8] flex flex-col overflow-hidden">
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-[#1A1A1A] bg-[#0E0E0E] flex items-center justify-between">
           <div className="flex items-center gap-3">

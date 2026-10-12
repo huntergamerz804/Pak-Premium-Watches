@@ -100,7 +100,7 @@ export const WatchAnalysisModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
@@ -109,7 +109,7 @@ export const WatchAnalysisModal: React.FC = () => {
       />
 
       {/* Main Dialog */}
-      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-3xl w-full my-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden flex flex-col max-h-[92vh]">
+      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-3xl w-full my-3 sm:my-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden flex flex-col max-h-[94vh] sm:max-h-[92vh]">
         {/* Header */}
         <div className="p-5 border-b border-[#1A1A1A] bg-[#0E0E0E] flex items-center justify-between">
           <div className="flex items-center gap-3">

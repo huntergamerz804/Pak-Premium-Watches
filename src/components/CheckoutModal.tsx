@@ -59,7 +59,7 @@ export const CheckoutModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
@@ -68,12 +68,12 @@ export const CheckoutModal: React.FC = () => {
       />
 
       {/* Modal Dialog */}
-      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-2xl w-full my-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden flex flex-col max-h-[92vh]">
+      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-2xl w-full my-3 sm:my-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden flex flex-col max-h-[94vh] sm:max-h-[92vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1A1A1A] bg-[#0E0E0E]">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1A1A1A] bg-[#0E0E0E]">
           <div className="flex items-center gap-2">
             <Lock className="w-4 h-4 text-[#C7A86B]" />
-            <span className="font-serif text-base tracking-wider uppercase text-[#F4F0E8]">
+            <span className="font-serif text-sm sm:text-base tracking-wider uppercase text-[#F4F0E8]">
               {isConfirmed ? 'Commission Confirmed' : 'Bespoke Acquisition Protocol'}
             </span>
           </div>
@@ -87,7 +87,7 @@ export const CheckoutModal: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="overflow-y-auto p-6 sm:p-8">
+        <div className="overflow-y-auto p-4 sm:p-8 overflow-x-hidden">
           {isConfirmed ? (
             <div className="text-center py-6 space-y-6">
               <div className="w-16 h-16 rounded-full bg-[#C7A86B]/10 border border-[#C7A86B] flex items-center justify-center mx-auto text-[#C7A86B]">

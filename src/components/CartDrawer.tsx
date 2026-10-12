@@ -25,11 +25,11 @@ export const CartDrawer: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-md w-full bg-[#0A0A0A] border-l border-[#222222] shadow-2xl flex flex-col justify-between z-10 text-[#F4F0E8]">
+      <div className="fixed inset-y-0 right-0 max-w-full sm:max-w-md w-full bg-[#0A0A0A] border-l border-[#222222] shadow-2xl flex flex-col justify-between z-10 text-[#F4F0E8]">
         {/* Drawer Header */}
-        <div className="p-6 border-b border-[#1A1A1A] flex items-center justify-between bg-[#0E0E0E]">
+        <div className="p-4 sm:p-6 border-b border-[#1A1A1A] flex items-center justify-between bg-[#0E0E0E]">
           <div className="flex items-center gap-2">
-            <h2 className="font-serif text-lg tracking-wider uppercase text-[#F4F0E8]">
+            <h2 className="font-serif text-base sm:text-lg tracking-wider uppercase text-[#F4F0E8]">
               Your Acquisition Bag
             </h2>
             <span className="text-xs font-mono text-[#C7A86B]">
@@ -46,7 +46,7 @@ export const CartDrawer: React.FC = () => {
         </div>
 
         {/* Item List / Empty State */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
           {cartItems.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center py-12">
               <span className="font-serif text-2xl text-[#6F6D68] mb-3">

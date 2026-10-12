@@ -33,7 +33,7 @@ export const ProductDetailModal: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
@@ -42,10 +42,10 @@ export const ProductDetailModal: React.FC = () => {
       />
 
       {/* Modal Dialog */}
-      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-5xl w-full my-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden flex flex-col max-h-[92vh]">
+      <div className="relative bg-[#0A0A0A] border border-[#222222] rounded-sm max-w-5xl w-full my-3 sm:my-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden flex flex-col max-h-[94vh] sm:max-h-[92vh]">
         {/* Top Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1A1A1A] bg-[#0E0E0E]">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#C7A86B]">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1A1A1A] bg-[#0E0E0E]">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono uppercase tracking-widest text-[#C7A86B]">
             <span>{selectedProduct.category}</span>
             <span aria-hidden="true">·</span>
             <span>{selectedProduct.caseSize}</span>
@@ -60,7 +60,7 @@ export const ProductDetailModal: React.FC = () => {
         </div>
 
         {/* Scrollable Body */}
-        <div className="overflow-y-auto p-6 sm:p-8">
+        <div className="overflow-y-auto p-4 sm:p-8 overflow-x-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Left Image Gallery (7 cols) */}
             <div className="lg:col-span-7 space-y-4">

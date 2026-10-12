@@ -32,7 +32,7 @@ export const SearchModal: React.FC = () => {
   if (!isSearchOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-6">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
@@ -41,7 +41,7 @@ export const SearchModal: React.FC = () => {
       />
 
       {/* Modal Dialog */}
-      <div className="relative bg-[#0C0C0C] border border-[#222222] rounded-sm max-w-2xl w-full p-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden">
+      <div className="relative bg-[#0C0C0C] border border-[#222222] rounded-sm max-w-2xl w-full p-4 sm:p-6 shadow-2xl shadow-black z-10 text-[#F4F0E8] overflow-hidden">
         {/* Search Input Bar */}
         <div className="flex items-center gap-3 border-b border-[#222222] pb-4">
           <Search className="w-5 h-5 text-[#C7A86B]" />

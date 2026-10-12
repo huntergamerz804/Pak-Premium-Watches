@@ -37,19 +37,19 @@ export const FeaturedCollection: React.FC = () => {
   }, [activeCategory, sortBy]);
 
   return (
-    <section id="collection" className="py-20 sm:py-28 bg-[#080808] border-b border-[#171717]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <section id="collection" className="py-16 sm:py-28 bg-[#080808] border-b border-[#171717] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-6">
           <div className="max-w-xl">
-            <div className="flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-[#C7A86B] font-medium mb-3">
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.18em] sm:tracking-[0.25em] uppercase text-[#C7A86B] font-medium mb-3">
               <span className="w-5 h-[1px] bg-[#C7A86B]/60" aria-hidden="true" />
               <span>Permanent & Atelier Works</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
+            <h2 className="text-2xl sm:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
               THE COLLECTION
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-[#9C9A94] leading-relaxed font-light">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-[#9C9A94] leading-relaxed font-light">
               Mechanical timepieces designed around precision, proportion, and enduring character. Hand-assembled in limited annual allocations.
             </p>
           </div>
@@ -62,7 +62,7 @@ export const FeaturedCollection: React.FC = () => {
             <select
               value={sortBy}
               onChange={e => setSortBy(e.target.value as any)}
-              className="bg-[#111111] border border-[#222222] hover:border-[#C7A86B]/40 text-xs tracking-wider uppercase text-[#E8E5DE] px-3.5 py-2 rounded-sm focus:outline-none focus:border-[#C7A86B] cursor-pointer"
+              className="bg-[#111111] border border-[#222222] hover:border-[#C7A86B]/40 text-xs tracking-wider uppercase text-[#E8E5DE] px-3.5 py-2.5 rounded-sm focus:outline-none focus:border-[#C7A86B] cursor-pointer w-full sm:w-auto"
               aria-label="Sort timepieces"
             >
               <option value="featured">Featured Allocation</option>
@@ -74,7 +74,7 @@ export const FeaturedCollection: React.FC = () => {
         </div>
 
         {/* Filter Segmented Controls */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 sm:mb-10 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {categories.map(cat => {
             const isActive = activeCategory === cat;
             return (
