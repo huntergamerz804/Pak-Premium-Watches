@@ -78,7 +78,7 @@ export const HorologyConciergeModal: React.FC = () => {
       let expertReply = '';
 
       if (queryLower.includes('owner') || queryLower.includes('founder') || queryLower.includes('developer') || queryLower.includes('suban') || queryLower.includes('ali khan') || queryLower.includes('awais') || queryLower.includes('who made') || queryLower.includes('creator')) {
-        expertReply = 'Pak-Premium Watches is led by First Owner M.suban kasi and Second Owner M.ali khan, steering the atelier\'s vision and mechanical curation. The digital platform and full-stack architecture were designed and engineered by Full-Stack Web Developer M.awais khaild noorzai.';
+        expertReply = 'Pak-Premium Watches is led by First Owner M. Suban Kasi and Second Owner M. Ali Khan, steering the atelier\'s vision and mechanical curation. The digital platform and full-stack architecture were designed and engineered by Full-Stack Web Developer M. Awais Khaild Noorzai.';
       } else if (queryLower.includes('tourbillon') || queryLower.includes('gravity') || queryLower.includes('cage')) {
         expertReply = 'In high-horology, the tourbillon is an architectural triumph designed to negate the isochronal errors caused by Earth’s gravitational pull on the balance spring. In our flagship Pak-Premium Sovereign and Nocturne calibres, the balance assembly and escapement are cradled within an ultralight Grade 5 titanium cage weighing just 0.28 grams, rotating a full 360 degrees once every sixty seconds to distribute gravitational forces symmetrically.';
       } else if (queryLower.includes('904l') || queryLower.includes('steel') || queryLower.includes('metal')) {

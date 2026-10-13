@@ -1,14 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product, CartItem } from '../types';
+import { Product, CartItem, Testimonial } from '../types';
+import { TESTIMONIALS } from '../data/journal';
 
 interface CartContextType {
   cartItems: CartItem[];
   wishlist: string[];
+  reviews: Testimonial[];
   isCartOpen: boolean;
   isSearchOpen: boolean;
   isConciergeOpen: boolean;
   isWatchAnalysisOpen: boolean;
   isCheckoutOpen: boolean;
+  isReviewModalOpen: boolean;
+  reviewWatchName: string;
   selectedProduct: Product | null;
   selectedArticleId: string | null;
   openCart: () => void;
@@ -21,6 +25,9 @@ interface CartContextType {
   closeWatchAnalysis: () => void;
   openCheckout: () => void;
   closeCheckout: () => void;
+  openReviewModal: (watchName?: string) => void;
+  closeReviewModal: () => void;
+  addReview: (review: { author: string; quote: string; rating?: number; watchModel?: string }) => void;
   openProductDetail: (product: Product) => void;
   closeProductDetail: () => void;
   openArticleModal: (articleId: string) => void;
@@ -39,6 +46,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CART_STORAGE_KEY = 'auren_cart_v1';
 const WISHLIST_STORAGE_KEY = 'auren_wishlist_v1';
+const REVIEWS_STORAGE_KEY = 'pak_premium_customer_reviews_v1';
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -64,8 +72,49 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isConciergeOpen, setIsConciergeOpen] = useState(false);
   const [isWatchAnalysisOpen, setIsWatchAnalysisOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [reviewWatchName, setReviewWatchName] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
+
+  const [reviews, setReviews] = useState<Testimonial[]>(() => {
+    try {
+      const saved = localStorage.getItem(REVIEWS_STORAGE_KEY);
+      return saved ? JSON.parse(saved) : TESTIMONIALS;
+    } catch {
+      return TESTIMONIALS;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviews));
+    } catch (e) {
+      console.error('Failed to save reviews to localStorage', e);
+    }
+  }, [reviews]);
+
+  const openReviewModal = (watchName?: string) => {
+    setReviewWatchName(watchName || '');
+    setIsReviewModalOpen(true);
+  };
+
+  const closeReviewModal = () => {
+    setIsReviewModalOpen(false);
+    setReviewWatchName('');
+  };
+
+  const addReview = (newRev: { author: string; quote: string; rating?: number; watchModel?: string }) => {
+    const formattedReview: Testimonial = {
+      id: `rev-${Date.now()}`,
+      author: newRev.author,
+      quote: newRev.quote,
+      rating: newRev.rating || 5,
+      watchModel: newRev.watchModel,
+      date: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+    };
+    setReviews(prev => [formattedReview, ...prev]);
+  };
 
   useEffect(() => {
     try {
@@ -164,11 +213,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
         cartItems,
         wishlist,
+        reviews,
         isCartOpen,
         isSearchOpen,
         isConciergeOpen,
         isWatchAnalysisOpen,
         isCheckoutOpen,
+        isReviewModalOpen,
+        reviewWatchName,
         selectedProduct,
         selectedArticleId,
         openCart,
@@ -181,6 +233,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         closeWatchAnalysis,
         openCheckout,
         closeCheckout,
+        openReviewModal,
+        closeReviewModal,
+        addReview,
         openProductDetail,
         closeProductDetail,
         openArticleModal,

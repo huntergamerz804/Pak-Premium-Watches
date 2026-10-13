@@ -19,6 +19,7 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { CheckoutModal } from './components/CheckoutModal';
 import { HorologyConciergeModal } from './components/HorologyConciergeModal';
 import { WatchAnalysisModal } from './components/WatchAnalysisModal';
+import { ReviewModal } from './components/ReviewModal';
 
 function AppContent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -51,6 +52,7 @@ function AppContent() {
       <CheckoutModal />
       <HorologyConciergeModal />
       <WatchAnalysisModal />
+      <ReviewModal />
     </div>
   );
 }

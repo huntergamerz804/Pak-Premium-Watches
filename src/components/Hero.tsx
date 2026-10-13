@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ShieldCheck, Clock } from 'lucide-react';
+import { ArrowRight, Headphones } from 'lucide-react';
 import { heroWatchImg } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { PRODUCTS } from '../data/products';
@@ -84,14 +84,10 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Micro Trust Metadata */}
-          <div className="pt-6 border-t border-[#1B1B1B] flex flex-wrap items-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-[#6F6D68]">
+          <div className="pt-6 border-t border-[#1B1B1B] flex items-center gap-4 text-[11px] sm:text-xs text-[#6F6D68]">
             <div className="flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-[#C7A86B]" />
-              <span className="tracking-wide">72-Hour Power Reserve</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C7A86B]" />
-              <span className="tracking-wide">5-Year Global Atelier Guarantee</span>
+              <Headphones className="w-3.5 h-3.5 text-[#C7A86B]" />
+              <span className="tracking-wide text-[#E8E5DE] font-medium">24/7 Support</span>
             </div>
           </div>
         </div>
@@ -131,13 +127,13 @@ export const Hero: React.FC = () => {
               />
 
               {/* Bottom Card Annotation */}
-              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between pointer-events-none">
+              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between pointer-events-none">
                 <div>
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-[#C7A86B] font-medium block">
+                  <span className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#C7A86B] font-medium block">
                     Flagship Piece
                   </span>
-                  <span className="font-serif text-lg text-[#F4F0E8] font-normal">
-                    Pak-Premium Sovereign Tourbillon
+                  <span className="font-serif text-sm sm:text-lg text-[#F4F0E8] font-normal leading-tight">
+                    Pak-Premium Sovereign
                   </span>
                 </div>
                 <div className="text-right">

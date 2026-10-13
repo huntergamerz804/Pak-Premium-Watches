@@ -5,37 +5,10 @@ import { EasyPaisaLogo } from './EasyPaisaLogo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#050505] text-[#9C9A94] border-t border-[#1C1C1C] pt-12 sm:pt-16 pb-12 overflow-hidden">
+    <footer className="bg-[#050505] text-[#9C9A94] border-t border-[#1C1C1C] pt-10 sm:pt-14 pb-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Brand & Manifesto */}
-        <div className="pb-10 sm:pb-12 border-b border-[#171717] mb-10 sm:mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl sm:text-2xl font-serif tracking-[0.2em] text-[#F4F0E8] font-semibold uppercase">
-                PAK-PREMIUM
-              </span>
-              <span className="text-xs sm:text-sm font-serif tracking-[0.25em] text-[#C7A86B] uppercase font-light">
-                WATCHES
-              </span>
-            </div>
-            <p className="text-xs text-[#6F6D68] max-w-md font-light leading-relaxed">
-              Atelier Horloger · Independent precision mechanical watchmaking. Engineered for Eternity.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-mono tracking-widest uppercase text-[#C7A86B]">
-            <span>Geneva</span>
-            <span>·</span>
-            <span>Zurich</span>
-            <span>·</span>
-            <span>London</span>
-            <span>·</span>
-            <span>Tokyo</span>
-          </div>
-        </div>
-
         {/* Atelier Leadership & Development Grand Showcase */}
-        <div className="my-10 sm:my-16 relative overflow-hidden bg-gradient-to-b from-[#0F0F0F] via-[#090909] to-[#050505] border border-[#242424] rounded-sm p-5 sm:p-10 lg:p-16">
+        <div className="mb-10 sm:mb-16 relative overflow-hidden bg-gradient-to-b from-[#0F0F0F] via-[#090909] to-[#050505] border border-[#242424] rounded-sm p-5 sm:p-10 lg:p-16">
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#C7A86B]/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Section Header */}
@@ -66,7 +39,7 @@ export const Footer: React.FC = () => {
                   First Owner
                 </span>
                 <h3 className="font-serif text-xl sm:text-3xl lg:text-4xl text-[#F4F0E8] font-medium tracking-wide mb-2 sm:mb-3 break-words">
-                  M.suban kasi
+                  M. Suban Kasi
                 </h3>
               </div>
               <div className="pt-5 sm:pt-6 border-t border-[#202020] mt-5 sm:mt-6">
@@ -90,7 +63,7 @@ export const Footer: React.FC = () => {
                   Second Owner
                 </span>
                 <h3 className="font-serif text-xl sm:text-3xl lg:text-4xl text-[#F4F0E8] font-medium tracking-wide mb-2 sm:mb-3 break-words">
-                  M.ali khan
+                  M. Ali Khan
                 </h3>
               </div>
               <div className="pt-5 sm:pt-6 border-t border-[#202020] mt-5 sm:mt-6">
@@ -114,7 +87,7 @@ export const Footer: React.FC = () => {
                   Full-Stack Web Developer
                 </span>
                 <h3 className="font-serif text-xl sm:text-3xl lg:text-4xl text-[#F4F0E8] font-medium tracking-wide mb-2 sm:mb-3 break-words">
-                  M.awais khaild noorzai
+                  M. Awais Khaild Noorzai
                 </h3>
               </div>
               <div className="pt-5 sm:pt-6 border-t border-[#202020] mt-5 sm:mt-6">
@@ -164,11 +137,11 @@ export const Footer: React.FC = () => {
         {/* Bottom Legal */}
         <div className="pt-6 sm:pt-8 border-t border-[#141414] flex flex-col md:flex-row items-center justify-between text-[11px] sm:text-xs text-[#666666] gap-4 text-center md:text-left">
           <div>
-            © {new Date().getFullYear()} Pak-Premium Watches Ltd. First Owner: <span className="text-[#999999] font-medium">M.suban kasi</span> · Second Owner: <span className="text-[#999999] font-medium">M.ali khan</span>.
+            © {new Date().getFullYear()} Pak-Premium Watches Ltd. First Owner: <span className="text-[#999999] font-medium">M. Suban Kasi</span> · Second Owner: <span className="text-[#999999] font-medium">M. Ali Khan</span>.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
             <span className="text-[#888888]">
-              Full-Stack Web Developer: <span className="text-[#C7A86B] font-medium">M.awais khaild noorzai</span>
+              Full-Stack Web Developer: <span className="text-[#C7A86B] font-medium">M. Awais Khaild Noorzai</span>
             </span>
             <span className="hover:text-[#9C9A94] cursor-pointer transition-colors">
               Privacy Discretion

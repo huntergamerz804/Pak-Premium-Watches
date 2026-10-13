@@ -3,9 +3,9 @@
 A high-end, responsive luxury mechanical-watch e-commerce website with in-house horological curation, bespoke cart, and Gemini-powered horological advisory.
 
 ### Leadership & Development
-* **First Owner**: M.suban kasi
-* **Second Owner**: M.ali khan
-* **Full-Stack Web Developer**: M.awais khaild noorzai
+* **First Owner**: M. Suban Kasi
+* **Second Owner**: M. Ali Khan
+* **Full-Stack Web Developer**: M. Awais Khaild Noorzai
 
 ---
 

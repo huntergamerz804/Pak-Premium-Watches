@@ -46,9 +46,11 @@ export interface Testimonial {
   id: string;
   quote: string;
   author: string;
-  city: string;
-  watchModel: string;
-  year: string;
+  city?: string;
+  watchModel?: string;
+  year?: string;
+  rating?: number;
+  date?: string;
 }
 
 export interface ChatMessage {

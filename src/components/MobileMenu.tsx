@@ -140,10 +140,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             Pak-Premium Watches · Atelier Horloger
           </div>
           <div className="text-[10px] text-[#555555]">
-            First Owner: <span className="text-[#888888]">M.suban kasi</span> · Second Owner: <span className="text-[#888888]">M.ali khan</span>
+            First Owner: <span className="text-[#888888]">M. Suban Kasi</span> · Second Owner: <span className="text-[#888888]">M. Ali Khan</span>
           </div>
           <div className="text-[10px] text-[#C7A86B]/90 font-mono">
-            Full-Stack Web Developer: M.awais khaild noorzai
+            Full-Stack Web Developer: M. Awais Khaild Noorzai
           </div>
         </div>
       </div>

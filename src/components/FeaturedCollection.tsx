@@ -145,14 +145,14 @@ export const FeaturedCollection: React.FC = () => {
                     <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
                   </button>
 
-                  {/* Hover Overlay Quick Actions */}
-                  <div className="absolute inset-x-3 bottom-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                  {/* Mobile Touch & Desktop Hover Quick Actions */}
+                  <div className="absolute inset-x-2.5 sm:inset-x-3 bottom-2.5 sm:bottom-3 flex items-center justify-between opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                     <button
                       onClick={e => {
                         e.stopPropagation();
                         openProductDetail(product);
                       }}
-                      className="px-3 py-1.5 bg-[#171717]/90 hover:bg-[#222222] text-[#F4F0E8] text-[10px] tracking-wider uppercase font-medium flex items-center gap-1.5 border border-[#333333] rounded-sm transition-colors"
+                      className="px-2.5 sm:px-3 py-1.5 bg-[#171717]/95 hover:bg-[#222222] text-[#F4F0E8] text-[10px] tracking-wider uppercase font-medium flex items-center gap-1.5 border border-[#333333] rounded-sm transition-colors shadow-sm"
                     >
                       <Eye className="w-3 h-3 text-[#C7A86B]" />
                       <span>Inspect</span>
@@ -163,7 +163,7 @@ export const FeaturedCollection: React.FC = () => {
                         e.stopPropagation();
                         addToCart(product);
                       }}
-                      className="px-3 py-1.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-[10px] tracking-wider uppercase font-semibold flex items-center gap-1.5 rounded-sm transition-colors shadow-md"
+                      className="px-2.5 sm:px-3 py-1.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-[10px] tracking-wider uppercase font-semibold flex items-center gap-1.5 rounded-sm transition-colors shadow-md shadow-[#C7A86B]/20"
                     >
                       <Plus className="w-3 h-3" />
                       <span>Add to Bag</span>

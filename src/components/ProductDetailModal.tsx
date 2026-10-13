@@ -10,6 +10,7 @@ export const ProductDetailModal: React.FC = () => {
     toggleWishlist,
     isInWishlist,
     openConcierge,
+    openReviewModal,
   } = useCart();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -211,16 +212,27 @@ export const ProductDetailModal: React.FC = () => {
                     </button>
                   </div>
 
-                  {/* Ask Concierge Link */}
-                  <button
-                    onClick={() => {
-                      closeProductDetail();
-                      openConcierge();
-                    }}
-                    className="w-full py-2.5 border border-[#1E1E1E] hover:border-[#C7A86B]/40 text-xs text-[#9C9A94] hover:text-[#F4F0E8] uppercase tracking-wider rounded-sm transition-colors text-center"
-                  >
-                    Have Questions? Inquire with our Master Horologist
-                  </button>
+                  {/* Concierge & Review Actions */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        closeProductDetail();
+                        openConcierge();
+                      }}
+                      className="flex-1 py-2.5 border border-[#1E1E1E] hover:border-[#C7A86B]/40 text-xs text-[#9C9A94] hover:text-[#F4F0E8] uppercase tracking-wider rounded-sm transition-colors text-center"
+                    >
+                      Inquire with Concierge
+                    </button>
+                    <button
+                      onClick={() => {
+                        closeProductDetail();
+                        openReviewModal(selectedProduct.name);
+                      }}
+                      className="px-4 py-2.5 border border-[#C7A86B]/30 hover:border-[#C7A86B] text-xs text-[#C7A86B] hover:text-[#EAD8B4] uppercase tracking-wider rounded-sm transition-colors text-center whitespace-nowrap"
+                    >
+                      Write Review
+                    </button>
+                  </div>
                 </div>
               </div>
 
