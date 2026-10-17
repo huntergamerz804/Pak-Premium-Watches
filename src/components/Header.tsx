@@ -8,7 +8,17 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { totalItems, wishlist, openCart, openSearch, openConcierge, openWatchAnalysis } = useCart();
+  const {
+    totalItems,
+    wishlist,
+    openCart,
+    openSearch,
+    openConcierge,
+    openWatchAnalysis,
+    openOrderPage,
+    closeOrderPage,
+    isOrderPageOpen,
+  } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,11 +40,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
         {/* Zone 1: Single text element wordmark */}
         <a
           href="#home"
-          className="text-base sm:text-2xl font-serif tracking-[0.16em] sm:tracking-[0.2em] text-[#F4F0E8] hover:text-[#C7A86B] transition-colors uppercase select-none flex items-center gap-1.5 sm:gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B] shrink-0"
+          onClick={() => {
+            if (isOrderPageOpen) closeOrderPage();
+          }}
+          className="text-xs xs:text-sm sm:text-2xl font-serif tracking-[0.1em] xs:tracking-[0.14em] sm:tracking-[0.2em] text-[#F4F0E8] hover:text-[#C7A86B] transition-colors uppercase select-none flex items-center gap-1 sm:gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B] shrink-0"
           aria-label="Pak-Premium Watches Homepage"
         >
           <span className="font-semibold">PAK-PREMIUM</span>
-          <span className="text-[#C7A86B] font-light text-[11px] sm:text-sm tracking-[0.2em] sm:tracking-[0.25em]">WATCHES</span>
+          <span className="text-[#C7A86B] font-light text-[9px] xs:text-[11px] sm:text-sm tracking-[0.16em] sm:tracking-[0.25em]">WATCHES</span>
         </a>
 
         {/* Zone 2: Clean text navigation links */}
@@ -44,12 +57,25 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
         >
           <a
             href="#collection"
+            onClick={() => {
+              if (isOrderPageOpen) closeOrderPage();
+            }}
             className="hover:text-[#F4F0E8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C7A86B] hover:after:w-full after:transition-all after:duration-300"
           >
             Collection
           </a>
+          <button
+            onClick={() => openOrderPage()}
+            className="text-[#C7A86B] hover:text-[#EAD8B4] font-semibold transition-colors relative py-1 flex items-center gap-1.5 uppercase text-[13px] tracking-[0.16em]"
+          >
+            <span>Order</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse" />
+          </button>
           <a
             href="#testimonials"
+            onClick={() => {
+              if (isOrderPageOpen) closeOrderPage();
+            }}
             className="hover:text-[#F4F0E8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C7A86B] hover:after:w-full after:transition-all after:duration-300"
           >
             Reviews
@@ -78,6 +104,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
           >
             <MessageSquare className="w-3.5 h-3.5 text-[#C7A86B]" />
             <span className="hidden sm:inline">Concierge</span>
+          </button>
+
+          {/* Quick Order Button */}
+          <button
+            onClick={() => openOrderPage()}
+            className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-xs font-semibold tracking-wider uppercase rounded-sm transition-colors shadow-sm cursor-pointer"
+          >
+            <span>Order</span>
           </button>
 
           {/* Search Trigger */}

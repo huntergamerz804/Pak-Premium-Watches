@@ -38,6 +38,10 @@ interface CartContextType {
   clearCart: () => void;
   toggleWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
+  isOrderPageOpen: boolean;
+  orderSelectedProduct: Product | null;
+  openOrderPage: (product?: Product) => void;
+  closeOrderPage: () => void;
   subtotal: number;
   totalItems: number;
 }
@@ -76,6 +80,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [reviewWatchName, setReviewWatchName] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
+  const [isOrderPageOpen, setIsOrderPageOpen] = useState<boolean>(() => {
+    return typeof window !== 'undefined' && window.location.hash === '#order';
+  });
+  const [orderSelectedProduct, setOrderSelectedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === '#order') {
+        setIsOrderPageOpen(true);
+      } else if (window.location.hash !== '#order' && isOrderPageOpen) {
+        setIsOrderPageOpen(false);
+      }
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, [isOrderPageOpen]);
 
   const [reviews, setReviews] = useState<Testimonial[]>(() => {
     try {
@@ -152,6 +172,31 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const openProductDetail = (product: Product) => setSelectedProduct(product);
   const closeProductDetail = () => setSelectedProduct(null);
+
+  const openOrderPage = (product?: Product) => {
+    if (product) {
+      setOrderSelectedProduct(product);
+    }
+    setIsCartOpen(false);
+    setIsCheckoutOpen(false);
+    setSelectedProduct(null);
+    setIsOrderPageOpen(true);
+    window.location.hash = '#order';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const closeOrderPage = () => {
+    setIsOrderPageOpen(false);
+    setOrderSelectedProduct(null);
+    if (window.location.hash === '#order') {
+      try {
+        window.history.pushState(null, '', window.location.pathname);
+      } catch {
+        window.location.hash = '';
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const openArticleModal = (articleId: string) => setSelectedArticleId(articleId);
   const closeArticleModal = () => setSelectedArticleId(null);
@@ -246,6 +291,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         clearCart,
         toggleWishlist,
         isInWishlist,
+        isOrderPageOpen,
+        orderSelectedProduct,
+        openOrderPage,
+        closeOrderPage,
         subtotal,
         totalItems,
       }}

@@ -11,6 +11,7 @@ export const ProductDetailModal: React.FC = () => {
     isInWishlist,
     openConcierge,
     openReviewModal,
+    openOrderPage,
   } = useCart();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -211,6 +212,15 @@ export const ProductDetailModal: React.FC = () => {
                       <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
                     </button>
                   </div>
+
+                  {/* Direct Order Fast Track */}
+                  <button
+                    onClick={() => openOrderPage(selectedProduct)}
+                    className="w-full py-3 bg-[#16120D] hover:bg-[#20180F] border border-[#C7A86B] text-[#C7A86B] hover:text-[#EAD8B4] font-semibold text-xs tracking-[0.16em] uppercase rounded-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#C7A86B]/10"
+                  >
+                    <span>Direct Order · $300 Upfront Shipping Fee</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
 
                   {/* Concierge & Review Actions */}
                   <div className="flex items-center gap-2">

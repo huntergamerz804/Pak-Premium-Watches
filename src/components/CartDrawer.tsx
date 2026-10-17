@@ -12,6 +12,7 @@ export const CartDrawer: React.FC = () => {
     subtotal,
     totalItems,
     openCheckout,
+    openOrderPage,
   } = useCart();
 
   if (!isCartOpen) return null;
@@ -158,10 +159,21 @@ export const CartDrawer: React.FC = () => {
             {/* Action CTA */}
             <button
               onClick={openCheckout}
-              className="w-full py-4 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-semibold text-xs tracking-[0.2em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg shadow-[#C7A86B]/15"
+              className="w-full py-4 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-semibold text-xs tracking-[0.2em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg shadow-[#C7A86B]/15 cursor-pointer"
             >
               <span>Proceed to Bespoke Checkout</span>
               <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={() => {
+                closeCart();
+                openOrderPage(cartItems[0]?.product);
+              }}
+              className="w-full py-3 bg-[#14120D] hover:bg-[#1E1911] border border-[#C7A86B]/60 hover:border-[#C7A86B] text-[#C7A86B] hover:text-[#EAD8B4] font-semibold text-xs tracking-[0.16em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>Go to Product Ordering Page ($300 Fee)</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
 
             <div className="flex items-center justify-center gap-2 text-[11px] text-[#A898A0]">

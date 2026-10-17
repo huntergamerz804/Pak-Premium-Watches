@@ -8,93 +8,93 @@ export const Footer: React.FC = () => {
     <footer className="bg-[#050505] text-[#9C9A94] border-t border-[#1C1C1C] pt-10 sm:pt-14 pb-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Atelier Leadership & Development Grand Showcase */}
-        <div className="mb-10 sm:mb-16 relative overflow-hidden bg-gradient-to-b from-[#0F0F0F] via-[#090909] to-[#050505] border border-[#242424] rounded-sm p-5 sm:p-10 lg:p-16">
+        <div className="mb-8 sm:mb-16 relative overflow-hidden bg-gradient-to-b from-[#0F0F0F] via-[#090909] to-[#050505] border border-[#242424] rounded-sm p-4 sm:p-8 lg:p-16">
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#C7A86B]/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16 relative z-10">
-            <div className="inline-flex items-center gap-2 sm:gap-3 text-[11px] sm:text-sm font-mono tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#C7A86B] font-medium mb-3">
-              <span className="w-5 sm:w-8 h-[1px] bg-[#C7A86B]" aria-hidden="true" />
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-14 relative z-10">
+            <div className="inline-flex items-center gap-2 sm:gap-3 text-[10px] sm:text-sm font-mono tracking-[0.16em] sm:tracking-[0.25em] uppercase text-[#C7A86B] font-medium mb-2.5 sm:mb-3">
+              <span className="w-4 sm:w-8 h-[1px] bg-[#C7A86B]" aria-hidden="true" />
               <span>Executive Directorate & Engineering</span>
-              <span className="w-5 sm:w-8 h-[1px] bg-[#C7A86B]" aria-hidden="true" />
+              <span className="w-4 sm:w-8 h-[1px] bg-[#C7A86B]" aria-hidden="true" />
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
+            <h2 className="text-xl sm:text-3xl lg:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
               Founding Leadership & Digital Architecture
             </h2>
-            <p className="text-xs sm:text-base text-[#9C9A94] mt-2.5 sm:mt-3 font-light leading-relaxed">
+            <p className="text-xs sm:text-base text-[#9C9A94] mt-2 sm:mt-3 font-light leading-relaxed">
               Guiding the vision and heritage of Pak-Premium Watches with artisanal curation and state-of-the-art engineering.
             </p>
           </div>
 
-          {/* 3 Prominent Large Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 relative z-10">
+          {/* 3 Prominent Large Cards - Mobile Stack */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 relative z-10">
             {/* First Owner */}
-            <div className="bg-[#111111]/90 border border-[#262626] hover:border-[#C7A86B]/60 transition-all duration-300 p-5 sm:p-8 lg:p-10 rounded-sm relative group flex flex-col justify-between shadow-2xl">
-              <div className="absolute top-0 right-0 w-24 sm:w-28 h-24 sm:h-28 bg-[#C7A86B]/5 rounded-bl-full pointer-events-none group-hover:bg-[#C7A86B]/15 transition-colors" />
+            <div className="bg-[#111111]/90 border border-[#262626] hover:border-[#C7A86B]/60 transition-all duration-300 p-4 sm:p-6 lg:p-10 rounded-sm relative group flex flex-col justify-between shadow-2xl">
+              <div className="absolute top-0 right-0 w-20 sm:w-28 h-20 sm:h-28 bg-[#C7A86B]/5 rounded-bl-full pointer-events-none group-hover:bg-[#C7A86B]/15 transition-colors" />
               <div>
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-sm bg-[#171717] border border-[#2A2A2A] group-hover:border-[#C7A86B]/50 flex items-center justify-center mb-5 sm:mb-6 transition-colors shadow-inner">
-                  <Crown className="w-6 h-6 sm:w-7 sm:h-7 text-[#C7A86B]" />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-sm bg-[#171717] border border-[#2A2A2A] group-hover:border-[#C7A86B]/50 flex items-center justify-center mb-4 sm:mb-6 transition-colors shadow-inner">
+                  <Crown className="w-5 h-5 sm:w-7 sm:h-7 text-[#C7A86B]" />
                 </div>
-                <span className="text-[11px] sm:text-sm uppercase font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#C7A86B] font-semibold block mb-1.5 sm:mb-2">
+                <span className="text-[10px] sm:text-sm uppercase font-mono tracking-[0.18em] sm:tracking-[0.25em] text-[#C7A86B] font-semibold block mb-1 sm:mb-2">
                   First Owner
                 </span>
-                <h3 className="font-serif text-xl sm:text-3xl lg:text-4xl text-[#F4F0E8] font-medium tracking-wide mb-2 sm:mb-3 break-words">
+                <h3 className="font-serif text-lg sm:text-2xl lg:text-3xl text-[#F4F0E8] font-medium tracking-wide mb-1.5 sm:mb-3 break-words">
                   M. Suban Kasi
                 </h3>
               </div>
-              <div className="pt-5 sm:pt-6 border-t border-[#202020] mt-5 sm:mt-6">
+              <div className="pt-4 sm:pt-6 border-t border-[#202020] mt-4 sm:mt-6">
                 <p className="text-xs sm:text-base text-[#E0DCD3] font-serif font-light">
                   Co-Founder & Executive Director
                 </p>
-                <span className="text-[10px] sm:text-xs text-[#7A7872] block mt-1">
+                <span className="text-[10px] sm:text-xs text-[#7A7872] block mt-0.5 sm:mt-1">
                   Atelier Horloger Directorate
                 </span>
               </div>
             </div>
 
             {/* Second Owner */}
-            <div className="bg-[#111111]/90 border border-[#262626] hover:border-[#C7A86B]/60 transition-all duration-300 p-5 sm:p-8 lg:p-10 rounded-sm relative group flex flex-col justify-between shadow-2xl">
-              <div className="absolute top-0 right-0 w-24 sm:w-28 h-24 sm:h-28 bg-[#C7A86B]/5 rounded-bl-full pointer-events-none group-hover:bg-[#C7A86B]/15 transition-colors" />
+            <div className="bg-[#111111]/90 border border-[#262626] hover:border-[#C7A86B]/60 transition-all duration-300 p-4 sm:p-6 lg:p-10 rounded-sm relative group flex flex-col justify-between shadow-2xl">
+              <div className="absolute top-0 right-0 w-20 sm:w-28 h-20 sm:h-28 bg-[#C7A86B]/5 rounded-bl-full pointer-events-none group-hover:bg-[#C7A86B]/15 transition-colors" />
               <div>
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-sm bg-[#171717] border border-[#2A2A2A] group-hover:border-[#C7A86B]/50 flex items-center justify-center mb-5 sm:mb-6 transition-colors shadow-inner">
-                  <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-[#C7A86B]" />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-sm bg-[#171717] border border-[#2A2A2A] group-hover:border-[#C7A86B]/50 flex items-center justify-center mb-4 sm:mb-6 transition-colors shadow-inner">
+                  <Shield className="w-5 h-5 sm:w-7 sm:h-7 text-[#C7A86B]" />
                 </div>
-                <span className="text-[11px] sm:text-sm uppercase font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#C7A86B] font-semibold block mb-1.5 sm:mb-2">
+                <span className="text-[10px] sm:text-sm uppercase font-mono tracking-[0.18em] sm:tracking-[0.25em] text-[#C7A86B] font-semibold block mb-1 sm:mb-2">
                   Second Owner
                 </span>
-                <h3 className="font-serif text-xl sm:text-3xl lg:text-4xl text-[#F4F0E8] font-medium tracking-wide mb-2 sm:mb-3 break-words">
+                <h3 className="font-serif text-lg sm:text-2xl lg:text-3xl text-[#F4F0E8] font-medium tracking-wide mb-1.5 sm:mb-3 break-words">
                   M. Ali Khan
                 </h3>
               </div>
-              <div className="pt-5 sm:pt-6 border-t border-[#202020] mt-5 sm:mt-6">
+              <div className="pt-4 sm:pt-6 border-t border-[#202020] mt-4 sm:mt-6">
                 <p className="text-xs sm:text-base text-[#E0DCD3] font-serif font-light">
                   Co-Founder & Managing Director
                 </p>
-                <span className="text-[10px] sm:text-xs text-[#7A7872] block mt-1">
+                <span className="text-[10px] sm:text-xs text-[#7A7872] block mt-0.5 sm:mt-1">
                   Strategic Operations & Atelier Expansion
                 </span>
               </div>
             </div>
 
             {/* Full-Stack Web Developer */}
-            <div className="bg-[#111111]/90 border border-[#262626] hover:border-[#C7A86B]/60 transition-all duration-300 p-5 sm:p-8 lg:p-10 rounded-sm relative group flex flex-col justify-between shadow-2xl">
-              <div className="absolute top-0 right-0 w-24 sm:w-28 h-24 sm:h-28 bg-[#C7A86B]/5 rounded-bl-full pointer-events-none group-hover:bg-[#C7A86B]/15 transition-colors" />
+            <div className="bg-[#111111]/90 border border-[#262626] hover:border-[#C7A86B]/60 transition-all duration-300 p-4 sm:p-6 lg:p-10 rounded-sm relative group flex flex-col justify-between shadow-2xl">
+              <div className="absolute top-0 right-0 w-20 sm:w-28 h-20 sm:h-28 bg-[#C7A86B]/5 rounded-bl-full pointer-events-none group-hover:bg-[#C7A86B]/15 transition-colors" />
               <div>
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-sm bg-[#171717] border border-[#2A2A2A] group-hover:border-[#C7A86B]/50 flex items-center justify-center mb-5 sm:mb-6 transition-colors shadow-inner">
-                  <Code2 className="w-6 h-6 sm:w-7 sm:h-7 text-[#C7A86B]" />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-sm bg-[#171717] border border-[#2A2A2A] group-hover:border-[#C7A86B]/50 flex items-center justify-center mb-4 sm:mb-6 transition-colors shadow-inner">
+                  <Code2 className="w-5 h-5 sm:w-7 sm:h-7 text-[#C7A86B]" />
                 </div>
-                <span className="text-[11px] sm:text-sm uppercase font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#C7A86B] font-semibold block mb-1.5 sm:mb-2">
+                <span className="text-[10px] sm:text-sm uppercase font-mono tracking-[0.18em] sm:tracking-[0.25em] text-[#C7A86B] font-semibold block mb-1 sm:mb-2">
                   Full-Stack Web Developer
                 </span>
-                <h3 className="font-serif text-xl sm:text-3xl lg:text-4xl text-[#F4F0E8] font-medium tracking-wide mb-2 sm:mb-3 break-words">
+                <h3 className="font-serif text-lg sm:text-2xl lg:text-3xl text-[#F4F0E8] font-medium tracking-wide mb-1.5 sm:mb-3 break-words">
                   M. Awais Khaild Noorzai
                 </h3>
               </div>
-              <div className="pt-5 sm:pt-6 border-t border-[#202020] mt-5 sm:mt-6">
+              <div className="pt-4 sm:pt-6 border-t border-[#202020] mt-4 sm:mt-6">
                 <p className="text-xs sm:text-base text-[#E0DCD3] font-serif font-light">
                   Lead Systems Architect & Engineer
                 </p>
-                <span className="text-[10px] sm:text-xs text-[#7A7872] block mt-1">
+                <span className="text-[10px] sm:text-xs text-[#7A7872] block mt-0.5 sm:mt-1">
                   Full-Stack Architecture & Next-Gen Interface
                 </span>
               </div>

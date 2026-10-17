@@ -7,7 +7,7 @@ import { PRODUCTS } from '../data/products';
 export const Hero: React.FC = () => {
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [reducedMotion, setReducedMotion] = useState(false);
-  const { openProductDetail } = useCart();
+  const { openProductDetail, openOrderPage } = useCart();
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,28 +63,34 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Major Heading */}
-          <h1 className="text-3xl sm:text-5xl xl:text-7xl font-serif font-normal text-[#F4F0E8] leading-[1.08] tracking-tight mb-5 sm:mb-6 text-balance">
+          <h1 className="text-2xl sm:text-4xl xl:text-7xl font-serif font-normal text-[#F4F0E8] leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-6 text-balance">
             ENGINEERED FOR ETERNITY.
           </h1>
 
           {/* Supporting Text */}
-          <p className="text-sm sm:text-lg text-[#9C9A94] max-w-xl font-light leading-relaxed mb-6 sm:mb-10">
+          <p className="text-xs sm:text-base lg:text-lg text-[#9C9A94] max-w-xl font-light leading-relaxed mb-6 sm:mb-10">
             Precision mechanical timepieces shaped by uncompromising craftsmanship. Hand-regulated escapements, proprietary calibres, and sculpted geometries designed to outlive ephemeral trends.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 mb-6 sm:mb-10 w-full sm:w-auto">
             <a
               href="#collection"
-              className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-medium text-xs tracking-[0.18em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-[#C7A86B]/15 hover:shadow-[#C7A86B]/25 active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86B]"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-3 sm:py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-medium text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase transition-all duration-300 rounded-sm shadow-lg shadow-[#C7A86B]/15 hover:shadow-[#C7A86B]/25 active:translate-y-[1px] text-center"
             >
               <span>Explore Collection</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
+            <button
+              onClick={() => openOrderPage()}
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 border border-[#C7A86B]/60 hover:border-[#C7A86B] hover:bg-[#C7A86B]/10 text-[#C7A86B] font-medium text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase transition-all duration-300 rounded-sm cursor-pointer text-center"
+            >
+              <span>Order Now ($300 Delivery Fee)</span>
+            </button>
           </div>
 
           {/* Micro Trust Metadata */}
-          <div className="pt-6 border-t border-[#1B1B1B] flex items-center gap-4 text-[11px] sm:text-xs text-[#6F6D68]">
+          <div className="pt-5 sm:pt-6 border-t border-[#1B1B1B] flex items-center gap-4 text-[11px] sm:text-xs text-[#6F6D68]">
             <div className="flex items-center gap-2">
               <Headphones className="w-3.5 h-3.5 text-[#C7A86B]" />
               <span className="tracking-wide text-[#E8E5DE] font-medium">24/7 Support</span>
@@ -93,16 +99,16 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Right Watch Photography Showcase (6 cols on desktop) */}
-        <div className="lg:col-span-6 flex items-center justify-center order-1 lg:order-2 relative">
+        <div className="lg:col-span-6 flex items-center justify-center order-1 lg:order-2 relative w-full">
           {/* Subtle glowing halo behind watch */}
           <div
-            className="absolute w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-[#C7A86B]/10 blur-3xl pointer-events-none"
+            className="absolute w-56 sm:w-96 h-56 sm:h-96 rounded-full bg-[#C7A86B]/10 blur-3xl pointer-events-none"
             aria-hidden="true"
           />
 
-          {/* Interactive Parallax Frame - Refined Medium Proportions */}
+          {/* Interactive Parallax Frame - Refined Auto-Scaling Proportions */}
           <div
-            className="relative w-full max-w-[390px] sm:max-w-[450px] transition-transform duration-300 ease-out cursor-pointer group"
+            className="relative w-full max-w-[270px] xs:max-w-[320px] sm:max-w-[440px] mx-auto transition-transform duration-300 ease-out cursor-pointer group"
             style={{
               transform: reducedMotion
                 ? 'none'
@@ -111,7 +117,7 @@ export const Hero: React.FC = () => {
             onClick={() => openProductDetail(featuredHeroProduct)}
           >
             {/* Primary Watch Image */}
-            <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-sm overflow-hidden border border-[#222222]/80 bg-gradient-to-b from-[#111111] to-[#080808] shadow-2xl shadow-black/80">
+            <div className="relative aspect-[4/3] max-h-[240px] sm:max-h-none rounded-sm overflow-hidden border border-[#222222]/80 bg-gradient-to-b from-[#111111] to-[#080808] shadow-2xl shadow-black/80">
               <img
                 src={heroWatchImg}
                 alt="Pak-Premium Sovereign Flying Tourbillon mechanical watch with visible open-worked escapement"

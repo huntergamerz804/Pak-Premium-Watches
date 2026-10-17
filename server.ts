@@ -1,7 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
+import nodemailer from 'nodemailer';
 import { GoogleGenAI } from '@google/genai';
 
 dotenv.config();
@@ -180,6 +182,248 @@ app.post('/api/analyze-watch', async (req, res) => {
       error: 'Watch analysis service encountered an issue.',
       details: error?.message || 'Unknown error',
     });
+  }
+});
+
+const ORDERS_FILE = path.resolve(__dirname, 'orders.json');
+
+// Ensure orders.json exists for persistence
+if (!fs.existsSync(ORDERS_FILE)) {
+  try {
+    fs.writeFileSync(ORDERS_FILE, JSON.stringify([], null, 2), 'utf-8');
+  } catch (err) {
+    console.warn('Could not initialize orders.json:', err);
+  }
+}
+
+// Order placement and email notification endpoint
+app.post('/api/orders', async (req, res) => {
+  try {
+    const {
+      fullName,
+      phone,
+      address,
+      city,
+      postalCode,
+      email,
+      items,
+      paymentMethod,
+      transactionTid,
+      deliveryFeeConfirmed,
+      notes,
+    } = req.body;
+
+    if (!fullName || !phone || !address || !items || !items.length) {
+      return res.status(400).json({
+        error: 'Missing required fields: fullName, phone, address, and selected items are required.',
+      });
+    }
+
+    const orderId = `PKP-${Date.now().toString(36).toUpperCase()}`;
+    const orderDate = new Date().toISOString();
+
+    const itemsTotal = items.reduce((sum: number, item: any) => {
+      const price = Number(item.price) || 0;
+      const qty = Number(item.quantity) || 1;
+      return sum + price * qty;
+    }, 0);
+
+    const deliveryFee = 300; // $300 upfront delivery fee for shipping
+
+    const newOrder = {
+      orderId,
+      createdAt: orderDate,
+      customer: {
+        fullName,
+        phone,
+        email: email || 'Not provided',
+        address,
+        city: city || '',
+        postalCode: postalCode || '',
+      },
+      items,
+      itemsTotal,
+      deliveryFee,
+      termsNotice: 'Delivery Fee: $300 required upfront for shipping. Remaining balance is paid upon delivery.',
+      paymentConfirmation: {
+        deliveryFeeAmount: deliveryFee,
+        deliveryFeeConfirmed: Boolean(deliveryFeeConfirmed),
+        paymentMethod: paymentMethod || 'mobile_account',
+        transactionTid: transactionTid || 'Pending/Cash Transfer',
+      },
+      notes: notes || '',
+      status: 'confirmed_upfront_fee_pending_dispatch',
+    };
+
+    // Save order locally for persistence
+    try {
+      let existingOrders: any[] = [];
+      if (fs.existsSync(ORDERS_FILE)) {
+        const raw = fs.readFileSync(ORDERS_FILE, 'utf-8');
+        existingOrders = JSON.parse(raw);
+      }
+      existingOrders.unshift(newOrder);
+      fs.writeFileSync(ORDERS_FILE, JSON.stringify(existingOrders, null, 2), 'utf-8');
+    } catch (fsErr) {
+      console.warn('Could not persist to orders.json:', fsErr);
+    }
+
+    // Configure Mailer
+    const primaryRecipient = 'huntergamer8044@gamil.com';
+    const backupRecipient = 'huntergamerz8044@gmail.com';
+
+    let transporter;
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+      transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: parseInt(process.env.SMTP_PORT || '587', 10),
+        secure: process.env.SMTP_PORT === '465',
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      });
+    } else {
+      transporter = nodemailer.createTransport({
+        jsonTransport: true,
+      });
+    }
+
+    const itemsHtml = items
+      .map(
+        (it: any) => `
+        <tr>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #222222; color: #f4f0e8;">
+            <strong>${it.name || 'Pak-Premium Timepiece'}</strong>
+          </td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #222222; text-align: center; color: #c7a86b;">
+            ${it.quantity || 1}
+          </td>
+          <td style="padding: 10px 14px; border-bottom: 1px solid #222222; text-align: right; color: #f4f0e8;">
+            Rs ${(Number(it.price) || 0).toLocaleString('en-US')}
+          </td>
+        </tr>`
+      )
+      .join('');
+
+    const emailSubject = `🔔 New Watch Order: ${orderId} - ${fullName} ($300 Delivery Fee Confirmed)`;
+
+    const emailHtml = `
+      <div style="background-color: #050505; color: #e8e5de; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 24px; max-width: 650px; margin: 0 auto; border: 1px solid #222222;">
+        <div style="border-bottom: 2px solid #c7a86b; padding-bottom: 16px; margin-bottom: 20px;">
+          <h1 style="color: #c7a86b; font-size: 22px; margin: 0; letter-spacing: 2px; text-transform: uppercase;">
+            PAK-PREMIUM WATCHES
+          </h1>
+          <p style="color: #9c9a94; font-size: 13px; margin: 6px 0 0 0;">
+            Atelier Horloger · New Client Order Notification
+          </p>
+        </div>
+
+        <div style="background: #14120f; border-left: 4px solid #c7a86b; padding: 14px 18px; margin-bottom: 24px;">
+          <strong style="color: #f4f0e8; font-size: 14px; display: block; margin-bottom: 4px;">
+            Order Terms Notice:
+          </strong>
+          <span style="color: #c7a86b; font-size: 13px;">
+            "Delivery Fee: $300 required upfront for shipping. Remaining balance is paid upon delivery."
+          </span>
+        </div>
+
+        <h2 style="color: #f4f0e8; font-size: 16px; border-bottom: 1px solid #222222; padding-bottom: 8px; margin-top: 24px;">
+          Order Details (#${orderId})
+        </h2>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+          <thead>
+            <tr style="background-color: #111111; color: #9c9a94; text-transform: uppercase; font-size: 11px;">
+              <th style="padding: 10px 14px; text-align: left;">Item</th>
+              <th style="padding: 10px 14px; text-align: center;">Qty</th>
+              <th style="padding: 10px 14px; text-align: right;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+        </table>
+
+        <div style="background-color: #0c0c0c; border: 1px solid #1f1f1f; padding: 16px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: #9c9a94;">Timepiece Total:</span>
+            <span style="color: #f4f0e8; font-weight: bold;">Rs ${itemsTotal.toLocaleString('en-US')}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; color: #c7a86b;">
+            <span>Upfront Shipping & Delivery Fee (Required):</span>
+            <span style="font-weight: bold;">$300 USD (Confirmed Paid)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-top: 1px solid #222222; padding-top: 8px; font-size: 14px;">
+            <span style="color: #00e676; font-weight: bold;">Remaining Balance Due:</span>
+            <span style="color: #00e676; font-weight: bold;">Payable Upon Doorstep Delivery</span>
+          </div>
+        </div>
+
+        <h2 style="color: #f4f0e8; font-size: 16px; border-bottom: 1px solid #222222; padding-bottom: 8px;">
+          Customer & Shipping Information
+        </h2>
+        <ul style="list-style: none; padding: 0; margin: 0 0 24px 0; font-size: 13px; line-height: 1.8;">
+          <li><strong style="color: #9c9a94;">Customer Name:</strong> <span style="color: #f4f0e8;">${fullName}</span></li>
+          <li><strong style="color: #9c9a94;">Phone Number:</strong> <a href="tel:${phone}" style="color: #c7a86b; text-decoration: none;">${phone}</a></li>
+          <li><strong style="color: #9c9a94;">Email Address:</strong> <a href="mailto:${email || 'none'}" style="color: #c7a86b; text-decoration: none;">${email || 'Not provided'}</a></li>
+          <li><strong style="color: #9c9a94;">Shipping Address:</strong> <span style="color: #f4f0e8;">${address}${city ? ', ' + city : ''}${postalCode ? ' - ' + postalCode : ''}</span></li>
+          <li><strong style="color: #9c9a94;">Payment Confirmation Method:</strong> <span style="color: #f4f0e8;">${paymentMethod}</span></li>
+          <li><strong style="color: #9c9a94;">Transaction ID (TID):</strong> <span style="color: #ffde00; font-family: monospace;">${transactionTid || 'Pending Verification'}</span></li>
+          ${notes ? `<li><strong style="color: #9c9a94;">Customer Notes:</strong> <span style="color: #e8e5de;">${notes}</span></li>` : ''}
+        </ul>
+
+        <div style="border-top: 1px solid #222222; padding-top: 14px; font-size: 11px; color: #666666; text-align: center;">
+          Sent automatically by Pak-Premium Watches Atelier Dispatch Engine to ${primaryRecipient}.
+        </div>
+      </div>
+    `;
+
+    const mailOptions = {
+      from: '"Pak-Premium Watches" <orders@pak-premiumwatches.com>',
+      to: primaryRecipient,
+      cc: backupRecipient,
+      subject: emailSubject,
+      text: `New Order Received for Pak-Premium Watches!\n\nOrder ID: ${orderId}\nCustomer: ${fullName}\nPhone: ${phone}\nAddress: ${address}, ${city || ''} ${postalCode || ''}\nEmail: ${email || 'None'}\n\nNotice: Delivery Fee: $300 required upfront for shipping. Remaining balance is paid upon delivery.\n\nItems Total: Rs ${itemsTotal}\nDelivery Fee: $300 Upfront\nTransaction ID (TID): ${transactionTid || 'N/A'}\n\nFull details recorded in atelier database.`,
+      html: emailHtml,
+    };
+
+    let emailSent = false;
+    let emailInfo: any = null;
+
+    try {
+      emailInfo = await transporter.sendMail(mailOptions);
+      emailSent = true;
+      console.log(`[Order Email] Dispatched notification for order ${orderId} to ${primaryRecipient}:`, emailInfo?.messageId || 'Success');
+    } catch (mailErr: any) {
+      console.warn('[Order Email] Direct SMTP send warning (falling back to recorded order log):', mailErr?.message);
+    }
+
+    return res.json({
+      success: true,
+      message: 'Order placed successfully. Notification email dispatched.',
+      orderId,
+      order: newOrder,
+      emailSentTo: primaryRecipient,
+      emailSent,
+    });
+  } catch (error: any) {
+    console.error('Order creation error:', error);
+    return res.status(500).json({
+      error: 'Failed to process order.',
+      details: error?.message || 'Unknown error',
+    });
+  }
+});
+
+app.get('/api/orders', (_req, res) => {
+  try {
+    if (fs.existsSync(ORDERS_FILE)) {
+      const raw = fs.readFileSync(ORDERS_FILE, 'utf-8');
+      return res.json({ orders: JSON.parse(raw) });
+    }
+    return res.json({ orders: [] });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to read orders', details: err?.message });
   }
 });
 

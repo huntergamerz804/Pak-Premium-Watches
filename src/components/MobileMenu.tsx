@@ -8,7 +8,16 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
-  const { totalItems, openCart, openSearch, openConcierge, openWatchAnalysis } = useCart();
+  const {
+    totalItems,
+    openCart,
+    openSearch,
+    openConcierge,
+    openWatchAnalysis,
+    openOrderPage,
+    closeOrderPage,
+    isOrderPageOpen,
+  } = useCart();
 
   if (!isOpen) return null;
 
@@ -69,20 +78,43 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
 
           {/* Navigation Links */}
           <nav className="flex flex-col space-y-4 pt-2">
-            {[
-              { label: 'The Collection', href: '#collection' },
-              { label: 'Client Testimonials', href: '#testimonials' },
-            ].map(item => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={onClose}
-                className="group flex items-center justify-between text-base font-serif tracking-wider text-[#F4F0E8] hover:text-[#C7A86B] py-2 border-b border-[#141414] transition-colors"
-              >
-                <span>{item.label}</span>
-                <ArrowRight className="w-4 h-4 text-[#6F6D68] group-hover:text-[#C7A86B] transition-colors" />
-              </a>
-            ))}
+            <a
+              href="#collection"
+              onClick={() => {
+                onClose();
+                if (isOrderPageOpen) closeOrderPage();
+              }}
+              className="group flex items-center justify-between text-base font-serif tracking-wider text-[#F4F0E8] hover:text-[#C7A86B] py-2 border-b border-[#141414] transition-colors"
+            >
+              <span>The Collection</span>
+              <ArrowRight className="w-4 h-4 text-[#6F6D68] group-hover:text-[#C7A86B] transition-colors" />
+            </a>
+
+            <button
+              onClick={() => {
+                onClose();
+                openOrderPage();
+              }}
+              className="group flex items-center justify-between text-base font-serif tracking-wider text-[#C7A86B] hover:text-[#EAD8B4] py-2 border-b border-[#141414] transition-colors text-left"
+            >
+              <div className="flex items-center gap-2">
+                <span>Order Timepiece ($300 Delivery Fee)</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse" />
+              </div>
+              <ArrowRight className="w-4 h-4 text-[#C7A86B] group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <a
+              href="#testimonials"
+              onClick={() => {
+                onClose();
+                if (isOrderPageOpen) closeOrderPage();
+              }}
+              className="group flex items-center justify-between text-base font-serif tracking-wider text-[#F4F0E8] hover:text-[#C7A86B] py-2 border-b border-[#141414] transition-colors"
+            >
+              <span>Client Testimonials</span>
+              <ArrowRight className="w-4 h-4 text-[#6F6D68] group-hover:text-[#C7A86B] transition-colors" />
+            </a>
           </nav>
 
           {/* AI Features */}

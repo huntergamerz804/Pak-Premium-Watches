@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 export const FeaturedCollection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'diameter'>('featured');
-  const { openProductDetail, addToCart, toggleWishlist, isInWishlist } = useCart();
+  const { openProductDetail, addToCart, toggleWishlist, isInWishlist, openOrderPage } = useCart();
 
   const categories = [
     'All',
@@ -44,10 +44,10 @@ export const FeaturedCollection: React.FC = () => {
               <span className="w-5 h-[1px] bg-[#C7A86B]/60" aria-hidden="true" />
               <span>Permanent & Atelier Works</span>
             </div>
-            <h2 className="text-2xl sm:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
+            <h2 className="text-xl sm:text-4xl lg:text-5xl font-serif text-[#F4F0E8] font-normal tracking-tight">
               THE COLLECTION
             </h2>
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-[#9C9A94] leading-relaxed font-light">
+            <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-[#9C9A94] leading-relaxed font-light">
               Mechanical timepieces designed around precision, proportion, and enduring character. Hand-assembled in limited annual allocations.
             </p>
           </div>
@@ -79,7 +79,7 @@ export const FeaturedCollection: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 text-xs tracking-wider uppercase font-medium rounded-sm whitespace-nowrap transition-all duration-200 ${
+                className={`px-3.5 sm:px-4 py-2 text-xs tracking-wider uppercase font-medium rounded-sm whitespace-nowrap transition-all duration-200 ${
                   isActive
                     ? 'bg-[#C7A86B] text-[#080808] shadow-md shadow-[#C7A86B]/10'
                     : 'bg-[#111111] hover:bg-[#181818] text-[#9C9A94] hover:text-[#F4F0E8] border border-[#1C1C1C]'
@@ -99,7 +99,7 @@ export const FeaturedCollection: React.FC = () => {
             return (
               <article
                 key={product.id}
-                className="group relative bg-[#0D0D0D] border border-[#1E1E1E] hover:border-[#C7A86B]/40 rounded-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/70 hover:-translate-y-1 max-w-[320px] sm:max-w-none w-full mx-auto"
+                className="group relative bg-[#0D0D0D] border border-[#1E1E1E] hover:border-[#C7A86B]/40 rounded-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/70 hover:-translate-y-1 max-w-sm sm:max-w-none w-full mx-auto"
               >
                 {/* Image Section - Medium Proportioned Frame */}
                 <div
@@ -210,14 +210,26 @@ export const FeaturedCollection: React.FC = () => {
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => openProductDetail(product)}
-                      className="p-1.5 text-[#9C9A94] hover:text-[#C7A86B] transition-colors flex items-center gap-1 text-xs tracking-wider uppercase font-medium"
-                      aria-label={`View details for ${product.name}`}
-                    >
-                      <span>Details</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openOrderPage(product);
+                        }}
+                        className="px-2 py-1 bg-[#17130E] hover:bg-[#251D14] border border-[#C7A86B]/60 hover:border-[#C7A86B] text-[#C7A86B] text-[10px] sm:text-[11px] font-mono uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
+                        title="Direct Order with $300 Upfront Shipping Fee"
+                      >
+                        Order
+                      </button>
+                      <button
+                        onClick={() => openProductDetail(product)}
+                        className="p-1.5 text-[#9C9A94] hover:text-[#C7A86B] transition-colors flex items-center gap-1 text-xs tracking-wider uppercase font-medium cursor-pointer"
+                        aria-label={`View details for ${product.name}`}
+                      >
+                        <span>Details</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>

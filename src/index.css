@@ -153,30 +153,92 @@ textarea {
    ========================================================================== */
 
 @media (max-width: 768px) {
-  /* Prevent horizontal layout shifts */
-  section,
-  header,
-  footer,
-  main {
+  /* Prevent horizontal layout shifts and scrolling */
+  *, html, body, section, header, footer, main, #root {
     max-width: 100vw;
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
-  /* Responsive fluid typography */
+  /* Responsive fluid typography scaling */
   h1 {
-    font-size: clamp(1.85rem, 6.5vw, 2.75rem) !important;
+    font-size: clamp(1.5rem, 5.2vw, 2.25rem) !important;
     line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
   }
 
   h2 {
-    font-size: clamp(1.6rem, 5.5vw, 2.25rem) !important;
+    font-size: clamp(1.25rem, 4.2vw, 1.85rem) !important;
     line-height: 1.2 !important;
   }
 
-  /* Inputs and buttons touch target guidelines */
+  h3 {
+    font-size: clamp(1.05rem, 3.4vw, 1.35rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  p {
+    font-size: clamp(0.8125rem, 2.5vw, 0.9375rem);
+    line-height: 1.55;
+  }
+
+  /* Compact section vertical rhythm on mobile */
+  section {
+    padding-top: clamp(2.5rem, 8vw, 4.5rem) !important;
+    padding-bottom: clamp(2.5rem, 8vw, 4.5rem) !important;
+  }
+
+  /* Container padding normalization */
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl {
+    padding-left: clamp(0.75rem, 3.5vw, 1.25rem) !important;
+    padding-right: clamp(0.75rem, 3.5vw, 1.25rem) !important;
+  }
+
+  /* Icon and SVG proportioning to prevent oversized display */
+  svg.lucide:not([class*="w-"]) {
+    width: 1.125rem !important;
+    height: 1.125rem !important;
+  }
+
+  /* Large decorative icon containers scale down */
+  .w-12.h-12, .w-14.h-14, .w-16.h-16 {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+  }
+
+  .w-12.h-12 svg, .w-14.h-14 svg, .w-16.h-16 svg {
+    width: 1.35rem !important;
+    height: 1.35rem !important;
+  }
+
+  /* Prevent stretched watch image frames */
+  .aspect-\[16\/11\],
+  .aspect-\[4\/3\],
+  .aspect-\[16\/10\] {
+    max-height: 240px;
+    width: 100%;
+  }
+
+  img {
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  /* Single stack column for multi-column structures on mobile */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* Inputs and buttons touch target guidelines & iOS zoom prevention */
   input, select, textarea {
     font-size: 16px !important;
     min-height: 42px;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 
   button, a {
@@ -184,22 +246,31 @@ textarea {
   }
 
   /* Modal responsive sizing */
-  .modal-dialog {
-    max-height: 94vh !important;
+  .modal-dialog,
+  [role="dialog"] {
+    max-height: 94dvh !important;
     width: calc(100% - 1rem) !important;
     margin: 0.5rem auto !important;
   }
 }
 
 @media (max-width: 480px) {
-  /* Small device padding adjustments */
-  .max-w-7xl {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  /* Small phone screen optimizations */
+  h1 {
+    font-size: clamp(1.35rem, 6vw, 1.85rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(1.15rem, 5vw, 1.55rem) !important;
   }
 
   /* Prevent monospace tracking overflows */
   .font-mono {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+  }
+
+  /* Button flex stacks */
+  .flex-col-xs {
+    flex-direction: column !important;
   }
 }
