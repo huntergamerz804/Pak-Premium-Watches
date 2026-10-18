@@ -28,7 +28,7 @@ interface OrderPageProps {
 export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedProduct }) => {
   // Item selection state
   const [selectedProductId, setSelectedProductId] = useState<string>(
-    preselectedProduct?.id || PRODUCTS[0]?.id || 'auren-nocturne'
+    preselectedProduct?.id || PRODUCTS[0]?.id || 'rado-centrix'
   );
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -382,7 +382,7 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
                         {selectedWatch.name}
                       </h4>
                       <p className="text-xs text-[#9C9A94] font-light">
-                        {selectedWatch.subtitle} · {selectedWatch.caseSize}
+                        {selectedWatch.subtitle ? `${selectedWatch.subtitle} · ` : ''}{selectedWatch.caseSize}
                       </p>
                       <div className="text-xs font-mono font-semibold text-[#C7A86B] mt-0.5">
                         Unit Price: Rs {selectedWatch.price.toLocaleString('en-US')}

@@ -16,8 +16,12 @@ export const FeaturedCollection: React.FC = () => {
     'Women',
   ];
 
+  const collectionProducts = useMemo(() => {
+    return PRODUCTS.filter(p => p.id !== 'three-in-one-deal');
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    let result = [...PRODUCTS];
+    let result = [...collectionProducts];
 
     if (activeCategory !== 'All') {
       result = result.filter(p => p.category.toLowerCase() === activeCategory.toLowerCase());
@@ -32,7 +36,7 @@ export const FeaturedCollection: React.FC = () => {
     }
 
     return result;
-  }, [activeCategory, sortBy]);
+  }, [collectionProducts, activeCategory, sortBy]);
 
   return (
     <section id="collection" className="py-16 sm:py-28 bg-[#080808] border-b border-[#171717] overflow-hidden">
@@ -188,23 +192,15 @@ export const FeaturedCollection: React.FC = () => {
                     {/* Title */}
                     <h3
                       onClick={() => openProductDetail(product)}
-                      className="text-lg font-serif text-[#F4F0E8] hover:text-[#C7A86B] transition-colors cursor-pointer mb-1 font-normal tracking-wide"
+                      className="text-lg font-serif text-[#F4F0E8] hover:text-[#C7A86B] transition-colors cursor-pointer mb-2 font-normal tracking-wide"
                     >
                       {product.name}
                     </h3>
-
-                    {/* Subtitle */}
-                    <p className="text-xs text-[#9C9A94] line-clamp-1 mb-3 font-light">
-                      {product.subtitle}
-                    </p>
                   </div>
 
                   {/* Card Bottom Row: Price & Trigger */}
                   <div className="pt-3 border-t border-[#1C1C1C] flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] uppercase tracking-widest text-[#6F6D68] block">
-                        Acquisition Price
-                      </span>
                       <span className="text-base font-sans font-semibold text-[#F4F0E8] tabular-nums tracking-tight">
                         Rs {product.price.toLocaleString('en-US')}
                       </span>
@@ -244,7 +240,7 @@ export const FeaturedCollection: React.FC = () => {
               onClick={() => setActiveCategory('All')}
               className="inline-flex items-center gap-2 px-6 py-3 border border-[#2A2A2A] hover:border-[#C7A86B] text-xs uppercase tracking-[0.18em] text-[#E8E5DE] hover:text-[#C7A86B] transition-colors rounded-sm"
             >
-              <span>View All 6 Timepieces</span>
+              <span>View All {collectionProducts.length} Timepieces</span>
             </button>
           </div>
         )}

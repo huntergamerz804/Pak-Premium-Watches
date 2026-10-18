@@ -116,9 +116,13 @@ export const ProductDetailModal: React.FC = () => {
                 <h1 className="text-2xl sm:text-3xl font-serif text-[#F4F0E8] font-normal leading-tight mb-1">
                   {selectedProduct.name}
                 </h1>
-                <p className="text-xs text-[#9C9A94] font-light mb-4">
-                  {selectedProduct.subtitle}
-                </p>
+                {selectedProduct.subtitle ? (
+                  <p className="text-xs text-[#9C9A94] font-light mb-4">
+                    {selectedProduct.subtitle}
+                  </p>
+                ) : (
+                  <div className="mb-4" />
+                )}
 
                 {/* Price */}
                 <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-[#1A1A1A]">

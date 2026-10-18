@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Headphones } from 'lucide-react';
-import { heroWatchImg } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { PRODUCTS } from '../data/products';
 
@@ -27,7 +26,7 @@ export const Hero: React.FC = () => {
     setMouseOffset({ x, y });
   };
 
-  const featuredHeroProduct = PRODUCTS.find(p => p.id === 'auren-sovereign') || PRODUCTS[0];
+  const featuredHeroProduct = PRODUCTS[0];
 
   return (
     <section
@@ -119,8 +118,8 @@ export const Hero: React.FC = () => {
             {/* Primary Watch Image */}
             <div className="relative aspect-[4/3] max-h-[240px] sm:max-h-none rounded-sm overflow-hidden border border-[#222222]/80 bg-gradient-to-b from-[#111111] to-[#080808] shadow-2xl shadow-black/80">
               <img
-                src={heroWatchImg}
-                alt="Pak-Premium Sovereign Flying Tourbillon mechanical watch with visible open-worked escapement"
+                src={featuredHeroProduct.primaryImage}
+                alt={featuredHeroProduct.name}
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="eager"
@@ -136,15 +135,15 @@ export const Hero: React.FC = () => {
               <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between pointer-events-none">
                 <div>
                   <span className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#C7A86B] font-medium block">
-                    Flagship Piece
+                    Featured Timepiece
                   </span>
                   <span className="font-serif text-sm sm:text-lg text-[#F4F0E8] font-normal leading-tight">
-                    Pak-Premium Sovereign
+                    {featuredHeroProduct.name}
                   </span>
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-[#E8E5DE] font-mono tracking-tight block">
-                    Rs 5,600
+                    Rs {featuredHeroProduct.price.toLocaleString('en-US')}
                   </span>
                   <span className="text-[10px] text-[#9C9A94] uppercase tracking-wider">
                     Click to Inspect
@@ -154,10 +153,10 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Floating Spec Tag */}
-            <div className="hidden sm:flex absolute -bottom-3 -right-3 bg-[#111111]/95 backdrop-blur-sm border border-[#C7A86B]/30 px-3.5 py-2 shadow-xl items-center gap-2.5 rounded-sm">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#C7A86B] animate-pulse" />
-              <span className="text-[11px] font-mono text-[#F4F0E8] tracking-wider uppercase">
-                Calibre AR-12 · 21,600 VPH
+            <div className="hidden sm:flex absolute -bottom-3 -right-3 bg-[#111111]/95 backdrop-blur-sm border border-[#C7A86B]/30 px-3.5 py-2 shadow-xl items-center gap-2.5 rounded-sm max-w-sm">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#C7A86B] animate-pulse shrink-0" />
+              <span className="text-[11px] font-mono text-[#F4F0E8] tracking-wider uppercase truncate">
+                {featuredHeroProduct.movement} · {featuredHeroProduct.caseSize}
               </span>
             </div>
           </div>

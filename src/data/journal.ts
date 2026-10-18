@@ -28,7 +28,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     image: heroWatchImg,
     content: [
       'A millimeter on paper is an eternity on the wrist. True luxury horology is not defined by size, but by the mathematical harmony between case thickness, lug-to-lug span, and dial aperture.',
-      'When designing the Pak-Premium Nocturne, our team modeled eighty-two iterations of the lug taper before arriving at the subtle downward camber that ensures balance across wrists from 16 to 20 centimeters in circumference.',
+      'When designing our flagship timepieces, our team modeled eighty-two iterations of the lug taper before arriving at the subtle downward camber that ensures balance across wrists from 16 to 20 centimeters in circumference.',
       'The result is a presence that feels substantial yet weightless—a quiet physical dialogue between forged metallurgy and human anatomy.'
     ]
   },
@@ -51,26 +51,26 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't-1',
-    quote: 'The architectural depth of the Nocturne skeleton dial is staggering in natural light. It has that rare quality of feeling like an heirloom made today for the next century.',
-    author: 'Julian V.',
-    city: 'Zurich, Switzerland',
-    watchModel: 'Pak-Premium Nocturne (No. 042/250)',
+    quote: 'The high-tech ceramic finish and diamond accents on the Rado Centrix are breathtaking in person. Exceptional build quality with an ultra-smooth push button lock.',
+    author: 'Hamza R.',
+    city: 'Lahore, Pakistan',
+    watchModel: 'Rado Centrix Model',
     year: 'Acquired 2026'
   },
   {
     id: 't-2',
-    quote: 'I have collected independent horology for thirty years. The finishing on the hand-bevelled bridges and the tactile crispness of the crown action rival watches three times the price.',
-    author: 'Marcus E.',
-    city: 'London, Mayfair',
-    watchModel: 'Pak-Premium Sovereign Flying Tourbillon',
+    quote: 'The blue waffle dial on the Tissot PRX is stunning under the sunlight, and the navy alligator strap is supremely comfortable. The craftsmanship exceeds expectations.',
+    author: 'Zain M.',
+    city: 'Karachi, Pakistan',
+    watchModel: 'Tissot PRX Strap Edition',
     year: 'Acquired 2026'
   },
   {
     id: 't-3',
-    quote: 'The Meridian Chronometre is the purest everyday luxury watch I own. Its flame-blued hands against the silver guilloché dial catch the light with quiet, undeniable distinction.',
-    author: 'Elena K.',
-    city: 'Vienna, Austria',
-    watchModel: 'Pak-Premium Meridian Chronometre',
+    quote: 'The Husky skeleton dial with the visible back pendulum is a true conversation starter. The solid stainless steel bracelet gives it a premium weighty feel.',
+    author: 'Bilal K.',
+    city: 'Islamabad, Pakistan',
+    watchModel: 'Husky Brand Chain Edition',
     year: 'Acquired 2026'
   }
 ];

@@ -22,7 +22,7 @@ export const SearchModal: React.FC = () => {
     return PRODUCTS.filter(
       p =>
         p.name.toLowerCase().includes(q) ||
-        p.subtitle.toLowerCase().includes(q) ||
+        (p.subtitle && p.subtitle.toLowerCase().includes(q)) ||
         p.category.toLowerCase().includes(q) ||
         p.calibre.toLowerCase().includes(q) ||
         p.caseMaterial.toLowerCase().includes(q)
@@ -50,7 +50,7 @@ export const SearchModal: React.FC = () => {
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Search by calibre, material, name (e.g. Nocturne, Tourbillon, Rose Gold)..."
+            placeholder="Search by model, brand, style (e.g. Rado, Tissot, Rim, Husky, Bestwin)..."
             className="flex-1 bg-transparent text-sm sm:text-base text-[#F4F0E8] placeholder-[#555555] focus:outline-none"
             aria-label="Search timepieces"
           />
@@ -78,7 +78,7 @@ export const SearchModal: React.FC = () => {
               Frequent Inquiries:
             </span>
             <div className="flex flex-wrap gap-2">
-              {['Tourbillon', 'Nocturne', 'Chronometre', 'Rose Gold', '904L Steel', 'Calibre AR-08'].map(
+              {['Rado', 'Tissot PRX', 'Ladies Rim', 'Husky', 'Bestwin', 'Moving Dial', 'Pack of 2'].map(
                 tag => (
                   <button
                     key={tag}

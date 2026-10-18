@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   name: string;
   subtitle: string;
-  category: 'Men' | 'Women' | 'Deal';
+  category: 'Men' | 'Women' | 'Deal' | 'Exclusive';
   price: number;
   caseSize: string;
   caseMaterial: string;

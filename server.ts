@@ -32,11 +32,14 @@ const HOROLOGY_SYSTEM_INSTRUCTION = `You are the Master Horologist and Chief Cli
 You possess exhaustive knowledge of high-end mechanical watchmaking, horological architecture, movement complications (triple-axis tourbillons, column-wheel chronographs, perpetual calendars, minute repeaters), hand-finishing techniques (anglage, perlage, Côtes de Genève, mirror-black polishing), metallurgies (Grade 5 Titanium, 904L brushed steel, 18k Sedna rose gold, DLC carbon), and sapphire anti-reflective treatments.
 
 The Pak-Premium Watches Collection consists of:
-1. Pak-Premium Nocturne (42mm, Matte DLC 904L Steel, Calibre AR-08 Skeleton Tourbillon, $4,850) - Avant-garde open-worked masterpiece with exposed champagne-gold gear train.
-2. Pak-Premium Meridian Chronometre (40mm, Hand-Brushed 904L Stainless Steel, Calibre AR-03 Automatic, $3,450) - Classic silver guilloché dial with heat-blued steel hands.
-3. Pak-Premium Regent Imperial (41mm, 18k Rose Gold, Calibre AR-05 Perpetual Reserve, $6,200) - Sunburst anthracite dial with solid rose gold faceted indices and alligator strap.
-4. Pak-Premium Élan Chronograph (41.5mm, Satin Titanium & Ceramic Bezel, Calibre AR-09 Flyback Chronograph, $4,150) - Precision bicompax timing instrument.
-5. Pak-Premium Sovereign (39mm, Hand-Polished Steel & 18k Champagne Accents, Calibre AR-01 Ultra-Thin, $3,900) - Minimalist dress watch with 72-hour power reserve.
+1. Rado Centrix Model (Rs 2,499) - Premium quality, push button lock, date display, outclass silver & black ceramic combo, diamond hour markers.
+2. Ladies Rim Watch (Rs 599) - Vibrant purple textured strap, rotating moving dial, Japanese machine quartz, faceted diamond-cut rim glass.
+3. Pack of 2 Ladies Collection (Rs 999) - Dual set featuring gold crystal pavé leaf bracelet watch and royal purple starry night galaxy watch with magnetic mesh strap.
+4. Ladies Model Moving Dial (Rs 699) - Pavé crystal rose gold bezel, rotating fan dial motif, brown crocodile pattern leather strap.
+5. Super Sunday Offer - Pack of 2 (Rs 1,499) - Tevise two-tone chain dress model paired with matte black tonneau sports model with silicone strap.
+6. Bestwin Magnetic Models (Rs 1,299) - Octagonal gold bezel, dual-material brown leather strap, multi-subdial layout, and date display.
+7. Tissot PRX Strap Edition (Rs 1,999) - Swiss style royal blue tapisserie waffle dial, gold fluted bezel, navy alligator leather strap, date window, master lock.
+8. Husky Brand Chain Edition (Rs 2,499) - Solid stainless steel link chain, full open-worked mechanical skeleton dial, visible back pendulum rotor, date display.
 
 Guidelines:
 - Tone: Quietly confident, cultivated, articulate, polite, and deeply knowledgeable.
@@ -127,13 +130,13 @@ app.post('/api/analyze-watch', async (req, res) => {
     const cleanBase64 = imageBase64.replace(/^data:image\/[a-z]+;base64,/, '');
 
     const analysisPrompt = userPrompt && userPrompt.trim().length > 0
-      ? `As a Master Horologist at Pak-Premium Watches, carefully analyze this watch/wrist photograph. Address the client's query: "${userPrompt}". Provide detailed visual observations of: 1) Case geometry, material & finish 2) Dial layout, indices & hands 3) Movement architecture or complications visible 4) Styling & occasion suitability 5) How this compares to or can be paired with a Pak-Premium timepiece (Nocturne, Meridian, or Regent).`
+      ? `As a Master Horologist at Pak-Premium Watches, carefully analyze this watch/wrist photograph. Address the client's query: "${userPrompt}". Provide detailed visual observations of: 1) Case geometry, material & finish 2) Dial layout, indices & hands 3) Movement architecture or complications visible 4) Styling & occasion suitability 5) How this compares to or can be paired with a Pak-Premium timepiece (Three-in-One Deal, Rado Centrix, Tissot PRX, Bestwin Arabic Gold, Husky Skeleton, or Bestwin).`
       : `As a Master Horologist at Pak-Premium Watches, analyze this timepiece photograph with high horological discernment. Provide:
 1. Architectural Assessment: Case shape, finishing (brushed/polished/beveled), crystal, bezel, and proportions.
 2. Dial & Face Anatomy: Indices, sub-dials, hands (leaf, dauphine, baton), guilloché or sunburst finish.
 3. Mechanical Complications & Movement Clues: Tourbillon, chronograph pushers, date window, or open-worked bridges.
 4. Horological Category & Occasion: Dress, high-complication, luxury sport, or vintage tribute.
-5. Pak-Premium Curated Recommendation: Which Pak-Premium timepiece (Nocturne, Meridian Chronometre, Regent Imperial, or Sovereign) best matches or elevates this personal aesthetic.`;
+5. Pak-Premium Curated Recommendation: Which Pak-Premium timepiece (Three-in-One Deal, Rado Centrix, Tissot PRX, Bestwin Arabic Gold, Husky Skeleton, Bestwin, or Ladies Moving Dial) best matches or elevates this personal aesthetic.`;
 
     const imagePart = {
       inlineData: {

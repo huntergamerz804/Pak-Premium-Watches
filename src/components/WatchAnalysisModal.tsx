@@ -82,7 +82,7 @@ export const WatchAnalysisModal: React.FC = () => {
 - Strap Pairing: Matte black Louisiana alligator or slate gray calfskin with deployant clasp.
 
 5. Pak-Premium Curated Pairing:
-- Direct Atelier Match: Pak-Premium Nocturne (for avant-garde skeleton transparency) or Pak-Premium Meridian Chronometre (for pure understated classical excellence).`;
+- Direct Atelier Match: Rado Centrix Model (for sleek ceramic luxury) or Tissot PRX Strap Edition (for timeless Swiss aesthetic).`;
 
       setAnalysisResult(fallbackAppraisal);
       setModelUsed('Pak-Premium Horological Engine');
@@ -250,7 +250,7 @@ export const WatchAnalysisModal: React.FC = () => {
                         Suggested Atelier Exploration
                       </div>
                       <div className="text-xs font-serif text-[#F4F0E8] mt-0.5">
-                        Discover the Pak-Premium Nocturne & Meridian Chronometres
+                        Discover the Rado Centrix & Tissot PRX Editions
                       </div>
                     </div>
                     <button
@@ -261,7 +261,7 @@ export const WatchAnalysisModal: React.FC = () => {
                       className="px-3.5 py-2 border border-[#C7A86B] hover:bg-[#C7A86B] text-[#C7A86B] hover:text-[#080808] text-xs uppercase tracking-wider rounded-sm transition-colors flex items-center gap-1.5"
                     >
                       <Eye className="w-3.5 h-3.5" />
-                      <span>Inspect Nocturne</span>
+                      <span>Inspect Model</span>
                     </button>
                   </div>
                 </div>
