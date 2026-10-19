@@ -13,7 +13,10 @@ export const CartDrawer: React.FC = () => {
     totalItems,
     openCheckout,
     openOrderPage,
+    isSoldOut,
   } = useCart();
+
+  const hasSoldOutItems = cartItems.some(i => isSoldOut(i.product.id));
 
   if (!isCartOpen) return null;
 
@@ -65,74 +68,104 @@ export const CartDrawer: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-4">
-              {cartItems.map(item => (
-                <div
-                  key={item.product.id}
-                  className="flex gap-4 p-4 bg-[#0E0E0E] border border-[#1C1C1C] rounded-sm"
-                >
-                  {/* Thumbnail */}
-                  <div className="w-20 h-20 bg-[#161616] border border-[#222222] rounded-sm overflow-hidden shrink-0">
-                    <img
-                      src={item.product.primaryImage}
-                      alt={item.product.name}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-
-                  {/* Details */}
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-serif text-sm text-[#F4F0E8] font-normal leading-snug">
-                          {item.product.name}
-                        </h4>
-                        <button
-                          onClick={() => removeFromCart(item.product.id)}
-                          className="text-[#6F6D68] hover:text-[#E57373] transition-colors p-1"
-                          aria-label={`Remove ${item.product.name}`}
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-
-                      <div className="text-[11px] text-[#6F6D68] font-mono mt-0.5">
-                        {item.selectedStrap || item.product.strap}
-                      </div>
+              {cartItems.map(item => {
+                const sold = isSoldOut(item.product.id);
+                return (
+                  <div
+                    key={item.product.id}
+                    className={`flex gap-4 p-4 rounded-sm border transition-all ${
+                      sold ? 'bg-red-950/20 border-red-500/40' : 'bg-[#0E0E0E] border-[#1C1C1C]'
+                    }`}
+                  >
+                    {/* Thumbnail */}
+                    <div className="w-20 h-20 bg-[#161616] border border-[#222222] rounded-sm overflow-hidden shrink-0 relative">
+                      <img
+                        src={item.product.primaryImage}
+                        alt={item.product.name}
+                        referrerPolicy="no-referrer"
+                        className={`w-full h-full object-cover object-center ${sold ? 'grayscale opacity-70' : ''}`}
+                      />
+                      {sold && (
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center p-1 text-center">
+                          <span className="text-[8px] font-mono text-red-400 font-bold uppercase tracking-wider">
+                            SOLD OUT
+                          </span>
+                        </div>
+                      )}
                     </div>
 
-                    <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#171717]">
-                      {/* Quantity Controls */}
-                      <div className="flex items-center border border-[#222222] rounded-sm bg-[#121212]">
-                        <button
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                          className="p-1 hover:text-[#C7A86B] transition-colors"
-                          aria-label="Decrease quantity"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="px-2.5 text-xs font-mono tabular-nums">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                          className="p-1 hover:text-[#C7A86B] transition-colors"
-                          aria-label="Increase quantity"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
+                    {/* Details */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <div className="flex items-center gap-1.5 mb-1">
+                              {sold && (
+                                <span className="text-[9px] font-mono text-red-400 bg-red-950/90 px-1.5 py-0.2 rounded-xs border border-red-500/40 uppercase font-bold">
+                                  Sold Out
+                                </span>
+                              )}
+                              <span className="text-[10px] font-mono text-[#C7A86B] uppercase">
+                                {item.product.category}
+                              </span>
+                            </div>
+                            <h4 className="font-serif text-sm text-[#F4F0E8] font-normal leading-snug">
+                              {item.product.name}
+                            </h4>
+                          </div>
+                          <button
+                            onClick={() => removeFromCart(item.product.id)}
+                            className="text-[#6F6D68] hover:text-[#E57373] transition-colors p-1"
+                            aria-label={`Remove ${item.product.name}`}
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
+                        <div className="text-[11px] text-[#6F6D68] font-mono mt-0.5">
+                          {item.selectedStrap || item.product.strap}
+                        </div>
                       </div>
 
-                      {/* Price */}
-                      <div className="text-right">
-                        <span className="text-xs font-sans font-semibold text-[#F4F0E8] tabular-nums">
-                          Rs {(item.product.price * item.quantity).toLocaleString('en-US')}
-                        </span>
+                      <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#171717]">
+                        {/* Quantity Controls - Enforced 1 piece max */}
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center border border-[#222222] rounded-sm bg-[#121212]">
+                            <button
+                              onClick={() => removeFromCart(item.product.id)}
+                              className="p-1 hover:text-[#C7A86B] transition-colors"
+                              aria-label="Remove item"
+                            >
+                              <Minus className="w-3 h-3" />
+                            </button>
+                            <span className="px-2.5 text-xs font-mono tabular-nums font-semibold">
+                              {sold ? 0 : 1}
+                            </span>
+                            <button
+                              disabled
+                              className="p-1 text-[#444444] cursor-not-allowed"
+                              title="Strict limit: Only 1 piece available per timepiece/deal"
+                              aria-label="Cannot increase (Max 1 available)"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </button>
+                          </div>
+                          <span className="text-[10px] font-mono text-[#888888]">
+                            {sold ? <span className="text-red-400">0 in Stock</span> : 'Limit: 1'}
+                          </span>
+                        </div>
+
+                        {/* Price */}
+                        <div className="text-right">
+                          <span className="text-xs font-sans font-semibold text-[#F4F0E8] tabular-nums">
+                            Rs {(item.product.price * (sold ? 0 : 1)).toLocaleString('en-US')}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
@@ -140,6 +173,16 @@ export const CartDrawer: React.FC = () => {
         {/* Drawer Footer with Subtotal & Checkout */}
         {cartItems.length > 0 && (
           <div className="p-6 border-t border-[#1C1C1C] bg-[#0E0E0E] space-y-4">
+            {/* Sold Out Warning in Cart */}
+            {hasSoldOutItems && (
+              <div className="p-3 bg-red-950/40 border border-red-500/50 rounded-sm text-red-300 text-xs space-y-1">
+                <span className="font-semibold block text-red-200">Timepiece Claimed</span>
+                <p className="text-[11px] text-red-300/90 leading-relaxed">
+                  One or more items in your bag have already been ordered and are now Sold Out. Please remove sold-out items to proceed with checkout.
+                </p>
+              </div>
+            )}
+
             {/* Complimentary Insured Transport */}
             <div className="flex items-center gap-2 p-2.5 bg-[#121212] border border-[#222222] rounded-sm text-xs text-[#9C9A94]">
               <Shield className="w-4 h-4 text-[#C7A86B] shrink-0" />
@@ -159,9 +202,10 @@ export const CartDrawer: React.FC = () => {
             {/* Action CTA */}
             <button
               onClick={openCheckout}
-              className="w-full py-4 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-semibold text-xs tracking-[0.2em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg shadow-[#C7A86B]/15 cursor-pointer"
+              disabled={hasSoldOutItems}
+              className="w-full py-4 bg-[#C7A86B] hover:bg-[#D8BC82] disabled:opacity-50 disabled:bg-red-950/40 disabled:border disabled:border-red-500/40 disabled:text-red-400 disabled:cursor-not-allowed text-[#080808] font-semibold text-xs tracking-[0.2em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg shadow-[#C7A86B]/15 cursor-pointer"
             >
-              <span>Proceed to Bespoke Checkout</span>
+              <span>{hasSoldOutItems ? 'Remove Sold Out Items to Checkout' : 'Proceed to Bespoke Checkout'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 

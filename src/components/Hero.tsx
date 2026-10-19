@@ -6,7 +6,7 @@ import { PRODUCTS } from '../data/products';
 export const Hero: React.FC = () => {
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [reducedMotion, setReducedMotion] = useState(false);
-  const { openProductDetail, openOrderPage } = useCart();
+  const { openProductDetail, openOrderPage, isSoldOut } = useCart();
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export const Hero: React.FC = () => {
   };
 
   const featuredHeroProduct = PRODUCTS[0];
+  const isHeroSoldOut = isSoldOut(featuredHeroProduct.id);
 
   return (
     <section
@@ -80,12 +81,21 @@ export const Hero: React.FC = () => {
               <span>Explore Collection</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
-            <button
-              onClick={() => openOrderPage()}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 border border-[#C7A86B]/60 hover:border-[#C7A86B] hover:bg-[#C7A86B]/10 text-[#C7A86B] font-medium text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase transition-all duration-300 rounded-sm cursor-pointer text-center"
-            >
-              <span>Order Now ($300 Delivery Fee)</span>
-            </button>
+            {isHeroSoldOut ? (
+              <button
+                disabled
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 border border-red-500/50 bg-red-950/30 text-red-400 font-medium text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase rounded-sm cursor-not-allowed text-center"
+              >
+                <span>Sold Out (1 of 1 Claimed)</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => openOrderPage(featuredHeroProduct)}
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 border border-[#C7A86B]/60 hover:border-[#C7A86B] hover:bg-[#C7A86B]/10 text-[#C7A86B] font-medium text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase transition-all duration-300 rounded-sm cursor-pointer text-center"
+              >
+                <span>Order Now ($300 Delivery Fee)</span>
+              </button>
+            )}
           </div>
 
           {/* Micro Trust Metadata */}
@@ -121,9 +131,22 @@ export const Hero: React.FC = () => {
                 src={featuredHeroProduct.primaryImage}
                 alt={featuredHeroProduct.name}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                className={`w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${isHeroSoldOut ? 'grayscale contrast-125 opacity-75' : ''}`}
                 loading="eager"
               />
+
+              {/* Stock Status Badge */}
+              <div className="absolute top-3 left-3 z-20">
+                {isHeroSoldOut ? (
+                  <span className="text-[10px] font-mono tracking-widest text-red-400 uppercase font-semibold bg-red-950/90 px-2.5 py-1 border border-red-500/50 rounded-xs shadow-lg backdrop-blur-sm">
+                    SOLD OUT
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-mono tracking-widest text-[#C7A86B] uppercase font-semibold bg-[#0A0A0A]/90 px-2.5 py-1 border border-[#C7A86B]/40 rounded-xs shadow-lg backdrop-blur-sm">
+                    ONLY 1 IN STOCK
+                  </span>
+                )}
+              </div>
 
               {/* Cinematic Vignette Overlay */}
               <div
@@ -135,7 +158,7 @@ export const Hero: React.FC = () => {
               <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between pointer-events-none">
                 <div>
                   <span className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#C7A86B] font-medium block">
-                    Featured Timepiece
+                    {isHeroSoldOut ? 'Front Deal · Sold Out' : 'Featured Timepiece'}
                   </span>
                   <span className="font-serif text-sm sm:text-lg text-[#F4F0E8] font-normal leading-tight">
                     {featuredHeroProduct.name}
@@ -146,7 +169,7 @@ export const Hero: React.FC = () => {
                     Rs {featuredHeroProduct.price.toLocaleString('en-US')}
                   </span>
                   <span className="text-[10px] text-[#9C9A94] uppercase tracking-wider">
-                    Click to Inspect
+                    {isHeroSoldOut ? 'Sold Out' : 'Click to Inspect'}
                   </span>
                 </div>
               </div>
@@ -154,9 +177,9 @@ export const Hero: React.FC = () => {
 
             {/* Floating Spec Tag */}
             <div className="hidden sm:flex absolute -bottom-3 -right-3 bg-[#111111]/95 backdrop-blur-sm border border-[#C7A86B]/30 px-3.5 py-2 shadow-xl items-center gap-2.5 rounded-sm max-w-sm">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#C7A86B] animate-pulse shrink-0" />
+              <div className={`w-1.5 h-1.5 rounded-full ${isHeroSoldOut ? 'bg-red-500' : 'bg-[#C7A86B] animate-pulse'} shrink-0`} />
               <span className="text-[11px] font-mono text-[#F4F0E8] tracking-wider uppercase truncate">
-                {featuredHeroProduct.movement} · {featuredHeroProduct.caseSize}
+                {isHeroSoldOut ? 'SOLD OUT · 1 OF 1 CLAIMED' : `${featuredHeroProduct.movement} · ${featuredHeroProduct.caseSize}`}
               </span>
             </div>
           </div>

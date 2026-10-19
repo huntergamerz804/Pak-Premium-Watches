@@ -10,6 +10,14 @@ import tissotPrxImg from '../assets/images/tissot_prx_watch_1792341464522.jpg';
 import huskySkeletonImg from '../assets/images/husky_skeleton_watch_1792341465468.jpg';
 import packThreeWatchesImg from '../assets/images/pack_three_watches_1792342435683.jpg';
 import bestwinArabicGoldImg from '../assets/images/bestwin_arabic_gold_1792342436601.jpg';
+import spetsonMeshChronoImg from '../assets/images/spetson_mesh_chrono_1792431980651.jpg';
+import waterproofSportsDigitalImg from '../assets/images/waterproof_sports_digital_1792431981106.jpg';
+import cartierPresidentSkeletonImg from '../assets/images/cartier_president_skeleton_1792431982317.jpg';
+import kezziGelflowDuoImg from '../assets/images/kezzi_gelflow_duo_1792431983930.jpg';
+import curatedTrioBundleImg from '../assets/images/curated_trio_bundle_1792431984487.jpg';
+import rolexGoldSkeletonImg from '../assets/images/rolex_gold_skeleton_1792431985436.jpg';
+import heritageAviatorTrioImg from '../assets/images/heritage_aviator_trio_1792431988274.jpg';
+import ladiesIcedOutRimImg from '../assets/images/iced_out_rim_1792431986680.jpg';
 
 export {
   radoCentrixImg,
@@ -22,6 +30,14 @@ export {
   huskySkeletonImg,
   packThreeWatchesImg,
   bestwinArabicGoldImg,
+  spetsonMeshChronoImg,
+  waterproofSportsDigitalImg,
+  cartierPresidentSkeletonImg,
+  kezziGelflowDuoImg,
+  curatedTrioBundleImg,
+  rolexGoldSkeletonImg,
+  heritageAviatorTrioImg,
+  ladiesIcedOutRimImg,
 };
 
 export const PRODUCTS: Product[] = [
@@ -356,5 +372,269 @@ export const PRODUCTS: Product[] = [
     ],
     primaryImage: bestwinArabicGoldImg,
     galleryImages: [bestwinArabicGoldImg]
+  },
+  {
+    id: 'spetson-mesh-chrono',
+    name: 'Spetson Outclass Chain Chronograph Model',
+    subtitle: '',
+    category: 'Men',
+    price: 999,
+    caseSize: '41 mm',
+    caseMaterial: 'PVD Stealth Black Stainless Steel',
+    movement: 'Precision Chronograph Quartz',
+    calibre: 'Spetson Multi-Chrono Calibre',
+    powerReserve: '3-Year Battery',
+    waterResistance: '30 m / 3 ATM',
+    crystal: 'Hardened Scratch-Resistant Mineral Glass',
+    strap: 'Black Stainless Steel Milanese Mesh Chain with Safety Hook Buckle',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Outclass Chain Edition · 1 Piece Only',
+    badge: 'Hot Pick',
+    description: 'Premium quality stealth black chronograph model featuring a pitch-black dial with three functional sub-dials, tachymeter bezel scale, dual pushers, date aperture, and an outclass black stainless steel Milanese mesh chain bracelet.',
+    features: [
+      'Outclass black Milanese mesh chain bracelet',
+      'Three functional chronograph subdials with tachymeter scale',
+      'Dual chronograph actuation pushers with knurled crown',
+      'Date display window with white baton indices'
+    ],
+    specs: [
+      { label: 'Case & Chain', value: 'PVD Stealth Black Steel' },
+      { label: 'Movement', value: 'Multi-Subdial Chronograph' },
+      { label: 'Strap Type', value: 'Milanese Mesh Chain' },
+      { label: 'Special Rate', value: 'Rs 999' }
+    ],
+    primaryImage: spetsonMeshChronoImg,
+    galleryImages: [spetsonMeshChronoImg]
+  },
+  {
+    id: 'waterproof-sports-digital',
+    name: '100% Water Proof Tactical Sports Digital Model',
+    subtitle: '',
+    category: 'Men',
+    price: 999,
+    caseSize: '45 mm',
+    caseMaterial: 'High-Impact Shock-Resistant Polycarbonate & Steel Back',
+    movement: 'Digital LCD Multi-Function Engine',
+    calibre: 'Tactical Hydro-Digital Engine',
+    powerReserve: 'Lithium CR2025 Long-Life Battery',
+    waterResistance: '100% Waterproof / 50 m',
+    crystal: 'Shatter-Resistant Acrylic Lens',
+    strap: 'Ergonomic Heavy-Duty Ribbed Silicone with Dual-Pin Buckle',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Tactical Hydro Series · 1 Piece Only',
+    badge: 'Waterproof',
+    description: '100% water proof rugged tactical sports timepiece designed for extreme durability. High-visibility backlit digital display with multi-function split stopwatch, countdown timer, dual alarm, calendar display, and reinforced water-sealed casing.',
+    features: [
+      '100% waterproof hermetic seal with heavy splash and submersion resistance',
+      'High-contrast digital LCD with calendar, day and 24-hr readout',
+      'Precision split-second chronograph and alarm functions',
+      'Rugged textured shock-absorbing silicone strap'
+    ],
+    specs: [
+      { label: 'Waterproof Rating', value: '100% Water Proof' },
+      { label: 'Display', value: 'Digital Multi-Function LCD' },
+      { label: 'Build', value: 'Shock-Resistant Polymer' },
+      { label: 'Special Rate', value: 'Sirf Rs 999' }
+    ],
+    primaryImage: waterproofSportsDigitalImg,
+    galleryImages: [waterproofSportsDigitalImg]
+  },
+  {
+    id: 'cartier-president-skeleton',
+    name: 'Cartier President Model Skeleton Edition',
+    subtitle: '',
+    category: 'Men',
+    price: 2499,
+    caseSize: '42 mm',
+    caseMaterial: 'Solid 316L Stainless Steel Tonneau Cushion Case',
+    movement: 'Automatic Self-Winding Mechanical Skeleton',
+    calibre: 'President Open-Worked Horological Calibre',
+    powerReserve: '42 Hours',
+    waterResistance: '50 m / 5 ATM',
+    crystal: 'Double-Sided Curved Sapphire Crystal Glass',
+    strap: 'Solid Multi-Link Brushed & Polished Stainless Steel with Master Lock',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'President Series · 1 Piece Only',
+    badge: 'Trending',
+    description: 'Most trending Cartier President inspired open-worked masterpiece. Double-sided sapphire crystal revealing intricate golden mechanics, red central hands, diamond-cut crystal hour accents, synthetic blue spinel cabochon crown, and solid steel link bracelet with master deployant lock.',
+    features: [
+      'Double-sided transparent glass exhibition case and dial',
+      'Fully open-worked skeleton dial with visible golden escapement',
+      'Master lock deployant clasp on solid steel bracelet',
+      'Signature cushion tonneau case with blue cabochon crown'
+    ],
+    specs: [
+      { label: 'Case Style', value: 'Cushion Tonneau President Shape' },
+      { label: 'Dial Anatomy', value: 'Double-Sided Skeleton Dial' },
+      { label: 'Lock Type', value: 'Deployant Master Lock' },
+      { label: 'Special Rate', value: 'Sirf Rs 2,499' }
+    ],
+    primaryImage: cartierPresidentSkeletonImg,
+    galleryImages: [cartierPresidentSkeletonImg]
+  },
+  {
+    id: 'kezzi-gelflow-duo',
+    name: 'Kezzi Brand Gel Flow Star Dust Duo (Pack of 2)',
+    subtitle: '',
+    category: 'Deal',
+    price: 999,
+    caseSize: '32 mm & 32 mm',
+    caseMaterial: 'Polished Rose Gold-Tone Alloy',
+    movement: 'Dual Japanese Precision Quartz Movements',
+    calibre: 'Kezzi Twin Calibre',
+    powerReserve: '2-Year Battery Each',
+    waterResistance: 'Splash Resistant',
+    crystal: 'Domed Mineral Glass',
+    strap: 'Mustard Tan & Chocolate Brown Leather Straps',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Twin Set Edition · 1 Set Only',
+    badge: 'Pack of 2',
+    description: 'Enchanting two-piece ladies collection by Kezzi Brand. Features soft ombre sunset-pink and sky-blue dials containing suspended floating holographic star dust that gently dances with wrist movement. One paired with mustard tan leather, the other with chocolate brown leather.',
+    features: [
+      'Pack of 2 complete ladies watches included in one deal',
+      'Floating holographic star dust floating inside ombre dials',
+      'Two distinct leather strap colorways: Mustard Tan & Chocolate Brown',
+      'Polished rose gold-tone slim profile cases'
+    ],
+    specs: [
+      { label: 'Bundle Contents', value: '2 Ladies Timepieces' },
+      { label: 'Dial Feature', value: 'Floating Gel Star Dust Effect' },
+      { label: 'Colors', value: 'Mustard & Chocolate Brown Straps' },
+      { label: 'Bundle Price', value: 'Deal Sirf Rs 999' }
+    ],
+    primaryImage: kezziGelflowDuoImg,
+    galleryImages: [kezziGelflowDuoImg]
+  },
+  {
+    id: 'curated-trio-bundle',
+    name: 'Curated Urban Trio Collection (Pack of 3)',
+    subtitle: '',
+    category: 'Deal',
+    price: 999,
+    caseSize: '40 mm · 38 mm · 40 mm',
+    caseMaterial: 'Brushed Stainless Steel & Polished Alloy',
+    movement: 'Triple Precision Quartz Movements',
+    calibre: 'Tri-Quartz Multi-Edition Engine',
+    powerReserve: '2-Year Battery Each',
+    waterResistance: 'Daily Splash Proof',
+    crystal: 'Hardened Mineral Glass',
+    strap: 'Black Croc Leather, Forest Green Leather & Royal Blue Silicone',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Trio Deal · 1 Deal Only',
+    badge: 'Pack of 3',
+    description: 'Outstanding three-watch package deal featuring three distinct styles: 1) A stealth black multi-dial chronograph on textured black leather, 2) A minimalist white dial watch with forest green leather strap and Eastern calligraphy indices, and 3) A deep royal blue dial sport watch on navy blue silicone strap.',
+    features: [
+      'Complete bundle of three distinct watches for everyday and formal wear',
+      'Watch 1: Stealth black chronograph on textured leather',
+      'Watch 2: White dial minimalist on forest green leather strap',
+      'Watch 3: Royal blue dial sport watch on navy silicone strap'
+    ],
+    specs: [
+      { label: 'Bundle Quantity', value: 'Pack of 3 Full Watches' },
+      { label: 'Straps Included', value: 'Black Leather, Green Leather, Blue Silicone' },
+      { label: 'Selection', value: 'Come First Get First Allocation' },
+      { label: 'Bundle Rate', value: 'Sirf Rs 999' }
+    ],
+    primaryImage: curatedTrioBundleImg,
+    galleryImages: [curatedTrioBundleImg]
+  },
+  {
+    id: 'rolex-gold-skeleton',
+    name: 'Rolex Auto Edition Gold Skeleton',
+    subtitle: '',
+    category: 'Men',
+    price: 2499,
+    caseSize: '41 mm',
+    caseMaterial: '18k Yellow Gold-Plated Heavy Solid Stainless Steel',
+    movement: 'Automatic Self-Winding Movement',
+    calibre: 'Golden Automatic Rotor Engine',
+    powerReserve: '40 Hours',
+    waterResistance: '50 m / 5 ATM',
+    crystal: 'Hardened Sapphire Glass Front & Exhibition Back Glass',
+    strap: 'Solid Gold Stainless Steel Link Bracelet with Concealed Butterfly Lock',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Luxury Statement Edition · 1 Piece Only',
+    badge: 'Automatic',
+    description: 'A statement of class and horological opulence. Features an 18k yellow gold heavy solid build, open-worked mechanical skeleton dial revealing the heartbeat of the automatic self-winding movement, transparent exhibition back glass, fluted bezel, and concealed butterfly lock.',
+    features: [
+      'Fully automatic self-winding mechanical movement with visible rotor',
+      'Exhibition skeleton dial and transparent caseback glass',
+      'Heavy solid build with 18k gold-plated Jubilee style bracelet',
+      'Concealed butterfly lock with safety deployment'
+    ],
+    specs: [
+      { label: 'Movement', value: 'Fully Automatic Self-Winding' },
+      { label: 'Dial & Caseback', value: 'Front Skeleton + Exhibition Back Glass' },
+      { label: 'Clasp', value: 'Butterfly Deployment Lock' },
+      { label: 'Set Price', value: 'Rs 2,499' }
+    ],
+    primaryImage: rolexGoldSkeletonImg,
+    galleryImages: [rolexGoldSkeletonImg]
+  },
+  {
+    id: 'heritage-aviator-trio',
+    name: 'Moroccan Mandala & Aviator Trio (Pack of 3)',
+    subtitle: '',
+    category: 'Deal',
+    price: 999,
+    caseSize: '41 mm · 38 mm · 42 mm',
+    caseMaterial: 'PVD Black, Polished Gold & Matte Black Alloy',
+    movement: 'Triple Independent Japanese Quartz Movements',
+    calibre: 'Trio Heritage Quartz Engine',
+    powerReserve: '2-Year Battery Each',
+    waterResistance: 'Daily Splash Proof',
+    crystal: 'Hardened Mineral Crystal',
+    strap: 'Stitched Black Leather, Nude Cream Leather & Black Leather',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Exclusive Trio · Only One Deal Available',
+    badge: 'Pack of 3',
+    description: 'One-of-a-kind three-timepiece bundle: 1) A deep navy blue multi-subdial watch with rose gold indices on black stitched leather, 2) An artistic royal gold watch with an intricate blue and gold geometric mosaic mandala dial on nude cream leather, 3) A Diniho sport aviator watch with black countdown bezel on black leather.',
+    features: [
+      'Three curated collectible timepieces in a single package',
+      'Watch 1: Navy blue multi-dial chronometer style on black leather',
+      'Watch 2: Gold case with Moroccan geometric mosaic mandala dial on cream leather',
+      'Watch 3: Diniho sport watch with calibrated bezel and white dial'
+    ],
+    specs: [
+      { label: 'Bundle Allocation', value: 'Only One Deal Available' },
+      { label: 'Count', value: 'Pack of 3 Complete Watches' },
+      { label: 'Delivery', value: 'Free Delivery with $300 Upfront Shipping' },
+      { label: 'Price', value: 'Sirf Rs 999' }
+    ],
+    primaryImage: heritageAviatorTrioImg,
+    galleryImages: [heritageAviatorTrioImg]
+  },
+  {
+    id: 'ladies-iced-out-rim',
+    name: 'Ladies Iced Out Rim Rotating Watch',
+    subtitle: '',
+    category: 'Women',
+    price: 1699,
+    caseSize: '36 mm',
+    caseMaterial: 'Midnight Black PVD Alloy Encrusted with Shimmering Crystals',
+    movement: 'Japanese Precision Quartz with Kinetic Rotating Mechanism',
+    calibre: 'Iced-Out Kinetic Rim Movement',
+    powerReserve: '3-Year Battery',
+    waterResistance: '30 m / 3 ATM',
+    crystal: 'Faceted Diamond-Cut Scratch-Resistant Glass',
+    strap: 'Heavy Pavé Crystal-Encrusted Chain Bracelet with Butterfly Lock',
+    warranty: '1-Year Atelier Warranty',
+    limitedEdition: 'Iced Out Series · 1 Piece Only',
+    badge: 'Iced Out',
+    description: 'Dazzling high-glamour ladies iced out timepiece in all-black sparkling crystal pavé. Features a kinetic spinning rotating turbine rim bezel, butterfly lock, heavy crystal-encrusted chain bracelet, and faceted diamond-cut crystal glass.',
+    features: [
+      'Full pavé sparkling crystal diamond encrusting across bezel and bracelet',
+      'Kinetic rotating turbine inner dial mechanism that spins freely',
+      'Concealed double butterfly safety clasp',
+      'Heavy luxury link chain bracelet build'
+    ],
+    specs: [
+      { label: 'Bezel Feature', value: 'Kinetic Rotating Turbine Bazzel' },
+      { label: 'Finish', value: 'Full Iced Out Pavé Crystal Black' },
+      { label: 'Lock Type', value: 'Butterfly Lock' },
+      { label: 'Special Rate', value: 'Sirf Rs 1,699' }
+    ],
+    primaryImage: ladiesIcedOutRimImg,
+    galleryImages: [ladiesIcedOutRimImg]
   }
 ];

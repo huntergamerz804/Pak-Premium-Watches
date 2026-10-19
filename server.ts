@@ -189,6 +189,80 @@ app.post('/api/analyze-watch', async (req, res) => {
 });
 
 const ORDERS_FILE = path.resolve(__dirname, 'orders.json');
+const INVENTORY_FILE = path.resolve(__dirname, 'inventory.json');
+
+const DEFAULT_PRODUCT_IDS = [
+  'three-in-one-deal',
+  'rado-centrix',
+  'ladies-rim-watch',
+  'pack-of-2-ladies',
+  'ladies-model-moving-dial',
+  'super-sunday-offer',
+  'bestwin-magnetic',
+  'tissot-prx-strap',
+  'husky-chain-edition',
+  'bestwin-arabic-gold',
+  'spetson-mesh-chrono',
+  'waterproof-sports-digital',
+  'cartier-president-skeleton',
+  'kezzi-gelflow-duo',
+  'curated-trio-bundle',
+  'rolex-gold-skeleton',
+  'heritage-aviator-trio',
+  'ladies-iced-out-rim',
+];
+
+function getInventory(): Record<string, number> {
+  const inventory: Record<string, number> = {};
+  for (const id of DEFAULT_PRODUCT_IDS) {
+    inventory[id] = 1; // Default: exactly 1 piece in stock for every watch & deal
+  }
+
+  if (fs.existsSync(INVENTORY_FILE)) {
+    try {
+      const raw = fs.readFileSync(INVENTORY_FILE, 'utf-8');
+      const saved = JSON.parse(raw);
+      return { ...inventory, ...saved };
+    } catch (err) {
+      console.warn('Could not read inventory.json:', err);
+    }
+  }
+
+  // Deduct from orders.json if inventory.json not yet written
+  if (fs.existsSync(ORDERS_FILE)) {
+    try {
+      const rawOrders = fs.readFileSync(ORDERS_FILE, 'utf-8');
+      const orders = JSON.parse(rawOrders);
+      for (const ord of orders) {
+        if (Array.isArray(ord.items)) {
+          for (const it of ord.items) {
+            if (it.id && inventory[it.id] !== undefined) {
+              inventory[it.id] = Math.max(0, inventory[it.id] - (Number(it.quantity) || 1));
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('Could not parse orders for initial inventory:', err);
+    }
+  }
+
+  try {
+    fs.writeFileSync(INVENTORY_FILE, JSON.stringify(inventory, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn('Could not write initial inventory.json:', err);
+  }
+
+  return inventory;
+}
+
+function saveInventory(inv: Record<string, number>) {
+  try {
+    fs.writeFileSync(INVENTORY_FILE, JSON.stringify(inv, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn('Could not write inventory.json:', err);
+  }
+}
 
 // Ensure orders.json exists for persistence
 if (!fs.existsSync(ORDERS_FILE)) {
@@ -198,6 +272,9 @@ if (!fs.existsSync(ORDERS_FILE)) {
     console.warn('Could not initialize orders.json:', err);
   }
 }
+
+// Ensure inventory.json is initialized
+getInventory();
 
 // Order placement and email notification endpoint
 app.post('/api/orders', async (req, res) => {
@@ -270,6 +347,18 @@ app.post('/api/orders', async (req, res) => {
     } catch (fsErr) {
       console.warn('Could not persist to orders.json:', fsErr);
     }
+
+    // Auto-deduct stock for each ordered item
+    const currentInventory = getInventory();
+    for (const item of items) {
+      const itemId = item.id;
+      if (itemId) {
+        const available = currentInventory[itemId] !== undefined ? currentInventory[itemId] : 1;
+        const qty = Number(item.quantity) || 1;
+        currentInventory[itemId] = Math.max(0, available - qty);
+      }
+    }
+    saveInventory(currentInventory);
 
     // Configure Mailer
     const primaryRecipient = 'huntergamer8044@gamil.com';
@@ -406,6 +495,7 @@ app.post('/api/orders', async (req, res) => {
       message: 'Order placed successfully. Notification email dispatched.',
       orderId,
       order: newOrder,
+      inventory: currentInventory,
       emailSentTo: primaryRecipient,
       emailSent,
     });
@@ -415,6 +505,27 @@ app.post('/api/orders', async (req, res) => {
       error: 'Failed to process order.',
       details: error?.message || 'Unknown error',
     });
+  }
+});
+
+app.get('/api/inventory', (_req, res) => {
+  try {
+    return res.json({ inventory: getInventory() });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to get inventory', details: err?.message });
+  }
+});
+
+app.post('/api/inventory/reset', (_req, res) => {
+  try {
+    const inv: Record<string, number> = {};
+    for (const id of DEFAULT_PRODUCT_IDS) {
+      inv[id] = 1;
+    }
+    saveInventory(inv);
+    return res.json({ success: true, inventory: inv });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to reset inventory', details: err?.message });
   }
 });
 

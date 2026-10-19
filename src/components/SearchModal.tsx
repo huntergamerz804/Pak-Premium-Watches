@@ -4,7 +4,7 @@ import { PRODUCTS } from '../data/products';
 import { useCart } from '../context/CartContext';
 
 export const SearchModal: React.FC = () => {
-  const { isSearchOpen, closeSearch, openProductDetail } = useCart();
+  const { isSearchOpen, closeSearch, openProductDetail, isSoldOut } = useCart();
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -120,8 +120,15 @@ export const SearchModal: React.FC = () => {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-mono text-[#C7A86B] uppercase tracking-wider">
-                      {p.category}
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono text-[#C7A86B] uppercase tracking-wider">
+                        {p.category}
+                      </span>
+                      {isSoldOut(p.id) && (
+                        <span className="text-[9px] font-mono text-red-400 bg-red-950/80 px-1.5 py-0.2 rounded-xs border border-red-500/40 uppercase font-bold">
+                          Sold Out
+                        </span>
+                      )}
                     </div>
                     <h4 className="font-serif text-base text-[#F4F0E8] group-hover:text-[#C7A86B] transition-colors truncate">
                       {p.name}
@@ -134,6 +141,9 @@ export const SearchModal: React.FC = () => {
                   <div className="text-right shrink-0">
                     <span className="text-sm font-sans font-semibold text-[#F4F0E8] tabular-nums block">
                       Rs {p.price.toLocaleString('en-US')}
+                    </span>
+                    <span className="text-[10px] font-mono text-[#888888]">
+                      {isSoldOut(p.id) ? 'Claimed' : '1 Available'}
                     </span>
                   </div>
 

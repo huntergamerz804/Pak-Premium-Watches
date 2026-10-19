@@ -12,6 +12,7 @@ export const ProductDetailModal: React.FC = () => {
     openConcierge,
     openReviewModal,
     openOrderPage,
+    isSoldOut,
   } = useCart();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -22,6 +23,7 @@ export const ProductDetailModal: React.FC = () => {
   if (!selectedProduct) return null;
 
   const isWishlisted = isInWishlist(selectedProduct.id);
+  const soldOut = isSoldOut(selectedProduct.id);
   const gallery = selectedProduct.galleryImages && selectedProduct.galleryImages.length > 0
     ? selectedProduct.galleryImages
     : [selectedProduct.primaryImage];
@@ -51,6 +53,15 @@ export const ProductDetailModal: React.FC = () => {
             <span>{selectedProduct.category}</span>
             <span aria-hidden="true">·</span>
             <span>{selectedProduct.caseSize}</span>
+            {soldOut ? (
+              <span className="text-[10px] text-red-400 bg-red-950/80 px-2 py-0.5 rounded-xs border border-red-500/40 uppercase font-bold ml-2">
+                SOLD OUT
+              </span>
+            ) : (
+              <span className="text-[10px] text-[#A3A199] bg-[#171717] px-2 py-0.5 rounded-xs border border-[#262626] uppercase ml-2">
+                1 Piece Only
+              </span>
+            )}
           </div>
           <button
             onClick={closeProductDetail}
@@ -72,15 +83,23 @@ export const ProductDetailModal: React.FC = () => {
                   src={gallery[activeImageIndex] || selectedProduct.primaryImage}
                   alt={selectedProduct.name}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-center transition-all duration-500"
+                  className={`w-full h-full object-cover object-center transition-all duration-500 ${soldOut ? 'grayscale contrast-125 opacity-70' : ''}`}
                 />
 
-                {selectedProduct.badge && (
-                  <div className="absolute top-4 left-4">
-                    <span className="text-[11px] font-mono tracking-widest uppercase text-[#C7A86B] bg-[#050505]/90 px-3 py-1 border border-[#C7A86B]/30 rounded-sm">
-                      {selectedProduct.badge}
+                {soldOut ? (
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none">
+                    <span className="text-xs sm:text-sm font-mono tracking-widest text-red-400 uppercase font-bold bg-red-950/95 px-3.5 py-1.5 border border-red-500/60 rounded-xs shadow-2xl">
+                      SOLD OUT · 1 OF 1 CLAIMED
                     </span>
                   </div>
+                ) : (
+                  selectedProduct.badge && (
+                    <div className="absolute top-4 left-4">
+                      <span className="text-[11px] font-mono tracking-widest uppercase text-[#C7A86B] bg-[#050505]/90 px-3 py-1 border border-[#C7A86B]/30 rounded-sm">
+                        {selectedProduct.badge}
+                      </span>
+                    </div>
+                  )
                 )}
               </div>
 
@@ -134,6 +153,19 @@ export const ProductDetailModal: React.FC = () => {
                   </span>
                 </div>
 
+                {/* Sold Out Notice Banner */}
+                {soldOut && (
+                  <div className="p-3 mb-5 bg-red-950/30 border border-red-500/40 rounded-sm text-red-300 text-xs flex items-start gap-2">
+                    <span className="text-red-400 font-bold shrink-0">⚠️</span>
+                    <div>
+                      <span className="font-semibold block mb-0.5 text-red-200">Allocation Claimed & Sold Out</span>
+                      <p className="text-[11px] text-red-300/90 leading-relaxed">
+                        This unique 1-of-1 timepiece has already been ordered and is no longer available.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 {/* Short Description */}
                 <p className="text-xs text-[#9C9A94] leading-relaxed font-light mb-6">
                   {selectedProduct.description}
@@ -156,8 +188,9 @@ export const ProductDetailModal: React.FC = () => {
                   </label>
                   <select
                     value={currentStrap}
+                    disabled={soldOut}
                     onChange={e => setSelectedStrap(e.target.value)}
-                    className="w-full bg-[#121212] border border-[#262626] focus:border-[#C7A86B] text-xs text-[#E8E5DE] px-3.5 py-2.5 rounded-sm focus:outline-none cursor-pointer"
+                    className="w-full bg-[#121212] border border-[#262626] focus:border-[#C7A86B] text-xs text-[#E8E5DE] px-3.5 py-2.5 rounded-sm focus:outline-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {strapOptions.map((st, i) => (
                       <option key={i} value={st}>
@@ -169,39 +202,57 @@ export const ProductDetailModal: React.FC = () => {
 
                 {/* Quantity & Buy CTAs */}
                 <div className="space-y-3 mb-6">
+                  <div className="text-[11px] font-mono uppercase tracking-wider flex items-center justify-between">
+                    <span className="text-[#6F6D68]">Quantity (Single Allocation):</span>
+                    {soldOut ? (
+                      <span className="text-red-400 font-bold">0 In Stock · Claimed</span>
+                    ) : (
+                      <span className="text-[#C7A86B] font-medium">Only 1 Piece In Stock</span>
+                    )}
+                  </div>
+
                   <div className="flex items-center gap-3">
-                    {/* Stepper */}
+                    {/* Stepper (Only 1 quantity available per timepiece) */}
                     <div className="flex items-center border border-[#2A2A2A] rounded-sm bg-[#121212]">
                       <button
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="px-3 py-3 hover:text-[#C7A86B] transition-colors"
+                        disabled
+                        className="px-3 py-3 text-[#555555] cursor-not-allowed"
                         aria-label="Decrease quantity"
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
                       <span className="px-3 text-xs font-mono font-medium tabular-nums">
-                        {quantity}
+                        {soldOut ? 0 : 1}
                       </span>
                       <button
-                        onClick={() => setQuantity(quantity + 1)}
-                        className="px-3 py-3 hover:text-[#C7A86B] transition-colors"
-                        aria-label="Increase quantity"
+                        disabled
+                        className="px-3 py-3 text-[#555555] cursor-not-allowed"
+                        aria-label="Increase quantity (Max 1 available)"
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
 
                     {/* Primary Buy CTA */}
-                    <button
-                      onClick={() => {
-                        addToCart(selectedProduct, quantity, currentStrap);
-                        closeProductDetail();
-                      }}
-                      className="flex-1 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-semibold text-xs tracking-[0.18em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg shadow-[#C7A86B]/15"
-                    >
-                      <span>Acquire Timepiece</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                    {soldOut ? (
+                      <button
+                        disabled
+                        className="flex-1 py-3.5 bg-red-950/40 border border-red-500/40 text-red-400 font-semibold text-xs tracking-[0.18em] uppercase rounded-sm flex items-center justify-center gap-2 cursor-not-allowed opacity-90"
+                      >
+                        <span>Sold Out</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          addToCart(selectedProduct, 1, currentStrap);
+                          closeProductDetail();
+                        }}
+                        className="flex-1 py-3.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] font-semibold text-xs tracking-[0.18em] uppercase transition-colors rounded-sm flex items-center justify-center gap-2 shadow-lg shadow-[#C7A86B]/15 cursor-pointer"
+                      >
+                        <span>Acquire Timepiece (1 in Stock)</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
 
                     {/* Wishlist */}
                     <button
@@ -218,13 +269,22 @@ export const ProductDetailModal: React.FC = () => {
                   </div>
 
                   {/* Direct Order Fast Track */}
-                  <button
-                    onClick={() => openOrderPage(selectedProduct)}
-                    className="w-full py-3 bg-[#16120D] hover:bg-[#20180F] border border-[#C7A86B] text-[#C7A86B] hover:text-[#EAD8B4] font-semibold text-xs tracking-[0.16em] uppercase rounded-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#C7A86B]/10"
-                  >
-                    <span>Direct Order · $300 Upfront Shipping Fee</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  {soldOut ? (
+                    <button
+                      disabled
+                      className="w-full py-3 bg-[#111111] border border-[#222222] text-[#666666] font-semibold text-xs tracking-[0.16em] uppercase rounded-sm cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      <span>Sold Out · No Direct Orders Available</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => openOrderPage(selectedProduct)}
+                      className="w-full py-3 bg-[#16120D] hover:bg-[#20180F] border border-[#C7A86B] text-[#C7A86B] hover:text-[#EAD8B4] font-semibold text-xs tracking-[0.16em] uppercase rounded-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#C7A86B]/10"
+                    >
+                      <span>Direct Order · $300 Upfront Shipping Fee</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
 
                   {/* Concierge & Review Actions */}
                   <div className="flex items-center gap-2">

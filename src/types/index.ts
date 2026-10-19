@@ -23,6 +23,7 @@ export interface Product {
   primaryImage: string;
   galleryImages: string[];
   badge?: string;
+  stock?: number;
 }
 
 export interface CartItem {

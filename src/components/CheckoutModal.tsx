@@ -5,7 +5,7 @@ import { JazzCashLogo } from './JazzCashLogo';
 import { EasyPaisaLogo } from './EasyPaisaLogo';
 
 export const CheckoutModal: React.FC = () => {
-  const { isCheckoutOpen, closeCheckout, cartItems, subtotal, clearCart } = useCart();
+  const { isCheckoutOpen, closeCheckout, cartItems, subtotal, clearCart, deductStock, isSoldOut } = useCart();
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -41,6 +41,13 @@ export const CheckoutModal: React.FC = () => {
       setError('Please fill in all required delivery fields.');
       return;
     }
+
+    const soldOutItem = cartItems.find(item => isSoldOut(item.product.id));
+    if (soldOutItem) {
+      setError(`"${soldOutItem.product.name}" has already been claimed and is now Sold Out. Exactly 1 piece was available. Please remove it from your bag.`);
+      return;
+    }
+
     setError('');
     setIsProcessing(true);
 
@@ -73,12 +80,14 @@ export const CheckoutModal: React.FC = () => {
 
       const data = await res.json();
       const generatedId = data.orderId || `PKP-${Math.floor(1000 + Math.random() * 9000)}-${new Date().getFullYear()}`;
+      deductStock(cartItems.map(item => ({ id: item.product.id, quantity: item.quantity })), data.inventory);
       setCommissionId(generatedId);
       setIsConfirmed(true);
       clearCart();
     } catch (err: any) {
       console.warn('Backend order dispatch note:', err?.message);
       const generatedId = `PKP-${Math.floor(1000 + Math.random() * 9000)}-${new Date().getFullYear()}`;
+      deductStock(cartItems.map(item => ({ id: item.product.id, quantity: item.quantity })));
       setCommissionId(generatedId);
       setIsConfirmed(true);
       clearCart();

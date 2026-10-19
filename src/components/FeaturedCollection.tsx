@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext';
 export const FeaturedCollection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'diameter'>('featured');
-  const { openProductDetail, addToCart, toggleWishlist, isInWishlist, openOrderPage } = useCart();
+  const { openProductDetail, addToCart, toggleWishlist, isInWishlist, openOrderPage, isSoldOut } = useCart();
 
   const categories = [
     'All',
@@ -52,7 +52,7 @@ export const FeaturedCollection: React.FC = () => {
               THE COLLECTION
             </h2>
             <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-[#9C9A94] leading-relaxed font-light">
-              Mechanical timepieces designed around precision, proportion, and enduring character. Hand-assembled in limited annual allocations.
+              Limited 1-of-1 allocations. Each timepiece is uniquely numbered and immediately marked as Sold Out once reserved.
             </p>
           </div>
 
@@ -99,6 +99,7 @@ export const FeaturedCollection: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
           {filteredProducts.map(product => {
             const isWishlisted = isInWishlist(product.id);
+            const soldOut = isSoldOut(product.id);
 
             return (
               <article
@@ -114,7 +115,7 @@ export const FeaturedCollection: React.FC = () => {
                     src={product.primaryImage}
                     alt={product.name}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className={`w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${soldOut ? 'grayscale contrast-125 opacity-70' : ''}`}
                     loading="lazy"
                   />
 
@@ -124,14 +125,25 @@ export const FeaturedCollection: React.FC = () => {
                     aria-hidden="true"
                   />
 
-                  {/* Subtle Badge */}
-                  {product.badge && (
-                    <div className="absolute top-3 left-3 z-10">
-                      <span className="text-[10px] font-mono tracking-widest text-[#C7A86B] uppercase font-medium bg-[#080808]/85 px-2 py-0.5 border border-[#C7A86B]/30 rounded-sm backdrop-blur-sm">
-                        {product.badge}
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 flex-wrap max-w-[85%]">
+                    {soldOut ? (
+                      <span className="text-[10px] font-mono tracking-widest text-red-400 uppercase font-bold bg-red-950/90 px-2 py-0.5 border border-red-500/50 rounded-xs shadow-md backdrop-blur-sm animate-pulse">
+                        SOLD OUT
                       </span>
-                    </div>
-                  )}
+                    ) : (
+                      <>
+                        {product.badge && (
+                          <span className="text-[10px] font-mono tracking-widest text-[#C7A86B] uppercase font-medium bg-[#080808]/85 px-2 py-0.5 border border-[#C7A86B]/30 rounded-sm backdrop-blur-sm">
+                            {product.badge}
+                          </span>
+                        )}
+                        <span className="text-[9px] font-mono tracking-wider text-[#A3A199] uppercase bg-[#141414]/90 px-1.5 py-0.5 border border-[#333333] rounded-sm backdrop-blur-sm">
+                          1 Piece Only
+                        </span>
+                      </>
+                    )}
+                  </div>
 
                   {/* Wishlist Button */}
                   <button
@@ -162,16 +174,22 @@ export const FeaturedCollection: React.FC = () => {
                       <span>Inspect</span>
                     </button>
 
-                    <button
-                      onClick={e => {
-                        e.stopPropagation();
-                        addToCart(product);
-                      }}
-                      className="px-2.5 sm:px-3 py-1.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-[10px] tracking-wider uppercase font-semibold flex items-center gap-1.5 rounded-sm transition-colors shadow-md shadow-[#C7A86B]/20"
-                    >
-                      <Plus className="w-3 h-3" />
-                      <span>Add to Bag</span>
-                    </button>
+                    {soldOut ? (
+                      <span className="px-2.5 sm:px-3 py-1.5 bg-red-950/80 border border-red-500/40 text-red-400 text-[10px] tracking-wider uppercase font-semibold rounded-sm">
+                        Sold Out
+                      </span>
+                    ) : (
+                      <button
+                        onClick={e => {
+                          e.stopPropagation();
+                          addToCart(product);
+                        }}
+                        className="px-2.5 sm:px-3 py-1.5 bg-[#C7A86B] hover:bg-[#D8BC82] text-[#080808] text-[10px] tracking-wider uppercase font-semibold flex items-center gap-1.5 rounded-sm transition-colors shadow-md shadow-[#C7A86B]/20 cursor-pointer"
+                      >
+                        <Plus className="w-3 h-3" />
+                        <span>Add to Bag</span>
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -180,13 +198,13 @@ export const FeaturedCollection: React.FC = () => {
                   <div>
                     {/* Unboxed Metadata with Size: Medium */}
                     <div className="flex items-center gap-2 text-[11px] text-[#6F6D68] uppercase tracking-wider mb-2 font-mono">
-                      <span className="text-[#C7A86B] font-semibold bg-[#C7A86B]/15 px-1.5 py-0.5 rounded-sm border border-[#C7A86B]/30">
-                        {product.caseSize}
+                      <span className={`font-semibold px-1.5 py-0.5 rounded-sm border ${soldOut ? 'text-red-400 bg-red-950/30 border-red-500/40' : 'text-[#C7A86B] bg-[#C7A86B]/15 border-[#C7A86B]/30'}`}>
+                        {soldOut ? 'Claimed' : product.caseSize}
                       </span>
                       <span aria-hidden="true">·</span>
                       <span>{product.movement.split(' ')[0]}</span>
                       <span aria-hidden="true">·</span>
-                      <span>{product.powerReserve}</span>
+                      <span className={soldOut ? 'text-red-400' : 'text-[#6F6D68]'}>{soldOut ? '0/1 Left' : '1/1 Left'}</span>
                     </div>
 
                     {/* Title */}
@@ -207,16 +225,24 @@ export const FeaturedCollection: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-1.5 sm:gap-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openOrderPage(product);
-                        }}
-                        className="px-2 py-1 bg-[#17130E] hover:bg-[#251D14] border border-[#C7A86B]/60 hover:border-[#C7A86B] text-[#C7A86B] text-[10px] sm:text-[11px] font-mono uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
-                        title="Direct Order with $300 Upfront Shipping Fee"
-                      >
-                        Order
-                      </button>
+                      {soldOut ? (
+                        <span
+                          className="px-2 py-1 bg-red-950/30 border border-red-500/40 text-red-400 text-[10px] sm:text-[11px] font-mono uppercase tracking-wider rounded-xs opacity-80"
+                        >
+                          Sold Out
+                        </span>
+                      ) : (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openOrderPage(product);
+                          }}
+                          className="px-2 py-1 bg-[#17130E] hover:bg-[#251D14] border border-[#C7A86B]/60 hover:border-[#C7A86B] text-[#C7A86B] text-[10px] sm:text-[11px] font-mono uppercase tracking-wider rounded-xs transition-colors cursor-pointer"
+                          title="Direct Order with $300 Upfront Shipping Fee"
+                        >
+                          Order
+                        </button>
+                      )}
                       <button
                         onClick={() => openProductDetail(product)}
                         className="p-1.5 text-[#9C9A94] hover:text-[#C7A86B] transition-colors flex items-center gap-1 text-xs tracking-wider uppercase font-medium cursor-pointer"

@@ -44,6 +44,12 @@ interface CartContextType {
   closeOrderPage: () => void;
   subtotal: number;
   totalItems: number;
+  inventory: Record<string, number>;
+  getStock: (productId: string) => number;
+  isSoldOut: (productId: string) => boolean;
+  deductStock: (items: { id: string; quantity?: number }[], directInventory?: Record<string, number>) => void;
+  resetInventory: () => void;
+  refreshInventory: () => Promise<void>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -51,6 +57,28 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 const CART_STORAGE_KEY = 'auren_cart_v1';
 const WISHLIST_STORAGE_KEY = 'auren_wishlist_v1';
 const REVIEWS_STORAGE_KEY = 'pak_premium_customer_reviews_v1';
+const INVENTORY_STORAGE_KEY = 'pak_premium_inventory_v1';
+
+const DEFAULT_INVENTORY: Record<string, number> = {
+  'three-in-one-deal': 1,
+  'rado-centrix': 1,
+  'ladies-rim-watch': 1,
+  'pack-of-2-ladies': 1,
+  'ladies-model-moving-dial': 1,
+  'super-sunday-offer': 1,
+  'bestwin-magnetic': 1,
+  'tissot-prx-strap': 1,
+  'husky-chain-edition': 1,
+  'bestwin-arabic-gold': 1,
+  'spetson-mesh-chrono': 1,
+  'waterproof-sports-digital': 1,
+  'cartier-president-skeleton': 1,
+  'kezzi-gelflow-duo': 1,
+  'curated-trio-bundle': 1,
+  'rolex-gold-skeleton': 1,
+  'heritage-aviator-trio': 1,
+  'ladies-iced-out-rim': 1,
+};
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -113,6 +141,92 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error('Failed to save reviews to localStorage', e);
     }
   }, [reviews]);
+
+  // Inventory Management: Exactly 1 piece available for all watches and deals
+  const [inventory, setInventory] = useState<Record<string, number>>(() => {
+    try {
+      const saved = localStorage.getItem(INVENTORY_STORAGE_KEY);
+      if (saved) {
+        return { ...DEFAULT_INVENTORY, ...JSON.parse(saved) };
+      }
+    } catch {}
+    return { ...DEFAULT_INVENTORY };
+  });
+
+  const refreshInventory = async () => {
+    try {
+      const res = await fetch('/api/inventory');
+      if (res.ok) {
+        const data = await res.json();
+        if (data?.inventory) {
+          setInventory(prev => {
+            const updated = { ...prev, ...data.inventory };
+            try {
+              localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(updated));
+            } catch {}
+            return updated;
+          });
+        }
+      }
+    } catch {}
+  };
+
+  // Sync inventory with server API on mount, focus, and every 10s
+  useEffect(() => {
+    refreshInventory();
+
+    const handleFocus = () => refreshInventory();
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('visibilitychange', () => {
+      if (!document.hidden) refreshInventory();
+    });
+
+    const interval = setInterval(refreshInventory, 10000);
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const getStock = (productId: string): number => {
+    return inventory[productId] !== undefined ? inventory[productId] : 1;
+  };
+
+  const isSoldOut = (productId: string): boolean => {
+    return getStock(productId) <= 0;
+  };
+
+  const deductStock = (
+    itemsToDeduct: { id: string; quantity?: number }[],
+    directInventory?: Record<string, number>
+  ) => {
+    setInventory(prev => {
+      const updated = directInventory ? { ...prev, ...directInventory } : { ...prev };
+      if (!directInventory) {
+        for (const it of itemsToDeduct) {
+          if (it.id) {
+            const cur = updated[it.id] !== undefined ? updated[it.id] : 1;
+            const qty = Number(it.quantity) || 1;
+            updated[it.id] = Math.max(0, cur - qty);
+          }
+        }
+      }
+      try {
+        localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(updated));
+      } catch (e) {
+        console.error('Failed to save inventory to localStorage', e);
+      }
+      return updated;
+    });
+  };
+
+  const resetInventory = () => {
+    setInventory({ ...DEFAULT_INVENTORY });
+    try {
+      localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(DEFAULT_INVENTORY));
+    } catch {}
+    fetch('/api/inventory/reset', { method: 'POST' }).catch(() => {});
+  };
 
   const openReviewModal = (watchName?: string) => {
     setReviewWatchName(watchName || '');
@@ -202,18 +316,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const closeArticleModal = () => setSelectedArticleId(null);
 
   const addToCart = (product: Product, quantity = 1, selectedStrap?: string) => {
+    if (isSoldOut(product.id)) {
+      return;
+    }
     setCartItems(prev => {
       const existingIndex = prev.findIndex(item => item.product.id === product.id);
       if (existingIndex > -1) {
-        const next = [...prev];
-        next[existingIndex] = {
-          ...next[existingIndex],
-          quantity: next[existingIndex].quantity + quantity,
-          selectedStrap: selectedStrap || next[existingIndex].selectedStrap
-        };
-        return next;
+        // Strictly 1 piece available per timepiece
+        return prev;
       }
-      return [...prev, { product, quantity, selectedStrap: selectedStrap || product.strap }];
+      return [...prev, { product, quantity: 1, selectedStrap: selectedStrap || product.strap }];
     });
     setIsCartOpen(true);
   };
@@ -227,9 +339,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       removeFromCart(productId);
       return;
     }
+    // Only 1 piece available for any timepiece
+    const maxAllowed = Math.min(1, getStock(productId));
+    const safeQty = Math.min(maxAllowed, quantity);
     setCartItems(prev =>
       prev.map(item =>
-        item.product.id === productId ? { ...item, quantity } : item
+        item.product.id === productId ? { ...item, quantity: safeQty } : item
       )
     );
   };
@@ -297,6 +412,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         closeOrderPage,
         subtotal,
         totalItems,
+        inventory,
+        getStock,
+        isSoldOut,
+        deductStock,
+        resetInventory,
+        refreshInventory,
       }}
     >
       {children}

@@ -19,6 +19,7 @@ import { PRODUCTS } from '../data/products';
 import { Product } from '../types';
 import { JazzCashLogo } from './JazzCashLogo';
 import { EasyPaisaLogo } from './EasyPaisaLogo';
+import { useCart } from '../context/CartContext';
 
 interface OrderPageProps {
   onBackToHome: () => void;
@@ -26,6 +27,8 @@ interface OrderPageProps {
 }
 
 export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedProduct }) => {
+  const { isSoldOut, deductStock } = useCart();
+
   // Item selection state
   const [selectedProductId, setSelectedProductId] = useState<string>(
     preselectedProduct?.id || PRODUCTS[0]?.id || 'rado-centrix'
@@ -83,6 +86,11 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
       return;
     }
 
+    if (isSoldOut(selectedWatch.id)) {
+      setErrorMessage(`"${selectedWatch.name}" is already sold out! Only 1 piece was available in this allocation and it has been claimed. Please choose another timepiece.`);
+      return;
+    }
+
     setIsSubmitting(true);
 
     const payload = {
@@ -98,7 +106,7 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
           id: selectedWatch.id,
           name: selectedWatch.name,
           price: selectedWatch.price,
-          quantity: quantity,
+          quantity: 1, // Enforce 1 piece
           caseSize: selectedWatch.caseSize,
         },
       ],
@@ -128,10 +136,12 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
         throw new Error(data.error || 'Failed to submit order');
       }
 
+      deductStock([{ id: selectedWatch.id, quantity: 1 }], data.inventory);
       setSubmittedOrder(data.order || { ...payload, orderId: data.orderId || `PKP-${Date.now().toString(36).toUpperCase()}` });
     } catch (err: any) {
       console.warn('Backend order submission fallback:', err.message);
       // Client-side fallback if server offline
+      deductStock([{ id: selectedWatch.id, quantity: 1 }]);
       const fallbackOrderId = `PKP-${Date.now().toString(36).toUpperCase()}`;
       const fallbackOrder = {
         ...payload,
@@ -329,13 +339,18 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-5">
                   {PRODUCTS.map(product => {
                     const isSelected = product.id === selectedProductId;
+                    const isSold = isSoldOut(product.id);
                     return (
                       <div
                         key={product.id}
                         onClick={() => setSelectedProductId(product.id)}
                         className={`p-3.5 rounded-sm border cursor-pointer transition-all flex flex-col justify-between ${
                           isSelected
-                            ? 'bg-[#16130E] border-[#C7A86B] shadow-lg shadow-[#C7A86B]/10'
+                            ? isSold
+                              ? 'bg-red-950/20 border-red-500/50 shadow-md shadow-red-500/10'
+                              : 'bg-[#16130E] border-[#C7A86B] shadow-lg shadow-[#C7A86B]/10'
+                            : isSold
+                            ? 'bg-[#0E0E0E] border-red-950/40 opacity-70 hover:opacity-90'
                             : 'bg-[#101010] border-[#222222] hover:border-[#333333]'
                         }`}
                       >
@@ -343,12 +358,19 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
                           <img
                             src={product.primaryImage}
                             alt={product.name}
-                            className="w-12 h-12 object-cover rounded-xs border border-[#222222] shrink-0"
+                            className={`w-12 h-12 object-cover rounded-xs border border-[#222222] shrink-0 ${isSold ? 'grayscale opacity-70' : ''}`}
                           />
                           <div className="min-w-0">
-                            <span className="text-[10px] font-mono text-[#C7A86B] uppercase block">
-                              {product.category}
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[10px] font-mono text-[#C7A86B] uppercase block">
+                                {product.category}
+                              </span>
+                              {isSold && (
+                                <span className="text-[9px] font-mono text-red-400 bg-red-950/90 px-1.5 py-0.2 rounded-xs border border-red-500/40 uppercase font-bold">
+                                  Sold Out
+                                </span>
+                              )}
+                            </div>
                             <h3 className="text-xs font-serif font-medium text-[#F4F0E8] truncate">
                               {product.name}
                             </h3>
@@ -359,8 +381,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
                         </div>
 
                         <div className="pt-2 border-t border-[#1C1C1C] flex items-center justify-between text-[10px] font-mono text-[#888888]">
-                          <span>{product.caseSize}</span>
-                          <span className={isSelected ? 'text-[#C7A86B] font-bold' : ''}>
+                          <span className={isSold ? 'text-red-400' : ''}>{isSold ? '0/1 Left (Sold Out)' : '1/1 Available'}</span>
+                          <span className={isSelected ? (isSold ? 'text-red-400 font-bold' : 'text-[#C7A86B] font-bold') : ''}>
                             {isSelected ? '✓ Selected' : 'Select'}
                           </span>
                         </div>
@@ -375,14 +397,21 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
                     <img
                       src={selectedWatch.primaryImage}
                       alt={selectedWatch.name}
-                      className="w-14 h-14 object-cover rounded-xs border border-[#C7A86B]/40 shrink-0"
+                      className={`w-14 h-14 object-cover rounded-xs border border-[#C7A86B]/40 shrink-0 ${isSoldOut(selectedWatch.id) ? 'grayscale opacity-70' : ''}`}
                     />
                     <div>
-                      <h4 className="font-serif text-base text-[#F4F0E8] font-medium">
-                        {selectedWatch.name}
-                      </h4>
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-serif text-base text-[#F4F0E8] font-medium">
+                          {selectedWatch.name}
+                        </h4>
+                        {isSoldOut(selectedWatch.id) && (
+                          <span className="text-[9px] font-mono font-bold text-red-400 bg-red-950/90 px-1.5 py-0.5 rounded-xs border border-red-500/50 uppercase">
+                            Sold Out
+                          </span>
+                        )}
+                      </div>
                       <p className="text-xs text-[#9C9A94] font-light">
-                        {selectedWatch.subtitle ? `${selectedWatch.subtitle} · ` : ''}{selectedWatch.caseSize}
+                        {selectedWatch.subtitle ? `${selectedWatch.subtitle} · ` : ''}{selectedWatch.caseSize} · {isSoldOut(selectedWatch.id) ? '0/1 Available' : '1/1 Available'}
                       </p>
                       <div className="text-xs font-mono font-semibold text-[#C7A86B] mt-0.5">
                         Unit Price: Rs {selectedWatch.price.toLocaleString('en-US')}
@@ -390,32 +419,43 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
                     </div>
                   </div>
 
-                  {/* Quantity Stepper */}
+                  {/* Quantity Stepper (Enforced 1 Piece max per watch) */}
                   <div className="flex items-center justify-between sm:justify-end gap-3 pt-3 sm:pt-0 border-t sm:border-t-0 border-[#222222]">
-                    <span className="text-xs text-[#888888] font-mono uppercase">Quantity:</span>
-                    <div className="flex items-center border border-[#333333] rounded-sm bg-[#080808]">
+                    <span className="text-xs text-[#888888] font-mono uppercase">Quantity (Max 1):</span>
+                    <div className="flex items-center border border-[#333333] rounded-sm bg-[#080808] opacity-80">
                       <button
                         type="button"
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="px-3 py-1.5 text-xs text-[#9C9A94] hover:text-[#F4F0E8] hover:bg-[#1A1A1A] transition-colors"
+                        disabled
+                        className="px-3 py-1.5 text-xs text-[#555555] cursor-not-allowed"
                         aria-label="Decrease quantity"
                       >
                         -
                       </button>
                       <span className="px-3 py-1.5 text-xs font-mono font-semibold text-[#F4F0E8] min-w-8 text-center">
-                        {quantity}
+                        {isSoldOut(selectedWatch.id) ? 0 : 1}
                       </span>
                       <button
                         type="button"
-                        onClick={() => setQuantity(quantity + 1)}
-                        className="px-3 py-1.5 text-xs text-[#9C9A94] hover:text-[#F4F0E8] hover:bg-[#1A1A1A] transition-colors"
-                        aria-label="Increase quantity"
+                        disabled
+                        className="px-3 py-1.5 text-xs text-[#555555] cursor-not-allowed"
+                        aria-label="Increase quantity (Max 1 piece available)"
                       >
                         +
                       </button>
                     </div>
                   </div>
                 </div>
+
+                {/* Sold Out Alert Banner */}
+                {isSoldOut(selectedWatch.id) && (
+                  <div className="mt-4 p-3.5 bg-red-950/40 border border-red-500/50 rounded-sm text-red-300 text-xs flex items-center gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                    <div>
+                      <span className="font-semibold block text-red-200">Item Allocation Claimed</span>
+                      <span>"{selectedWatch.name}" is already sold out. Exactly 1 piece was produced and it has been reserved. Please choose an in-stock timepiece above.</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* SECTION 2: Shipping Address & Phone Number */}
@@ -729,14 +769,16 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome, preselectedP
               <div className="pt-2">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 sm:py-4 bg-[#C7A86B] hover:bg-[#D8BC82] disabled:opacity-60 text-[#080808] font-bold text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.2em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-xl shadow-[#C7A86B]/20 cursor-pointer"
+                  disabled={isSubmitting || isSoldOut(selectedWatch.id)}
+                  className="w-full py-3.5 sm:py-4 bg-[#C7A86B] hover:bg-[#D8BC82] disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-red-950/40 disabled:border disabled:border-red-500/50 disabled:text-red-400 text-[#080808] font-bold text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.2em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-xl shadow-[#C7A86B]/20 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 border-2 border-[#080808] border-t-transparent rounded-full animate-spin" />
                       <span>Transmitting Order to Atelier...</span>
                     </div>
+                  ) : isSoldOut(selectedWatch.id) ? (
+                    <span>Sold Out · Item Already Claimed</span>
                   ) : (
                     <>
                       <Sparkles className="w-4 h-4" />
