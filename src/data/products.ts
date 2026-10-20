@@ -45,7 +45,7 @@ export const PRODUCTS: Product[] = [
     id: 'three-in-one-deal',
     name: 'Three-in-One Luxury Deal (Trio Collection)',
     subtitle: '',
-    category: 'Exclusive',
+    category: 'Deal',
     price: 999,
     caseSize: '34 mm · 40 mm · 42 mm',
     caseMaterial: 'PVD Stealth Black, Diamond Pavé Gold & Polished Rose Gold',

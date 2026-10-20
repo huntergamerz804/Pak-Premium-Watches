@@ -17,7 +17,7 @@ export const FeaturedCollection: React.FC = () => {
   ];
 
   const collectionProducts = useMemo(() => {
-    return PRODUCTS.filter(p => p.id !== 'three-in-one-deal');
+    return PRODUCTS;
   }, []);
 
   const filteredProducts = useMemo(() => {

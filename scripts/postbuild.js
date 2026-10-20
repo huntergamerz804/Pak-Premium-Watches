@@ -10,7 +10,7 @@ const distDir = path.join(rootDir, 'dist');
 const docsDir = path.join(rootDir, 'docs');
 const rootAssetsDir = path.join(rootDir, 'assets');
 
-// 1. Ensure .nojekyll in root, dist, and docs
+// 1. Ensure .nojekyll in root and dist
 fs.writeFileSync(path.join(rootDir, '.nojekyll'), '');
 if (fs.existsSync(distDir)) {
   fs.writeFileSync(path.join(distDir, '.nojekyll'), '');
@@ -23,31 +23,60 @@ if (fs.existsSync(indexHtmlPath)) {
   fs.copyFileSync(indexHtmlPath, notFoundHtmlPath);
 }
 
-// 3. Find built JS and CSS files and create unhashed aliases index.js & index.css
+// 3. Accurately detect the exact generated JS and CSS files from dist/index.html
 const distAssetsDir = path.join(distDir, 'assets');
-if (fs.existsSync(distAssetsDir)) {
-  const assetFiles = fs.readdirSync(distAssetsDir);
-  const jsFile = assetFiles.find(f => f.startsWith('index-') && f.endsWith('.js'));
-  const cssFile = assetFiles.find(f => f.startsWith('index-') && f.endsWith('.css'));
+if (fs.existsSync(distAssetsDir) && fs.existsSync(indexHtmlPath)) {
+  const htmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
+  const jsMatch = htmlContent.match(/src=["']\.\/assets\/(index-[^"']+\.js)["']/);
+  const cssMatch = htmlContent.match(/href=["']\.\/assets\/(index-[^"']+\.css)["']/);
 
-  if (jsFile) {
+  const jsFile = jsMatch ? jsMatch[1] : null;
+  const cssFile = cssMatch ? cssMatch[1] : null;
+
+  if (jsFile && fs.existsSync(path.join(distAssetsDir, jsFile))) {
     fs.copyFileSync(path.join(distAssetsDir, jsFile), path.join(distAssetsDir, 'index.js'));
-  }
-  if (cssFile) {
-    fs.copyFileSync(path.join(distAssetsDir, cssFile), path.join(distAssetsDir, 'index.css'));
+    console.log(`✓ Synchronized production JS bundle: ${jsFile} -> index.js`);
+  } else {
+    // Fallback: newest index-*.js file
+    const assetFiles = fs.readdirSync(distAssetsDir);
+    const newestJs = assetFiles
+      .filter(f => f.startsWith('index-') && f.endsWith('.js'))
+      .sort((a, b) => fs.statSync(path.join(distAssetsDir, b)).mtimeMs - fs.statSync(path.join(distAssetsDir, a)).mtimeMs)[0];
+    if (newestJs) {
+      fs.copyFileSync(path.join(distAssetsDir, newestJs), path.join(distAssetsDir, 'index.js'));
+      console.log(`✓ Synchronized newest JS bundle: ${newestJs} -> index.js`);
+    }
   }
 
-  // 4. Clean rootAssetsDir if it exists so stale build artifacts don't accumulate
+  if (cssFile && fs.existsSync(path.join(distAssetsDir, cssFile))) {
+    fs.copyFileSync(path.join(distAssetsDir, cssFile), path.join(distAssetsDir, 'index.css'));
+    console.log(`✓ Synchronized production CSS bundle: ${cssFile} -> index.css`);
+  } else {
+    // Fallback: newest index-*.css file
+    const assetFiles = fs.readdirSync(distAssetsDir);
+    const newestCss = assetFiles
+      .filter(f => f.startsWith('index-') && f.endsWith('.css'))
+      .sort((a, b) => fs.statSync(path.join(distAssetsDir, b)).mtimeMs - fs.statSync(path.join(distAssetsDir, a)).mtimeMs)[0];
+    if (newestCss) {
+      fs.copyFileSync(path.join(distAssetsDir, newestCss), path.join(distAssetsDir, 'index.css'));
+      console.log(`✓ Synchronized newest CSS bundle: ${newestCss} -> index.css`);
+    }
+  }
+
+  // 4. Clean root /assets so root deployment (/ root) has exact current compiled bundles and assets
   if (fs.existsSync(rootAssetsDir)) {
     fs.rmSync(rootAssetsDir, { recursive: true, force: true });
   }
   fs.cpSync(distAssetsDir, rootAssetsDir, { recursive: true });
 }
 
-// 5. Copy dist to docs for GitHub Pages "/docs" branch deployment
+// 5. Completely wipe and refresh docs/ so GitHub Pages "/docs" branch has exact current bundle
 if (fs.existsSync(distDir)) {
+  if (fs.existsSync(docsDir)) {
+    fs.rmSync(docsDir, { recursive: true, force: true });
+  }
   fs.cpSync(distDir, docsDir, { recursive: true });
   fs.writeFileSync(path.join(docsDir, '.nojekyll'), '');
 }
 
-console.log('✓ Successfully configured root, dist/, and docs/ with .nojekyll, 404.html, and unhashed asset fallbacks for GitHub Pages!');
+console.log('✓ Successfully synchronized root, dist/, and docs/ with clean bundles, .nojekyll, and 404.html for GitHub Pages!');
