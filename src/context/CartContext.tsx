@@ -8,7 +8,6 @@ interface CartContextType {
   reviews: Testimonial[];
   isCartOpen: boolean;
   isSearchOpen: boolean;
-  isConciergeOpen: boolean;
   isWatchAnalysisOpen: boolean;
   isCheckoutOpen: boolean;
   isReviewModalOpen: boolean;
@@ -19,8 +18,6 @@ interface CartContextType {
   closeCart: () => void;
   openSearch: () => void;
   closeSearch: () => void;
-  openConcierge: () => void;
-  closeConcierge: () => void;
   openWatchAnalysis: () => void;
   closeWatchAnalysis: () => void;
   openCheckout: () => void;
@@ -101,7 +98,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isConciergeOpen, setIsConciergeOpen] = useState(false);
   const [isWatchAnalysisOpen, setIsWatchAnalysisOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
@@ -272,9 +268,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const openSearch = () => setIsSearchOpen(true);
   const closeSearch = () => setIsSearchOpen(false);
 
-  const openConcierge = () => setIsConciergeOpen(true);
-  const closeConcierge = () => setIsConciergeOpen(false);
-
   const openWatchAnalysis = () => setIsWatchAnalysisOpen(true);
   const closeWatchAnalysis = () => setIsWatchAnalysisOpen(false);
 
@@ -376,7 +369,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         reviews,
         isCartOpen,
         isSearchOpen,
-        isConciergeOpen,
         isWatchAnalysisOpen,
         isCheckoutOpen,
         isReviewModalOpen,
@@ -387,8 +379,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         closeCart,
         openSearch,
         closeSearch,
-        openConcierge,
-        closeConcierge,
         openWatchAnalysis,
         closeWatchAnalysis,
         openCheckout,

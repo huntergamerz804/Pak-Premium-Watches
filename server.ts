@@ -111,7 +111,7 @@ app.post('/api/chat', async (req, res) => {
   } catch (error: any) {
     console.error('Chat API Error:', error);
     return res.status(500).json({
-      error: 'Concierge service temporarily unavailable.',
+      error: 'Advisory service temporarily unavailable.',
       details: error?.message || 'Unknown error',
     });
   }

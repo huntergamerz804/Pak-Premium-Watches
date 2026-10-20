@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Search, ShoppingBag, Camera, MessageSquare, ArrowRight } from 'lucide-react';
+import { X, Search, ShoppingBag, Camera, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface MobileMenuProps {
@@ -12,7 +12,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     totalItems,
     openCart,
     openSearch,
-    openConcierge,
     openWatchAnalysis,
     openOrderPage,
     closeOrderPage,
@@ -141,27 +140,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-[#C7A86B]" />
-            </button>
-
-            <button
-              onClick={() => {
-                onClose();
-                openConcierge();
-              }}
-              className="w-full flex items-center justify-between p-3 bg-[#111111] hover:bg-[#171717] border border-[#222222] text-left transition-colors rounded-sm"
-            >
-              <div className="flex items-center gap-3">
-                <MessageSquare className="w-4 h-4 text-[#C7A86B]" />
-                <div>
-                  <div className="text-xs font-medium text-[#F4F0E8] uppercase tracking-wider">
-                    Horological Concierge
-                  </div>
-                  <div className="text-[11px] text-[#9C9A94]">
-                    Live Bespoke Watch Advisory
-                  </div>
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-[#9C9A94]" />
             </button>
           </div>
         </div>

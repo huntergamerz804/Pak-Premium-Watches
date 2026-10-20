@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShoppingBag, Heart, MessageSquare, Camera, Menu, X } from 'lucide-react';
+import { Search, ShoppingBag, Heart, Camera, Menu, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface HeaderProps {
@@ -13,7 +13,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
     wishlist,
     openCart,
     openSearch,
-    openConcierge,
     openWatchAnalysis,
     openOrderPage,
     closeOrderPage,
@@ -95,16 +94,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
             <span className="hidden md:inline">Identify Watch</span>
           </button>
 
-          {/* Horology Concierge */}
-          <button
-            onClick={openConcierge}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs tracking-wider uppercase text-[#F4F0E8] hover:text-[#C7A86B] border border-[#222222] hover:border-[#C7A86B]/50 transition-all rounded-sm whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C7A86B]"
-            title="Ask Pak-Premium Horological Concierge"
-            aria-label="Open Concierge"
-          >
-            <MessageSquare className="w-3.5 h-3.5 text-[#C7A86B]" />
-            <span className="hidden sm:inline">Concierge</span>
-          </button>
 
           {/* Quick Order Button */}
           <button

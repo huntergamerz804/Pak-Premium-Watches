@@ -18,7 +18,6 @@ import { CartDrawer } from './components/CartDrawer';
 import { SearchModal } from './components/SearchModal';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CheckoutModal } from './components/CheckoutModal';
-import { HorologyConciergeModal } from './components/HorologyConciergeModal';
 import { WatchAnalysisModal } from './components/WatchAnalysisModal';
 import { ReviewModal } from './components/ReviewModal';
 
@@ -63,7 +62,6 @@ function AppContent() {
       <SearchModal />
       <ProductDetailModal />
       <CheckoutModal />
-      <HorologyConciergeModal />
       <WatchAnalysisModal />
       <ReviewModal />
     </div>

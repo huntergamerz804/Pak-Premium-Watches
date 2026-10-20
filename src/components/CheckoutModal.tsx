@@ -496,7 +496,7 @@ export const CheckoutModal: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
                     {/* Swiss Wire */}
                     <label
                       className={`flex items-start gap-3 p-3.5 border rounded-sm cursor-pointer transition-colors ${
@@ -517,30 +517,6 @@ export const CheckoutModal: React.FC = () => {
                         <div className="font-semibold text-[#F4F0E8]">Direct Swiss IBAN Wire</div>
                         <div className="text-[11px] text-[#6F6D68] mt-0.5">
                           Pro-forma invoice issued directly from Banque Cantonale de Genève.
-                        </div>
-                      </div>
-                    </label>
-
-                    {/* Salon Escrow */}
-                    <label
-                      className={`flex items-start gap-3 p-3.5 border rounded-sm cursor-pointer transition-colors ${
-                        formData.paymentMethod === 'concierge'
-                          ? 'border-[#C7A86B] bg-[#121212]'
-                          : 'border-[#222222] bg-[#0E0E0E]'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="concierge"
-                        checked={formData.paymentMethod === 'concierge'}
-                        onChange={() => setFormData({ ...formData, paymentMethod: 'concierge' })}
-                        className="mt-0.5 text-[#C7A86B] accent-[#C7A86B]"
-                      />
-                      <div>
-                        <div className="font-semibold text-[#F4F0E8]">Atelier Salon Escrow</div>
-                        <div className="text-[11px] text-[#6F6D68] mt-0.5">
-                          Inspect in person at a Pak-Premium private salon prior to settlement.
                         </div>
                       </div>
                     </label>
