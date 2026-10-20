@@ -37,7 +37,10 @@ if (fs.existsSync(distAssetsDir)) {
     fs.copyFileSync(path.join(distAssetsDir, cssFile), path.join(distAssetsDir, 'index.css'));
   }
 
-  // 4. Copy dist/assets to root /assets so root deployment (/ root) has all compiled bundles
+  // 4. Clean rootAssetsDir if it exists so stale build artifacts don't accumulate
+  if (fs.existsSync(rootAssetsDir)) {
+    fs.rmSync(rootAssetsDir, { recursive: true, force: true });
+  }
   fs.cpSync(distAssetsDir, rootAssetsDir, { recursive: true });
 }
 
